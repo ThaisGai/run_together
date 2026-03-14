@@ -1,4 +1,4 @@
-class ListRun < ApplicationRecord
+class Run < ApplicationRecord
   belongs_to :user
   has_many :run_members, dependent: :destroy
   has_many :members, through: :run_members, source: :user
