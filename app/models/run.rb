@@ -4,11 +4,13 @@ class Run < ApplicationRecord
   has_many :members, through: :run_members, source: :user
   has_one :chat, dependent: :destroy
 
-  validates :date, presence: true
-  validates :time, presence: true
+  after_create :create_chat
+
+  validates :date,     presence: true
+  validates :time,     presence: true
   validates :location, presence: true
-  validates :pace, presence: true
+  validates :place,    presence: true
 
   scope :public_runs, -> { where(private: false) }
-  scope :upcoming, -> { where("date >= ?", Date.today).order(:date, :time) }
+  scope :upcoming,    -> { where("date >= ?", Date.today).order(:date, :time) }
 end
