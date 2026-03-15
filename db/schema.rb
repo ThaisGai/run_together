@@ -10,15 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2026_03_13_000155) do
+ActiveRecord::Schema[7.1].define(version: 2026_03_13_000155) do
   # These are extensions that must be enabled in order to support this database
-  enable_extension "pg_catalog.plpgsql"
+  enable_extension "plpgsql"
 
   create_table "runs", force: :cascade do |t|
     t.date "date"
     t.time "time"
     t.string "location"
-    t.string "place"
+    t.string "pace"
     t.boolean "private"
     t.bigint "user_id", null: false
     t.datetime "created_at", null: false
