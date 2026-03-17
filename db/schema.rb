@@ -10,7 +10,8 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2026_03_14_173856) do
+
+ActiveRecord::Schema[7.1].define(version: 2026_03_17_230443) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -38,7 +39,6 @@ ActiveRecord::Schema[7.1].define(version: 2026_03_14_173856) do
     t.datetime "updated_at", null: false
     t.index ["run_id"], name: "index_run_members_on_run_id"
     t.index ["user_id", "run_id"], name: "index_run_members_on_user_id_and_run_id", unique: true
-    t.index ["user_id"], name: "index_run_members_on_user_id"
   end
 
   create_table "runs", force: :cascade do |t|
@@ -61,6 +61,10 @@ ActiveRecord::Schema[7.1].define(version: 2026_03_14_173856) do
     t.datetime "remember_created_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.text "name"
+    t.date "birth_date"
+    t.string "phone"
+    t.integer "gender"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
