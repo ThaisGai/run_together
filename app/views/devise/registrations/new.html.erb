@@ -11,6 +11,12 @@
                 required: true %>
     <%= f.input :phone,
                 required: true %>
+    <%= f.label :gender, "Gênero" %>
+    <%= f.select :gender, [
+    ["Feminino", "Female"],
+    ["Masculino", "male"],
+    ["Outro", "other"],
+    ], prompt: "Selecione"%>
     <%= f.input :email,
                 required: true,
                 autofocus: true,
