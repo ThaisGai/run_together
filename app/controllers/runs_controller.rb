@@ -16,6 +16,7 @@ class RunsController < ApplicationController
   def create
     @run = Run.new(run_params)
     @run.user = current_user
+    authorize @run #estava com erro ao criar a run
     if @run.save
       redirect_to @run
     else
