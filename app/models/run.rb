@@ -13,4 +13,11 @@ class Run < ApplicationRecord
 
   scope :public_runs, -> { where(private: false) }
   scope :upcoming,    -> { where("date >= ?", Date.today).order(:date, :time) }
+
+  include PgSearch::Model
+  pg_search_scope :search_by_name_location_date_time,
+  against: [ :name, :location, :date, :time ],
+  using: {
+    tsearch: { prefix: true }
+  }
 end

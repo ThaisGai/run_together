@@ -1,12 +1,26 @@
-<h1>Runs</h1>
-
-<% @runs.each do |run| %>
-  <div>
-    <p><strong>Date:</strong> <%= run.date %></p>
-    <p><strong>Time:</strong> <%= run.time.strftime("%H:%M") %></p>
-    <p><strong>Location:</strong> <%= run.location %></p>
-    <p><strong>Pace:</strong> <%= run.pace %></p>
-    <%= link_to "View", run_path(run) %>
-    <%= link_to "Delete", run_path(run), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "btn btn-danger" %>
-  </div>
-<% end %>
+<div>
+  <%= form_with url: runs_path, method: :get, class: "d-flex" do %>
+    <%= label_tag :query, "Search runs", class: "visually-hidden" %>
+    <%= text_field_tag :query,
+          params[:query],
+          class: "form-control",
+          placeholder: "Type a keyword"
+      %>
+    <%= submit_tag "Search", name: "", class: "btn btn-primary" %>
+  <% end %>
+</div>
+<div>
+  <h1>Runs</h1>
+    <% if @runs.any? %>
+      <% @runs.each do |run| %>
+          <p><strong>Date:</strong> <%= run.date %></p>
+          <p><strong>Time:</strong> <%= run.time.strftime("%H:%M") %></p>
+          <p><strong>Location:</strong> <%= run.location %></p>
+          <p><strong>Pace:</strong> <%= run.pace %></p>
+          <%= link_to "View", run_path(run) %>
+          <%= link_to "Delete", run_path(run), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "btn btn-danger" %>
+        <% end %>
+      <% else %>
+      <em> Sorry, no runs found. </em>
+    <% end %>
+</div>
