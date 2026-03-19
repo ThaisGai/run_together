@@ -9,7 +9,7 @@ class Run < ApplicationRecord
   validates :date,     presence: true
   validates :time,     presence: true
   validates :location, presence: true
-  validates :place,    presence: true
+  validates :pace,    presence: true
 
   scope :public_runs, -> { where(private: false) }
   scope :upcoming,    -> { where("date >= ?", Date.today).order(:date, :time) }

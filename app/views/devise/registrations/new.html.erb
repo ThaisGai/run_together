@@ -4,6 +4,19 @@
   <%= f.error_notification %>
 
   <div class="form-inputs">
+    <%= f.input :name,
+                required: true,
+                input_html: { autocomplete: "name"}%>
+    <%= f.input :birth_date,
+                required: true %>
+    <%= f.input :phone,
+                required: true %>
+    <%= f.label :gender, "Gênero" %>
+    <%= f.select :gender, [
+    ["Feminino", "Female"],
+    ["Masculino", "male"],
+    ["Outro", "other"],
+    ], prompt: "Selecione"%>
     <%= f.input :email,
                 required: true,
                 autofocus: true,

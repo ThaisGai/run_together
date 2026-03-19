@@ -10,9 +10,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2026_03_14_173856) do
+ActiveRecord::Schema[8.0].define(version: 2026_03_17_230443) do
   # These are extensions that must be enabled in order to support this database
-  enable_extension "pg_catalog.plpgsql"
+  enable_extension "plpgsql"
 
   create_table "chats", force: :cascade do |t|
     t.bigint "run_id", null: false
@@ -45,7 +45,7 @@ ActiveRecord::Schema[8.0].define(version: 2026_03_14_173856) do
     t.date "date"
     t.time "time"
     t.string "location"
-    t.string "place"
+    t.string "pace"
     t.boolean "private"
     t.bigint "user_id", null: false
     t.datetime "created_at", null: false
@@ -61,6 +61,10 @@ ActiveRecord::Schema[8.0].define(version: 2026_03_14_173856) do
     t.datetime "remember_created_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.text "name"
+    t.date "birth_date"
+    t.string "phone"
+    t.integer "gender"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end

@@ -1,0 +1,20 @@
+<h1>ListRuns#new</h1>
+<p>Find me in app/views/list_runs/new.html.erb</p>
+<%= simple_form_for @run do |f| %>
+  <%= f.input :date,
+    label: "Date",
+    as: :string,
+    input_html: {
+      type: "date",
+      min: Date.today.strftime("%Y-%m-%d")
+    } %>
+  <%= f.input :time,
+    label: "Time",
+    input_html: { type: "time" } %>
+  <%= f.input :location %>
+  <%= f.input :pace,
+    label: "Pace (min/km)",
+    collection: (["Sem pace definido", "3:00", "3:30", "4:00", "4:30", "5:00", "5:30", "6:00", "6:30", "7:00", "7:30"].map { |p| ["#{p} min/km", p] }),
+    prompt: "Select your pace" %>
+  <%= f.button :submit, "Criar Corrida", class: "btn btn-primary" %>
+<% end %>
