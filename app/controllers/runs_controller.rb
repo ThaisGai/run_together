@@ -3,6 +3,11 @@ class RunsController < ApplicationController
   def index
     @runs = policy_scope(Run)
   end
+
+  def my_runs
+    @runs = policy_scope(Run).where(user: current_user)
+  end
+
   def show
     @run = Run.find(params[:id])
     authorize @run
@@ -16,7 +21,7 @@ class RunsController < ApplicationController
   def create
     @run = Run.new(run_params)
     @run.user = current_user
-    authorize @run #estava com erro ao criar a run
+    authorize @run
     if @run.save
       redirect_to @run
     else
@@ -45,6 +50,8 @@ class RunsController < ApplicationController
     @run.destroy
     redirect_to runs_path, status: :see_other
   end
+
+  private
 
   def run_params
     params.require(:run).permit(:user_id, :date, :time, :location, :pace, :private)
