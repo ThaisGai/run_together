@@ -1,38 +1,45 @@
-<h2>Sign up</h2>
+<div class="rt-auth-wrap">
+  <div class="rt-auth-side">
+    <h2>Criar Conta</h2>
+    <p class="rt-auth-sub">Junte-se à comunidade</p>
 
-<%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-  <%= f.error_notification %>
+    <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+      <%= f.error_notification %>
+      <div class="rt-auth-form">
+        <div class="rt-field">
+          <%= f.label :name %>
+          <%= f.input_field :name, required: true, autocomplete: "name", placeholder: "Seu nome" %>
+        </div>
+        <div class="rt-field">
+          <%= f.label :birth_date, "Data de nascimento" %>
+          <%= f.input_field :birth_date, required: true %>
+        </div>
+        <div class="rt-field">
+          <%= f.label :phone, "Telefone" %>
+          <%= f.input_field :phone, required: true, placeholder: "+55 (11) 99999-9999" %>
+        </div>
+        <div class="rt-field">
+          <%= f.label :gender, "Gênero" %>
+          <%= f.select :gender, [["Feminino", "Female"], ["Masculino", "male"], ["Outro", "other"]], { prompt: "Selecione" } %>
+        </div>
+        <div class="rt-field">
+          <%= f.label :email %>
+          <%= f.input_field :email, required: true, autofocus: true, autocomplete: "email", placeholder: "seu@email.com" %>
+        </div>
+        <div class="rt-field">
+          <%= f.label :password %>
+          <%= f.input_field :password, required: true, autocomplete: "new-password", placeholder: "••••••••" %>
+        </div>
+        <div class="rt-field">
+          <%= f.label :password_confirmation, "Confirmar senha" %>
+          <%= f.input_field :password_confirmation, required: true, autocomplete: "new-password", placeholder: "••••••••" %>
+        </div>
+        <%= f.button :submit, "Criar Conta", class: "rt-submit" %>
+      </div>
+    <% end %>
 
-  <div class="form-inputs">
-    <%= f.input :name,
-                required: true,
-                input_html: { autocomplete: "name"}%>
-    <%= f.input :birth_date,
-                required: true %>
-    <%= f.input :phone,
-                required: true %>
-    <%= f.label :gender, "Gênero" %>
-    <%= f.select :gender, [
-    ["Feminino", "Female"],
-    ["Masculino", "male"],
-    ["Outro", "other"],
-    ], prompt: "Selecione"%>
-    <%= f.input :email,
-                required: true,
-                autofocus: true,
-                input_html: { autocomplete: "email" }%>
-    <%= f.input :password,
-                required: true,
-                hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length),
-                input_html: { autocomplete: "new-password" } %>
-    <%= f.input :password_confirmation,
-                required: true,
-                input_html: { autocomplete: "new-password" } %>
+    <div class="rt-auth-links">
+      <%= render "devise/shared/links" %>
+    </div>
   </div>
-
-  <div class="form-actions">
-    <%= f.button :submit, "Sign up" %>
-  </div>
-<% end %>
-
-<%= render "devise/shared/links" %>
+</div>
