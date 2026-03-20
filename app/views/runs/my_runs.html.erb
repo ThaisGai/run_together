@@ -1,0 +1,16 @@
+<h1>Minhas Corridas</h1>
+
+<% if @runs.empty? %>
+  <p>Você ainda não criou nenhuma corrida.</p>
+  <%= link_to "Criar corrida", new_run_path %>
+<% else %>
+  <% @runs.each do |run| %>
+    <div>
+      <p><%= run.date %> — <%= run.location %></p>
+      <p>Pace: <%= run.pace %></p>
+      <%= link_to "Ver", run %>
+      <%= link_to "Editar", edit_run_path(run) %>
+      <%= button_to "Excluir", run, method: :delete, data: { turbo_confirm: "Tem certeza?" } %>
+    </div>
+  <% end %>
+<% end %>

@@ -1,0 +1,117 @@
+<style>
+  .rt-nav {
+    background: #0f0f0f;
+    padding: 0 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 60px;
+    border-bottom: 2px solid #ff4d00;
+    font-family: 'Barlow', sans-serif;
+  }
+  .rt-logo {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 22px;
+    color: #fff;
+    letter-spacing: 1px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none;
+  }
+  .rt-logo-dot {
+    width: 10px;
+    height: 10px;
+    background: #ff4d00;
+    border-radius: 50%;
+    display: inline-block;
+  }
+  .rt-links {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .rt-links a {
+    color: #aaa;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+  .rt-links a:hover { color: #fff; }
+  .rt-links a.active { color: #ff4d00; }
+  .rt-cta {
+    background: #ff4d00;
+    color: #fff !important;
+    padding: 7px 18px;
+    border-radius: 4px;
+    font-size: 13px !important;
+    font-weight: 600 !important;
+  }
+  .rt-cta:hover { background: #e04300; }
+  .rt-user {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .rt-avatar {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    background: #1e1e1e;
+    border: 1.5px solid #ff4d00;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #ff4d00;
+    font-size: 13px;
+    font-weight: 700;
+    font-family: 'Barlow Condensed', sans-serif;
+  }
+  .rt-logout {
+    color: #555;
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    transition: color 0.2s;
+  }
+  .rt-logout:hover { color: #aaa; }
+</style>
+
+<nav class="rt-nav">
+  <%= link_to root_path, class: "rt-logo" do %>
+    <span class="rt-logo-dot"></span>
+    RUN TOGETHER
+  <% end %>
+
+  <ul class="rt-links">
+    <li><%= link_to "Home", root_path, class: current_page?(root_path) ? "active" : "" %></li>
+
+    <% if user_signed_in? %>
+      <li><%= link_to "Explorar", runs_path, class: current_page?(runs_path) ? "active" : "" %></li>
+      <li><%= link_to "Minhas Corridas", my_runs_path, class: current_page?(my_runs_path) ? "active" : "" %></li>
+      <li><%= link_to "+ Criar Corrida", new_run_path, class: "rt-cta" %></li>
+    <% end %>
+  </ul>
+
+  <div class="rt-user">
+    <% if user_signed_in? %>
+      <div class="rt-avatar">
+        <%= current_user.name&.split&.map { |n| n[0] }&.first(2)&.join&.upcase %>
+      </div>
+      <%= link_to destroy_user_session_path, data: { turbo_method: :delete }, class: "rt-logout" do %>
+        Sair
+      <% end %>
+    <% else %>
+      <%= link_to "Entrar", new_user_session_path, class: "rt-links a" %>
+    <% end %>
+  </div>
+</nav>
