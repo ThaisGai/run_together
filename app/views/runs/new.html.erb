@@ -11,7 +11,16 @@
   <%= f.input :time,
     label: "Time",
     input_html: { type: "time" } %>
-  <%= f.input :location %>
+    <!-- Location com Mapbox autofill -->
+  <div class="form-group mb-3">
+    <label>Location</label>
+    <mapbox-address-autofill access-token="pk.eyJ1IjoiZGlvZ290YW5ha2EiLCJhIjoiY21tdmF6Z20wMmlvZDJwcHljNmE4ajkybiJ9.rU5MFILh2sHAg1Kz4fZPVQ">
+      <%= f.input :location,
+          label: false,
+          placeholder: "Local...",
+          input_html: { autocomplete: "address-line1" } %>
+    </mapbox-address-autofill>
+  </div>
   <%= f.input :pace,
     label: "Pace (min/km)",
     collection: (["Sem pace definido", "3:00", "3:30", "4:00", "4:30", "5:00", "5:30", "6:00", "6:30", "7:00", "7:30"].map { |p| ["#{p} min/km", p] }),
