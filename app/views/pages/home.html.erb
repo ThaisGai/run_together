@@ -1,3 +1,29 @@
-<h1>Pages#home</h1>
-<p>Find me in app/views/pages/home.html.erb</p>
-<%= button_to "Logout", destroy_user_session_path, method: :delete %>
+<div class="rt-home">
+  <div class="rt-hero">
+    <p class="rt-tag">— Conectando corredores</p>
+    <div class="rt-slogan">Corra <span>junto.</span><br>Vá mais longe.</div>
+    <p>Encontre corridas perto de você, crie seu próprio grupo e conecte-se com quem compartilha o mesmo ritmo.</p>
+    <div class="rt-actions">
+      <%= link_to "Explorar Corridas", runs_path, class: "rt-btn-primary" %>
+      <%= link_to "+ Criar Corrida", new_run_path, class: "rt-btn-secondary" %>
+    </div>
+    <div class="rt-watermark">RUN<br>TOGETHER</div>
+  </div>
+
+  <div class="rt-stats">
+    <div class="rt-stat">
+      <span class="rt-stat-number">1.2k</span>
+      <span class="rt-stat-label">Corredores</span>
+    </div>
+    <div class="rt-stat">
+      <span class="rt-stat-number">340</span>
+      <span class="rt-stat-label">Corridas criadas</span>
+    </div>
+    <div class="rt-stat">
+      <span class="rt-stat-number">18</span>
+      <span class="rt-stat-label">Cidades</span>
+    </div>
+  </div>
+
+  <%= button_to "Logout", destroy_user_session_path, method: :delete %>
+</div>
