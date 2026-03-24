@@ -15,7 +15,7 @@
     <li><%= link_to "Home", root_path, class: current_page?(root_path) ? "active" : "" %></li>
 
     <% if user_signed_in? %>
-      <li><%= link_to "Mensagens", messages_path, class: current_page?(messages_path) ? "active" : "" %></li>
+      <li><%= link_to "Mensagens", chats_path, class: current_page?(chats_path) ? "active" : "" %></li>
       <li><%= link_to "Minhas Corridas", my_runs_path, class: current_page?(my_runs_path) ? "active" : "" %></li>
       <li><%= link_to "+ Criar Corrida", new_run_path, class: "rt-cta" %></li>
     <% end %>
