@@ -38,10 +38,12 @@
   <script>
     window.addEventListener('load', () => {
       // Add search box to input
-      const collection = mapboxsearch.autofill({ accessToken: MAPBOX_ACCESS_TOKEN });
+      const ACCESS_TOKEN = '<%= ENV["MAPBOX_ACCESS_TOKEN"] %>';
+
+      const collection = mapboxsearch.autofill({ accessToken: ACCESS_TOKEN });
       // Configure minimap
       const minimap = document.querySelector('mapbox-address-minimap');
-      minimap.accessToken = MAPBOX_ACCESS_TOKEN;
+      minimap.accessToken = ACCESS_TOKEN;
       minimap.defaultMapStyle = ['mapbox', 'outdoors-v11'];
       minimap.theme = {
         variables: { border: '3px solid #ff4d00', borderRadius: '18px', boxShadow: '0 2px 8px #000' }
