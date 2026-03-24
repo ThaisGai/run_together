@@ -36,13 +36,12 @@
 
 
   <script>
-    const ACCESS_TOKEN = 'pk.eyJ1IjoiZGlvZ290YW5ha2EiLCJhIjoiY21tdmF6Z20wMmlvZDJwcHljNmE4ajkybiJ9.rU5MFILh2sHAg1Kz4fZPVQ';
     window.addEventListener('load', () => {
       // Add search box to input
-      const collection = mapboxsearch.autofill({ accessToken: ACCESS_TOKEN });
+      const collection = mapboxsearch.autofill({ accessToken: MAPBOX_ACCESS_TOKEN });
       // Configure minimap
       const minimap = document.querySelector('mapbox-address-minimap');
-      minimap.accessToken = ACCESS_TOKEN;
+      minimap.accessToken = MAPBOX_ACCESS_TOKEN;
       minimap.defaultMapStyle = ['mapbox', 'outdoors-v11'];
       minimap.theme = {
         variables: { border: '3px solid #ff4d00', borderRadius: '18px', boxShadow: '0 2px 8px #000' }
