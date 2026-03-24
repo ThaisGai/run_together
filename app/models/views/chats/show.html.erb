@@ -1,0 +1,22 @@
+<div class="chat-window">
+  <div class="chat-header">
+    <div class="chat-avatar">
+      <%= @chat.other_user(current_user).name&.split&.map { |n| n[0] }&.first(2)&.join&.upcase %>
+    </div>
+    <span><%= @chat.other_user(current_user).name %></span>
+  </div>
+
+  <div class="chat-messages" id="chat-messages">
+    <% @messages.each do |message| %>
+      <div class="chat-bubble <%= message.user == current_user ? 'mine' : 'theirs' %>">
+        <p><%= message.content %></p>
+        <span class="chat-time"><%= message.created_at.strftime("%H:%M") %></span>
+      </div>
+    <% end %>
+  </div>
+
+  <%= form_with model: [@chat, @message], class: "chat-form" do |f| %>
+    <%= f.text_field :content, placeholder: "Escreva uma mensagem...", class: "chat-input", autocomplete: "off" %>
+    <%= f.submit "Enviar", class: "chat-send" %>
+  <% end %>
+</div>

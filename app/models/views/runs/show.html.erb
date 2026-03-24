@@ -1,0 +1,22 @@
+<div class="run-show">
+  <p><strong>Data:</strong> <%= @run.date.strftime("%d/%m/%Y") %></p>
+  <p><strong>Horário:</strong> <%= @run.time.strftime("%H:%M") %></p>
+  <p><strong>Local:</strong> <%= @run.location %></p>
+  <p><strong>Lugar:</strong> <%= @run.place %></p>
+  <p><strong>Criado por:</strong> <%= @run.user.name %></p>
+
+  <% if user_signed_in? %>
+    <% if @run.user == current_user %>
+      <%= link_to "Editar", edit_run_path(@run), class: "rt-cta" %>
+      <%= link_to "Deletar", run_path(@run), data: { turbo_method: :delete, turbo_confirm: "Tem certeza?" }, class: "btn btn-danger" %>
+    <% else %>
+      <%= link_to "Mensagem", chat_path(@run.user), class: "rt-cta" %>
+
+      <% if @run.members.include?(current_user) %>
+        <p>Você já está participando desta corrida!</p>
+      <% else %>
+        <%= button_to "Participar", run_run_members_path(@run), class: "rt-cta" %>
+      <% end %>
+    <% end %>
+  <% end %>
+</div>
