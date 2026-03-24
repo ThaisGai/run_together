@@ -6,7 +6,15 @@
     <p><strong>Time:</strong> <%= run.time.strftime("%H:%M") %></p>
     <p><strong>Location:</strong> <%= run.location %></p>
     <p><strong>Pace:</strong> <%= run.pace %></p>
+
     <%= link_to "View", run_path(run) %>
-    <%= link_to "Delete", run_path(run), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "btn btn-danger" %>
+
+    <% if user_signed_in? && run.user != current_user %>
+      <%= link_to "Mensagem", chat_path(run.user), class: "rt-cta" %>
+    <% end %>
+
+    <% if user_signed_in? && run.user == current_user %>
+      <%= link_to "Delete", run_path(run), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "btn btn-danger" %>
+    <% end %>
   </div>
 <% end %>
