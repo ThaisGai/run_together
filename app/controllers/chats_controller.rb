@@ -1,5 +1,7 @@
 class ChatsController < ApplicationController
   before_action :authenticate_user!
+  skip_after_action :verify_authorized
+  skip_after_action :verify_policy_scoped
 
   def index
     @chats = current_user.chats.includes(:sender, :receiver, :messages)

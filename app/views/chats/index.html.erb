@@ -1,0 +1,22 @@
+<div class="chats-index">
+  <h2>Mensagens</h2>
+
+  <% if @chats.empty? %>
+    <p class="no-chats">Nenhuma conversa ainda.</p>
+  <% else %>
+    <div class="chat-list">
+      <% @chats.each do |chat| %>
+        <% other = chat.other_user(current_user) %>
+        <%= link_to chat_path(chat), class: "chat-item" do %>
+          <div class="chat-avatar">
+            <%= other.name&.split&.map { |n| n[0] }&.first(2)&.join&.upcase %>
+          </div>
+          <div class="chat-info">
+            <span class="chat-name"><%= other.name %></span>
+            <span class="chat-preview"><%= chat.messages.last&.content&.truncate(40) %></span>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+  <% end %>
+</div>
