@@ -22,6 +22,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700&family=Barlow:wght@400;500&display=swap" rel="stylesheet">
 
     <link href="https://api.mapbox.com/mapbox-gl-js/v3.20.0/mapbox-gl.css" rel="stylesheet">
+    <script src="https://api.mapbox.com/mapbox-gl-js/v3.20.0/mapbox-gl.js"></script>
 
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
@@ -33,7 +34,9 @@
     <%= render "shared/flashes" %>
     <%= yield %>
 
-    <script src="https://api.mapbox.com/mapbox-gl-js/v3.20.0/mapbox-gl.js"></script>
-    
+    <script>
+      const MAPBOX_ACCESS_TOKEN = "<%= ENV['MAPBOX_ACCESS_TOKEN'] %>"
+    </script>
+
   </body>
 </html>

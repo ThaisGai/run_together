@@ -2,6 +2,12 @@ class RunsController < ApplicationController
 
   def index
     @runs = policy_scope(Run)
+
+    @markers = @runs.map do |run| {
+        lat: run.latitude,
+        lng: run.longitude
+      }
+    end
   end
 
   def my_runs

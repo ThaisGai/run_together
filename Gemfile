@@ -48,7 +48,7 @@ gem "simple_form", github: "heartcombo/simple_form"
 gem "sassc-rails"
 gem "pundit" #authorization gem
 gem "pg_search"
-
+gem "geocoder"
 
 group :development, :test do
   gem "dotenv-rails"
