@@ -39,6 +39,7 @@ class RunsController < ApplicationController
   def update
     @run = Run.find(params[:id])
     authorize @run
+    raise
     if @run.update(run_params)
       redirect_to runs_path
     else
@@ -56,6 +57,6 @@ class RunsController < ApplicationController
   private
 
   def run_params
-    params.require(:run).permit(:user_id, :date, :time, :location, :pace, :private)
+    params.require(:run).permit(:user_id, :date, :time, :location, :pace, :private, :latitude, :longitude)
   end
 end
