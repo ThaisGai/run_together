@@ -11,19 +11,62 @@
   <%= f.input :time,
     label: "Time",
     input_html: { type: "time" } %>
-    <!-- Location com Mapbox autofill -->
+<!-- Location com Mapbox autofill -->
   <div class="form-group mb-3">
-    <label>Location</label>
-    <mapbox-address-autofill access-token="pk.eyJ1IjoiZGlvZ290YW5ha2EiLCJhIjoiY21tdmF6Z20wMmlvZDJwcHljNmE4ajkybiJ9.rU5MFILh2sHAg1Kz4fZPVQ">
-      <%= f.input :location,
-          label: false,
-          placeholder: "Local...",
-          input_html: { autocomplete: "address-line1" } %>
-    </mapbox-address-autofill>
+      <input type="text"
+        id="location-search"
+        class="form-control mb-2"
+        placeholder="Local de encontro..."
+        autocomplete="address-line1">
+      <%= f.input :location, as: :hidden %>
+      <%= f.input :latitude, as: :hidden %>
+      <%= f.input :longitude, as: :hidden %>
   </div>
+
+  <div id="map" class="mb-5" style="height: 360px; width: 100%;">
+    <mapbox-address-minimap satellite-toggle="true" can-adjust-marker="true"></mapbox-address-minimap>
+  </div>
+
   <%= f.input :pace,
     label: "Pace (min/km)",
     collection: (["Sem pace definido", "3:00", "3:30", "4:00", "4:30", "5:00", "5:30", "6:00", "6:30", "7:00", "7:30"].map { |p| ["#{p} min/km", p] }),
-    prompt: "Select your pace" %>
+    prompt: "Selecione o ritmo (pace) desejado" %>
   <%= f.button :submit, "Criar Corrida", class: "btn btn-primary" %>
 <% end %>
+
+
+  <script>
+    const ACCESS_TOKEN = 'pk.eyJ1IjoiZGlvZ290YW5ha2EiLCJhIjoiY21tdmF6Z20wMmlvZDJwcHljNmE4ajkybiJ9.rU5MFILh2sHAg1Kz4fZPVQ';
+    window.addEventListener('load', () => {
+      // Add search box to input
+      const collection = mapboxsearch.autofill({ accessToken: ACCESS_TOKEN });
+      // Configure minimap
+      const minimap = document.querySelector('mapbox-address-minimap');
+      minimap.accessToken = ACCESS_TOKEN;
+      minimap.defaultMapStyle = ['mapbox', 'outdoors-v11'];
+      minimap.theme = {
+        variables: { border: '3px solid #ff4d00', borderRadius: '18px', boxShadow: '0 2px 8px #000' }
+      }
+    minimap.onSaveMarkerLocation = (coordinate) => {
+      document.getElementById('run_latitude').value = coordinate[1];
+      console.log(coordinate[1], coordinate[0])
+      document.getElementById('run_longitude').value = coordinate[0];
+    };
+    minimap.feature = {
+      type: 'Feature',
+      geometry: { type: 'Point', coordinates: [-46.6560, -23.5615] },
+      properties: {}
+    };
+    // Set minimap feature on search box selection
+    collection.addEventListener('retrieve', (e) => {
+      const feature = e.detail.features[0];
+      minimap.feature = feature;
+      document.getElementById('run_location').value = feature.properties.full_address || feature.place_name;
+      document.getElementById('run_latitude').value = feature.geometry.coordinates[1];
+      document.getElementById('run_longitude').value = feature.geometry.coordinates[0];
+      console.log("Location:", feature.properties.full_address);
+      console.log("Lat:", feature.geometry.coordinates[1]);
+      console.log("Lng:", feature.geometry.coordinates[0]);
+    })
+  });
+  </script>
