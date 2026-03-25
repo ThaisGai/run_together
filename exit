@@ -1,0 +1,291 @@
+[33mcommit 54208ffbe9d33f550d7445c9a5f3de954fdcce4b[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mnew-mapbox[m[33m)[m
+Author: Diogo Tanaka <diogohideki@gmail.com>
+Date:   Tue Mar 24 19:20:37 2026 -0300
+
+    mapa e location
+
+[33mcommit 750e2cbd15f5763c49ca920632a90d3ac100a259[m
+Author: Diogo Tanaka <diogohideki@gmail.com>
+Date:   Tue Mar 24 19:14:09 2026 -0300
+
+    mapa e location
+
+[33mcommit c1e1b5a27b34a4fae65f9c568dfd7f408a4a3826[m
+Merge: fe6a21a 3a71c0a
+Author: Diogo Tanaka <diogohideki@gmail.com>
+Date:   Sat Mar 21 12:32:42 2026 -0300
+
+    resolve merge conflict
+
+[33mcommit 3a71c0a23068a599d0c3694932d067d0732cdc4a[m[33m ([m[1;32mmaster[m[33m)[m
+Author: Diogo Tanaka <diogohideki@gmail.com>
+Date:   Sat Mar 21 12:30:08 2026 -0300
+
+    add coordinates to runs
+
+[33mcommit 678d1a32b1d84e749b33ebd246788925056bc377[m[33m ([m[1;31morigin/master[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Merge: c212bb6 fdaad27
+Author: diogotanaka <diogohideki@gmail.com>
+Date:   Sat Mar 21 12:27:00 2026 -0300
+
+    Merge pull request #14 from ThaisGai/lat-long
+    
+    latitude e longitude adicionados
+
+[33mcommit fdaad27b69078cb891580cce14a1f54f71db5081[m[33m ([m[1;31morigin/lat-long[m[33m, [m[1;32mlat-long[m[33m)[m
+Author: Diogo Tanaka <diogohideki@gmail.com>
+Date:   Sat Mar 21 12:25:58 2026 -0300
+
+    latitude e longitude adicionados
+
+[33mcommit c212bb64517a2f37e21072eab5c0eae801d0845e[m
+Author: Beatriz Barguil <beatrizz.barguil@gmail.com>
+Date:   Thu Mar 19 22:24:00 2026 -0300
+
+    corrigindo db migrate
+
+[33mcommit 814cb723bbc3f8a329d0a51eece550571604d7ca[m
+Author: Beatriz Barguil <beatrizz.barguil@gmail.com>
+Date:   Thu Mar 19 22:17:42 2026 -0300
+
+    corrigindo scss
+
+[33mcommit e1679396d660a17d76ab7fc6073cd1c0c28c3a73[m
+Author: Beatriz Barguil <beatrizz.barguil@gmail.com>
+Date:   Thu Mar 19 22:15:28 2026 -0300
+
+    corrigindo auth.scss
+
+[33mcommit 777d877549be42473d814f9a08dc7b7d74fea0dc[m
+Merge: 07ce2fc 0a27ea2
+Author: Beatriz Barguil <beatrizz.barguil@gmail.com>
+Date:   Thu Mar 19 22:10:16 2026 -0300
+
+    Merge pull request #13 from ThaisGai/session-new
+    
+    atualizando a pagina de registro login
+
+[33mcommit 0a27ea2b5e80dd3b0fdbfd3923f5d426ca24a02e[m
+Author: Beatriz Barguil <beatrizz.barguil@gmail.com>
+Date:   Thu Mar 19 22:09:42 2026 -0300
+
+    atualizando a pagina de registro login
+
+[33mcommit fe6a21ae592d4a8315685b1abb3145cc6d914f38[m
+Author: Diogo Tanaka <diogohideki@gmail.com>
+Date:   Thu Mar 19 21:48:29 2026 -0300
+
+    autocomplete
+
+[33mcommit 07ce2fc9509aa761c5cab3fe4b6afc32cf65b9fe[m
+Merge: 973f98d 8c9c53e
+Author: Beatriz Barguil <beatrizz.barguil@gmail.com>
+Date:   Thu Mar 19 21:44:12 2026 -0300
+
+    Merge pull request #12 from ThaisGai/home-page
+    
+    feito home css e html
+
+[33mcommit 8c9c53eb5bba162156466fe25feae4755bf90555[m
+Author: Beatriz Barguil <beatrizz.barguil@gmail.com>
+Date:   Thu Mar 19 21:42:26 2026 -0300
+
+    feito home css e html
+
+[33mcommit 973f98de745b6f85bb2df2cf9fdec68cf9c4e942[m
+Merge: 2fd6d17 c71575a
+Author: diogotanaka <diogohideki@gmail.com>
+Date:   Thu Mar 19 21:37:28 2026 -0300
+
+    Merge pull request #8 from ThaisGai/dependabot/bundler/devise-5.0.3
+    
+    Bump devise from 5.0.2 to 5.0.3
+
+[33mcommit 2fd6d179c16c3a65c2a9a981638b871e7762ed8a[m
+Author: Beatriz Barguil <beatrizz.barguil@gmail.com>
+Date:   Thu Mar 19 21:28:31 2026 -0300
+
+    navbar html e navbar css
+
+[33mcommit 003ce1d7f0fe3bffa438d5e748982b58db60835b[m
+Author: Beatriz Barguil <beatrizz.barguil@gmail.com>
+Date:   Thu Mar 19 21:25:25 2026 -0300
+
+    criei navbar,routes.rb, runs_controller, aplication html, criei tambem o file de my runs em view
+
+[33mcommit d85cca5fb7db3a0d7608a269abd75098b5a56d7c[m
+Merge: a9e268d 69413dc
+Author: Beatriz Barguil <beatrizz.barguil@gmail.com>
+Date:   Thu Mar 19 19:57:35 2026 -0300
+
+    resolve merge conflict in schema.rb
+
+[33mcommit a9e268de274ab55189d6e0c25480de70aa492ee1[m
+Author: Beatriz Barguil <beatrizz.barguil@gmail.com>
+Date:   Thu Mar 19 19:51:09 2026 -0300
+
+    atualizar file
+
+[33mcommit 69413dcb37be203711586257755b0196f5e25e14[m[33m ([m[1;32mmap-new[m[33m)[m
+Merge: ab517ca 24a3046
+Author: diogotanaka <diogohideki@gmail.com>
+Date:   Tue Mar 17 21:31:10 2026 -0300
+
+    Merge pull request #10 from ThaisGai/new-run
+    
+    fiz um formzinho para poder criar uma run
+    arrumei um pouco a parte do pundit que nao tava com o authorize @run no controller de runs em create
+    
+    no model de run tava place ao inves de pace
+
+[33mcommit 24a3046772429843fe819778e29ae0e0e94f3b13[m[33m ([m[1;31morigin/new-run[m[33m, [m[1;32mnew-run[m[33m)[m
+Author: Diogo Tanaka <diogohideki@gmail.com>
+Date:   Tue Mar 17 21:06:46 2026 -0300
+
+    simple form de new run sem map
+
+[33mcommit 18c0c55c1a4c76217e81207073eebe84b8bb272b[m
+Author: Diogo Tanaka <diogohideki@gmail.com>
+Date:   Tue Mar 17 21:06:09 2026 -0300
+
+    simple form de new run
+
+[33mcommit ab517ca85f98767e19f699f9e48f4a0c03d60344[m
+Author: Thais Almeida Gai <thais.gabriel@gmail.com>
+Date:   Tue Mar 17 20:40:04 2026 -0300
+
+    resolvendo conflitos
+
+[33mcommit 5efc2a58a185ddfbe5af3e5a44bad7023cb8a2c2[m
+Merge: 6970bf2 230f4f2
+Author: Thais Almeida Gai <thais.gabriel@gmail.com>
+Date:   Tue Mar 17 20:38:49 2026 -0300
+
+    resolvendo conflitos
+
+[33mcommit 230f4f29c8693be24e98e5603c98956e56478198[m
+Author: Thais Almeida Gai <thais.gabriel@gmail.com>
+Date:   Tue Mar 17 20:27:36 2026 -0300
+
+    Configurando gender
+
+[33mcommit b782557f3e59a8f3725eed1cb76c21e553a8fa51[m
+Author: Thais Almeida Gai <thais.gabriel@gmail.com>
+Date:   Tue Mar 17 20:20:20 2026 -0300
+
+    Add informaçoes no devise
+
+[33mcommit 6970bf2c7aa694ad25f11aedcbd186c72face63d[m
+Author: Diogo Tanaka <diogohideki@gmail.com>
+Date:   Tue Mar 17 19:35:35 2026 -0300
+
+    active records 7.0 na migration
+
+[33mcommit c71575a85530b4b348321983a45d7122e35ddd92[m
+Author: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
+Date:   Tue Mar 17 16:58:56 2026 +0000
+
+    Bump devise from 5.0.2 to 5.0.3
+    
+    Bumps [devise](https://github.com/heartcombo/devise) from 5.0.2 to 5.0.3.
+    - [Release notes](https://github.com/heartcombo/devise/releases)
+    - [Changelog](https://github.com/heartcombo/devise/blob/main/CHANGELOG.md)
+    - [Commits](https://github.com/heartcombo/devise/compare/v5.0.2...v5.0.3)
+    
+    ---
+    updated-dependencies:
+    - dependency-name: devise
+      dependency-version: 5.0.3
+      dependency-type: direct:production
+      update-type: version-update:semver-patch
+    ...
+    
+    Signed-off-by: dependabot[bot] <support@github.com>
+
+[33mcommit 86b3d2225b30cc80742007d8a4ed0c12651a5ba8[m
+Merge: 6eedc45 00133c9
+Author: diogotanaka <diogohideki@gmail.com>
+Date:   Sat Mar 14 23:41:12 2026 -0300
+
+    Merge pull request #7 from ThaisGai/list-run-controller
+    
+    runs controller, pundit e rails 7.1.6
+
+[33mcommit 00133c92aa78b10e8a6f0863371596b975fabda1[m
+Merge: 4703435 6eedc45
+Author: diogotanaka <diogohideki@gmail.com>
+Date:   Sat Mar 14 23:40:08 2026 -0300
+
+    Merge branch 'master' into list-run-controller
+
+[33mcommit 47034354e2570b765f7f19bec4bf6b86f9eeb6cc[m[33m ([m[1;31morigin/list-run-controller[m[33m, [m[1;32mlist-run-controller[m[33m)[m
+Author: Diogo Tanaka <diogohideki@gmail.com>
+Date:   Sat Mar 14 23:31:39 2026 -0300
+
+    runs controller, pundit e projeto em rails 7.1
+
+[33mcommit d5de0e9b8321a81b2c8d6d35142ac6945722f333[m
+Author: Diogo Tanaka <diogohideki@gmail.com>
+Date:   Sat Mar 14 23:26:17 2026 -0300
+
+    runs controller, pundit e projeto em rails 7.1
+
+[33mcommit 69e942c506e6fd543a2a211b324b0c8fa8570f7f[m
+Author: Diogo Tanaka <diogohideki@gmail.com>
+Date:   Sat Mar 14 15:41:49 2026 -0300
+
+    parte 1
+
+[33mcommit 6eedc45efc9cbc620908078233682768cba7e88f[m
+Merge: 9eeb913 9e782bd
+Author: Beatriz Barguil <beatrizz.barguil@gmail.com>
+Date:   Sat Mar 14 15:37:42 2026 -0300
+
+    Merge pull request #6 from ThaisGai/model-run-member
+    
+    Model run member
+
+[33mcommit 9e782bd2b8dd323b3ff463b8a17879a8c763d786[m[33m ([m[1;31morigin/model-run-member[m[33m)[m
+Author: Beatriz Barguil <beatrizz.barguil@gmail.com>
+Date:   Sat Mar 14 14:47:42 2026 -0300
+
+    atualizando models de chat, message, run e run member
+
+[33mcommit dc59d06418b4a0b7ffd16b3ae6c5de80cde88b29[m
+Author: Beatriz Barguil <beatrizz.barguil@gmail.com>
+Date:   Sat Mar 14 14:43:35 2026 -0300
+
+    corrigindo as migrations
+
+[33mcommit 9eeb91353ebdbc65529e20f8b4890b0a0313ecfe[m
+Author: Beatriz Barguil <beatrizz.barguil@gmail.com>
+Date:   Sat Mar 14 14:40:34 2026 -0300
+
+    criei migrations de chat, message e runmembers
+
+[33mcommit 5344633a1eea76f24367947becc8df3271a7c802[m
+Merge: d873203 fda1b72
+Author: diogotanaka <diogohideki@gmail.com>
+Date:   Sat Mar 14 12:18:16 2026 -0300
+
+    Merge pull request #4 from ThaisGai/list-run
+    
+    list run and migration
+
+[33mcommit fda1b7292acf1de881a78cde1558855a84d97a0f[m[33m ([m[1;31morigin/list-run[m[33m)[m
+Author: Beatriz Barguil <beatrizz.barguil@gmail.com>
+Date:   Thu Mar 12 21:42:25 2026 -0300
+
+    fix: rubocop lint corrections
+
+[33mcommit 83e9eb7bbe67f1faeb32df2711f9ccbd41409fdd[m
+Author: Beatriz Barguil <beatrizz.barguil@gmail.com>
+Date:   Thu Mar 12 21:03:36 2026 -0300
+
+    criado model run e migration run
+
+[33mcommit d87320303cbbe3a4fff25f5d2b7e988204a3ae0c[m
+Author: Thais Almeida Gai <thais.gabriel@gmail.com>
+Date:   Thu Mar 12 19:26:00 2026 -0300
+
+    Initial commit with devise template from https://github.com/lewagon/rails-templates
