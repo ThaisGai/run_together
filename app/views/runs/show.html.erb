@@ -2,15 +2,27 @@
   <p><strong>Data:</strong> <%= @run.date.strftime("%d/%m/%Y") %></p>
   <p><strong>Horário:</strong> <%= @run.time.strftime("%H:%M") %></p>
   <p><strong>Local:</strong> <%= @run.location %></p>
-  <p><strong>Lugar:</strong> <%= @run.pace %></p>
   <p><strong>Criado por:</strong> <%= @run.user.name %></p>
 
   <% if user_signed_in? %>
     <% if @run.user == current_user %>
       <%= link_to "Editar", edit_run_path(@run), class: "rt-cta" %>
       <%= link_to "Deletar", run_path(@run), data: { turbo_method: :delete, turbo_confirm: "Tem certeza?" }, class: "btn btn-danger" %>
+
+      <% if @run.members.any? %>
+        <h3>Participantes</h3>
+        <% @run.members.each do |member| %>
+          <div>
+            <span><%= member.name %></span>
+            <%= link_to "Enviar mensagem", chat_with_user_path(user_id: member.id), class: "rt-cta" %>
+          </div>
+        <% end %>
+      <% else %>
+        <p>Nenhum participante ainda.</p>
+      <% end %>
+
     <% else %>
-      <%= link_to "Mensagem", chat_path(@run.user), class: "rt-cta" %>
+      <%= link_to "Enviar mensagem ao criador", chat_with_user_path(user_id: @run.user.id), class: "rt-cta" %>
 
       <% if @run.members.include?(current_user) %>
         <p>Você já está participando desta corrida!</p>
