@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   resources :chats, only: [:index, :show] do
     resources :messages, only: [:create]
   end
+  get "chats/with/:user_id", to: "chats#with_user", as: "chat_with_user"
 
   get "up" => "rails/health#show", as: :rails_health_check
 end
