@@ -3,7 +3,7 @@ class RunsController < ApplicationController
   skip_after_action :verify_policy_scoped, only: :my_runs
 
   def index
-    @runs = policy_scope(Run)
+    @runs = policy_scope(Run).upcoming
   end
 
   def my_runs
@@ -39,7 +39,6 @@ class RunsController < ApplicationController
   def update
     @run = Run.find(params[:id])
     authorize @run
-    raise
     if @run.update(run_params)
       redirect_to runs_path
     else

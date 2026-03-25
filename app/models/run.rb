@@ -4,7 +4,7 @@ class Run < ApplicationRecord
   has_many :members, through: :run_members, source: :user
   has_one :chat, dependent: :destroy
 
-  after_create :create_chat
+  # after_create :create_chat
 
   validates :date,     presence: true
   validates :time,     presence: true
