@@ -10,7 +10,7 @@ document.addEventListener("turbo:load", () => {
 
   if (mapElement) {
 
-    mapboxgl.accessToken = MAPBOX_ACCESS_TOKEN
+    mapboxgl.accessToken = mapElement.dataset.mapboxApiKey
 
     const markers = JSON.parse(mapElement.dataset.markers)
 
