@@ -85,10 +85,6 @@
 .rt-dropdown {
   position: relative;
   cursor: pointer;
-
-  &:hover .rt-dropdown-menu {
-    display: flex;
-  }
 }
 
 .rt-avatar {

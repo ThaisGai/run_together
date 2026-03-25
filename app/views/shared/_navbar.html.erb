@@ -44,22 +44,3 @@
     <% end %>
   </div>
 </nav>
-
-<script>
-  document.addEventListener('DOMContentLoaded', function() {
-    const dropdown = document.querySelector('.rt-dropdown');
-    const menu = document.querySelector('.rt-dropdown-menu');
-
-    if (dropdown && menu) {
-      dropdown.addEventListener('click', function() {
-        menu.style.display = menu.style.display === 'flex' ? 'none' : 'flex';
-      });
-
-      document.addEventListener('click', function(e) {
-        if (!dropdown.contains(e.target)) {
-          menu.style.display = 'none';
-        }
-      });
-    }
-  });
-</script>
