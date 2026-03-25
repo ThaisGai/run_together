@@ -129,6 +129,10 @@
   z-index: 100;
 }
 
+.rt-dropdown.open .rt-dropdown-menu {
+  display: flex;
+}
+
 .rt-dropdown-item {
   color: #aaa;
   text-decoration: none;
