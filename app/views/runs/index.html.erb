@@ -10,7 +10,7 @@
     <%= link_to "View", run_path(run) %>
 
     <% if user_signed_in? && run.user != current_user %>
-      <%= link_to "Mensagem", chat_path(run.user), class: "rt-cta" %>
+      <%= link_to "Mensagem", chat_with_user_path(user_id: run.user.id), class: "rt-cta" %>
     <% end %>
 
     <% if user_signed_in? && run.user == current_user %>
