@@ -126,3 +126,85 @@
 
   &:hover { background: #e04300; }
 }
+
+.chats-index {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 32px 24px;
+
+  h2 {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 28px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #0f0f0f;
+    margin-bottom: 24px;
+  }
+}
+
+.no-chats {
+  color: #aaa;
+  font-size: 15px;
+  font-family: 'Barlow', sans-serif;
+}
+
+.chat-list {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.chat-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 16px;
+  border-radius: 12px;
+  text-decoration: none;
+  transition: background 0.15s;
+  background: #fff;
+  border: 1px solid #f0f0f0;
+
+  &:hover {
+    background: #fff8f6;
+    border-color: #ff4d00;
+  }
+
+  .chat-avatar {
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    background: #1e1e1e;
+    border: 1.5px solid #ff4d00;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #ff4d00;
+    font-size: 14px;
+    font-weight: 700;
+    font-family: 'Barlow Condensed', sans-serif;
+    flex-shrink: 0;
+  }
+
+  .chat-info {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+  }
+
+  .chat-name {
+    font-size: 15px;
+    font-weight: 600;
+    color: #1a1a1a;
+    font-family: 'Barlow Condensed', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .chat-preview {
+    font-size: 13px;
+    color: #888;
+    font-family: 'Barlow', sans-serif;
+  }
+}
