@@ -3,7 +3,13 @@ class RunsController < ApplicationController
   skip_after_action :verify_policy_scoped, only: :my_runs
 
   def index
-    @runs = policy_scope(Run).upcoming
+    @runs = policy_scope(Run)
+
+    @markers = @runs.map do |run| {
+        lat: run.latitude,
+        lng: run.longitude
+      }
+    end
   end
 
   def my_runs
