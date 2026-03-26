@@ -10,14 +10,37 @@
   <% end %>
 </div>
 <div>
-  <h1>Runs</h1>
 
-    <div>
-      id="map"
-      data-markers="<%= @markers.to_json %>"
-      data-mapbox-api-key="<%= ENV['MAPBOX_ACCESS_TOKEN'] %>"
-      style="width: 100%; height: 500px;">
-    </div>
+<h1>Runs</h1>
+
+  <div
+    id="map"
+    data-markers="<%= @markers.to_json %>"
+    data-mapbox-api-key="<%= ENV['MAPBOX_ACCESS_TOKEN'] %>"
+    style="width: 100%; height: 500px;">
+  </div>
+
+  <script>
+    const mapElement = document.getElementById("map")
+
+    const markers = JSON.parse(mapElement.dataset.markers)
+    const apiKey = mapElement.dataset.mapboxApiKey
+
+    mapboxgl.accessToken = apiKey
+
+    const map = new mapboxgl.Map({
+      container: "map",
+      style: "mapbox://styles/mapbox/streets-v12",
+      center: [-46.6333, -23.5505],
+      zoom: 10
+    })
+
+    markers.forEach((marker) => {
+      new mapboxgl.Marker()
+        .setLngLat([marker.lng, marker.lat])
+        .addTo(map)
+    })
+  </script>
 
       <% @runs.each do |run| %>
         <div>
