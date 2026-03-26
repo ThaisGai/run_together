@@ -15,10 +15,13 @@ ActiveRecord::Schema[7.1].define(version: 2026_03_21_152411) do
   enable_extension "plpgsql"
 
   create_table "chats", force: :cascade do |t|
-    t.bigint "run_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["run_id"], name: "index_chats_on_run_id"
+    t.bigint "sender_id", null: false
+    t.bigint "receiver_id", null: false
+    t.index ["receiver_id"], name: "index_chats_on_receiver_id"
+    t.index ["sender_id", "receiver_id"], name: "index_chats_on_sender_id_and_receiver_id", unique: true
+    t.index ["sender_id"], name: "index_chats_on_sender_id"
   end
 
   create_table "messages", force: :cascade do |t|
@@ -51,6 +54,10 @@ ActiveRecord::Schema[7.1].define(version: 2026_03_21_152411) do
     t.datetime "updated_at", null: false
     t.float "latitude"
     t.float "longitude"
+<<<<<<< HEAD
+=======
+    t.string "pace"
+>>>>>>> ae7b810515b4e45b6ad2db8d3226c75c5758bf68
     t.index ["user_id"], name: "index_runs_on_user_id"
   end
 
@@ -70,7 +77,8 @@ ActiveRecord::Schema[7.1].define(version: 2026_03_21_152411) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  add_foreign_key "chats", "runs"
+  add_foreign_key "chats", "users", column: "receiver_id"
+  add_foreign_key "chats", "users", column: "sender_id"
   add_foreign_key "messages", "chats"
   add_foreign_key "messages", "users"
   add_foreign_key "run_members", "runs"

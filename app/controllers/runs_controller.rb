@@ -1,4 +1,6 @@
 class RunsController < ApplicationController
+  skip_after_action :verify_authorized, only: :my_runs
+  skip_after_action :verify_policy_scoped, only: :my_runs
 
   def index
     @runs = policy_scope(Run)
@@ -60,6 +62,6 @@ class RunsController < ApplicationController
   private
 
   def run_params
-    params.require(:run).permit(:user_id, :date, :time, :location, :pace, :private)
+    params.require(:run).permit(:user_id, :date, :time, :location, :pace, :private, :latitude, :longitude)
   end
 end

@@ -1,20 +1,67 @@
-<h1>ListRuns#new</h1>
-<p>Find me in app/views/list_runs/new.html.erb</p>
+<h1>Criar Corrida</h1>
+
 <%= simple_form_for @run do |f| %>
   <%= f.input :date,
-    label: "Date",
+    label: "Data",
     as: :string,
     input_html: {
       type: "date",
       min: Date.today.strftime("%Y-%m-%d")
     } %>
   <%= f.input :time,
-    label: "Time",
+    label: "Horário",
     input_html: { type: "time" } %>
-  <%= f.input :location %>
+
+  <div class="form-group mb-3">
+    <input type="text"
+      id="location-search"
+      class="form-control mb-2"
+      placeholder="Local de encontro..."
+      autocomplete="address-line1">
+    <%= f.input :location, as: :hidden %>
+    <%= f.input :latitude, as: :hidden %>
+    <%= f.input :longitude, as: :hidden %>
+  </div>
+
+  <div id="map" class="mb-5" style="height: 360px; width: 100%;">
+    <mapbox-address-minimap satellite-toggle="true" can-adjust-marker="true"></mapbox-address-minimap>
+  </div>
+
   <%= f.input :pace,
     label: "Pace (min/km)",
     collection: (["Sem pace definido", "3:00", "3:30", "4:00", "4:30", "5:00", "5:30", "6:00", "6:30", "7:00", "7:30"].map { |p| ["#{p} min/km", p] }),
-    prompt: "Select your pace" %>
+    prompt: "Selecione o ritmo (pace) desejado" %>
+
+  <%= f.input :private, label: "Corrida privada?" %>
+
   <%= f.button :submit, "Criar Corrida", class: "btn btn-primary" %>
 <% end %>
+
+<script>
+  window.addEventListener('load', () => {
+    const ACCESS_TOKEN = '<%= ENV["MAPBOX_ACCESS_TOKEN"] %>';
+    const collection = mapboxsearch.autofill({ accessToken: ACCESS_TOKEN });
+    const minimap = document.querySelector('mapbox-address-minimap');
+    minimap.accessToken = ACCESS_TOKEN;
+    minimap.defaultMapStyle = ['mapbox', 'outdoors-v11'];
+    minimap.theme = {
+      variables: { border: '3px solid #ff4d00', borderRadius: '18px', boxShadow: '0 2px 8px #000' }
+    }
+    minimap.onSaveMarkerLocation = (coordinate) => {
+      document.getElementById('run_latitude').value = coordinate[1];
+      document.getElementById('run_longitude').value = coordinate[0];
+    };
+    minimap.feature = {
+      type: 'Feature',
+      geometry: { type: 'Point', coordinates: [-46.6560, -23.5615] },
+      properties: {}
+    };
+    collection.addEventListener('retrieve', (e) => {
+      const feature = e.detail.features[0];
+      minimap.feature = feature;
+      document.getElementById('run_location').value = feature.properties.full_address || feature.place_name;
+      document.getElementById('run_latitude').value = feature.geometry.coordinates[1];
+      document.getElementById('run_longitude').value = feature.geometry.coordinates[0];
+    })
+  });
+</script>
