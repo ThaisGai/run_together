@@ -60,9 +60,9 @@
   font-size: 13px !important;
   font-weight: 600 !important;
   text-decoration: none;
-}
 
-.rt-cta:hover { background: #e04300; }
+  &:hover { background: #e04300; }
+}
 
 .rt-user {
   display: flex;
@@ -85,10 +85,6 @@
 .rt-dropdown {
   position: relative;
   cursor: pointer;
-
-  &:hover .rt-dropdown-menu {
-    display: flex;
-  }
 }
 
 .rt-avatar {
@@ -127,10 +123,8 @@
   min-width: 160px;
   overflow: hidden;
   z-index: 100;
-}
 
-.rt-dropdown.open .rt-dropdown-menu {
-  display: flex;
+  &.open { display: flex; }
 }
 
 .rt-dropdown-item {
