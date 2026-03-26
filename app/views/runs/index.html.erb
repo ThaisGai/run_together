@@ -31,15 +31,20 @@
     const map = new mapboxgl.Map({
       container: "map",
       style: "mapbox://styles/mapbox/streets-v12",
-      center: [-46.6333, -23.5505],
       zoom: 10
     })
 
+    const bounds = new mapboxgl.LngLatBounds()
+
     markers.forEach((marker) => {
-      new mapboxgl.Marker()
+      const newMarker = new mapboxgl.Marker()
         .setLngLat([marker.lng, marker.lat])
         .addTo(map)
+
+      bounds.extend([marker.lng, marker.lat])
     })
+
+    map.fitBounds(bounds, { padding: 70, maxZoom: 15 })
   </script>
 
       <% @runs.each do |run| %>
