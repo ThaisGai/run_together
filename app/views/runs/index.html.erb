@@ -1,21 +1,36 @@
-<h1>Runs</h1>
+<div class="runs-index">
+  <h1>Corridas</h1>
 
-<% @runs.each do |run| %>
-  <div>
-    <p><strong>Criado por:</strong> <%= run.user.name %></p>
-    <p><strong>Date:</strong> <%= run.date %></p>
-    <p><strong>Time:</strong> <%= run.time.strftime("%H:%M") %></p>
-    <p><strong>Location:</strong> <%= run.location %></p>
-    <p><strong>Pace:</strong> <%= run.pace %></p>
+  <div class="runs-list">
+    <% @runs.each do |run| %>
+      <div class="run-card">
+        <div class="run-card-header">
+          <div class="run-creator-avatar">
+            <%= run.user.name&.split&.map { |n| n[0] }&.first(2)&.join&.upcase %>
+          </div>
+          <div class="run-creator-info">
+            <span class="run-creator-name"><%= run.user.name %></span>
+            <span class="run-date"><%= run.date.strftime("%d/%m/%Y") %> às <%= run.time.strftime("%H:%M") %></span>
+          </div>
+        </div>
 
-    <%= link_to "View", run_path(run) %>
+        <div class="run-card-body">
+          <p class="run-location">📍 <%= run.location %></p>
+          <p class="run-pace">⚡ Pace: <%= run.pace %></p>
+        </div>
 
-    <% if user_signed_in? && run.user != current_user %>
-      <%= link_to "Mensagem", chat_with_user_path(user_id: run.user.id), class: "rt-cta" %>
-    <% end %>
+        <div class="run-card-actions">
+          <%= link_to "Ver detalhes", run_path(run), class: "run-btn-outline" %>
 
-    <% if user_signed_in? && run.user == current_user %>
-      <%= link_to "Delete", run_path(run), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "btn btn-danger" %>
+          <% if user_signed_in? && run.user != current_user %>
+            <%= link_to "Mensagem", chat_with_user_path(user_id: run.user.id), class: "rt-cta" %>
+          <% end %>
+
+          <% if user_signed_in? && run.user == current_user %>
+            <%= link_to "Deletar", run_path(run), data: { turbo_method: :delete, turbo_confirm: "Tem certeza?" }, class: "run-btn-danger" %>
+          <% end %>
+        </div>
+      </div>
     <% end %>
   </div>
-<% end %>
+</div>
