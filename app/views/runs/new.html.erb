@@ -1,41 +1,51 @@
-<h1>Criar Corrida</h1>
+<div class="run-form-page">
+  <div class="run-form-card">
+    <h1>Criar Corrida</h1>
 
-<%= simple_form_for @run do |f| %>
-  <%= f.input :date,
-    label: "Data",
-    as: :string,
-    input_html: {
-      type: "date",
-      min: Date.today.strftime("%Y-%m-%d")
-    } %>
-  <%= f.input :time,
-    label: "Horário",
-    input_html: { type: "time" } %>
+    <%= simple_form_for @run do |f| %>
+      <div class="run-form-fields">
+        <div class="run-form-row">
+          <div class="run-form-group">
+            <%= f.label :date, "Data" %>
+            <%= f.input_field :date, as: :string, input_html: { type: "date", min: Date.today.strftime("%Y-%m-%d") }, class: "run-input" %>
+          </div>
+          <div class="run-form-group">
+            <%= f.label :time, "Horário" %>
+            <%= f.input_field :time, input_html: { type: "time" }, class: "run-input" %>
+          </div>
+        </div>
 
-  <div class="form-group mb-3">
-    <input type="text"
-      id="location-search"
-      class="form-control mb-2"
-      placeholder="Local de encontro..."
-      autocomplete="address-line1">
-    <%= f.input :location, as: :hidden %>
-    <%= f.input :latitude, as: :hidden %>
-    <%= f.input :longitude, as: :hidden %>
+        <div class="run-form-group">
+          <label>Local de encontro</label>
+          <input type="text"
+            id="location-search"
+            class="run-input"
+            placeholder="Buscar endereço..."
+            autocomplete="address-line1">
+          <%= f.input :location, as: :hidden %>
+          <%= f.input :latitude, as: :hidden %>
+          <%= f.input :longitude, as: :hidden %>
+        </div>
+
+        <div id="map" style="height: 320px; width: 100%; border-radius: 12px; overflow: hidden; margin-bottom: 8px;">
+          <mapbox-address-minimap satellite-toggle="true" can-adjust-marker="true"></mapbox-address-minimap>
+        </div>
+
+        <div class="run-form-group">
+          <%= f.label :pace, "Pace (min/km)" %>
+          <%= f.input_field :pace, collection: (["Sem pace definido", "3:00", "3:30", "4:00", "4:30", "5:00", "5:30", "6:00", "6:30", "7:00", "7:30"].map { |p| ["#{p} min/km", p] }), prompt: "Selecione o ritmo (pace) desejado", class: "run-input" %>
+        </div>
+
+        <div class="run-form-check">
+          <%= f.input_field :private, as: :boolean %>
+          <%= f.label :private, "Corrida privada?" %>
+        </div>
+
+        <%= f.button :submit, "Criar Corrida", class: "rt-cta run-submit" %>
+      </div>
+    <% end %>
   </div>
-
-  <div id="map" class="mb-5" style="height: 360px; width: 100%;">
-    <mapbox-address-minimap satellite-toggle="true" can-adjust-marker="true"></mapbox-address-minimap>
-  </div>
-
-  <%= f.input :pace,
-    label: "Pace (min/km)",
-    collection: (["Sem pace definido", "3:00", "3:30", "4:00", "4:30", "5:00", "5:30", "6:00", "6:30", "7:00", "7:30"].map { |p| ["#{p} min/km", p] }),
-    prompt: "Selecione o ritmo (pace) desejado" %>
-
-  <%= f.input :private, label: "Corrida privada?" %>
-
-  <%= f.button :submit, "Criar Corrida", class: "btn btn-primary" %>
-<% end %>
+</div>
 
 <script>
   window.addEventListener('load', () => {
