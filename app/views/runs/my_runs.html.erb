@@ -1,16 +1,35 @@
-<h1>Minhas Corridas</h1>
+<div class="runs-index">
+  <h1>Minhas Corridas</h1>
 
-<% if @runs.empty? %>
-  <p>Você ainda não criou nenhuma corrida.</p>
-  <%= link_to "Criar corrida", new_run_path %>
-<% else %>
-  <% @runs.each do |run| %>
-    <div>
-      <p><%= run.date %> — <%= run.location %></p>
-      <p>Pace: <%= run.pace %></p>
-      <%= link_to "Ver", run %>
-      <%= link_to "Editar", edit_run_path(run) %>
-      <%= button_to "Excluir", run, method: :delete, data: { turbo_confirm: "Tem certeza?" } %>
+  <% if @runs.empty? %>
+    <p class="no-chats">Você ainda não criou nenhuma corrida.</p>
+    <%= link_to "+ Criar Corrida", new_run_path, class: "rt-cta" %>
+  <% else %>
+    <div class="runs-list">
+      <% @runs.each do |run| %>
+        <div class="run-card">
+          <div class="run-card-header">
+            <div class="run-creator-avatar">
+              <%= current_user.name&.split&.map { |n| n[0] }&.first(2)&.join&.upcase %>
+            </div>
+            <div class="run-creator-info">
+              <span class="run-creator-name"><%= current_user.name %></span>
+              <span class="run-date"><%= run.date.strftime("%d/%m/%Y") %> às <%= run.time.strftime("%H:%M") %></span>
+            </div>
+          </div>
+
+          <div class="run-card-body">
+            <p class="run-location">📍 <%= run.location %></p>
+            <p class="run-pace">⚡ Pace: <%= run.pace %></p>
+          </div>
+
+          <div class="run-card-actions">
+            <%= link_to "Ver detalhes", run_path(run), class: "run-btn-outline" %>
+            <%= link_to "Editar", edit_run_path(run), class: "run-btn-outline" %>
+            <%= button_to "Excluir", run, method: :delete, data: { turbo_confirm: "Tem certeza?" }, class: "run-btn-danger" %>
+          </div>
+        </div>
+      <% end %>
     </div>
   <% end %>
-<% end %>
+</div>
