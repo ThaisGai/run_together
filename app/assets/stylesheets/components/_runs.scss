@@ -214,3 +214,89 @@
   border-radius: 8px;
   background: #f9f9f9;
 }
+
+.run-form-page {
+  max-width: 700px;
+  margin: 32px auto;
+  padding: 0 24px;
+}
+
+.run-form-card {
+  background: #fff;
+  border: 1px solid #f0f0f0;
+  border-radius: 12px;
+  padding: 32px;
+
+  h1 {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 28px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #0f0f0f;
+    margin-bottom: 24px;
+  }
+}
+
+.run-form-fields {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.run-form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.run-form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+
+  label {
+    font-size: 13px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: #555;
+    font-family: 'Barlow', sans-serif;
+  }
+}
+
+.run-input {
+  padding: 10px 14px;
+  border: 1.5px solid #e0e0e0;
+  border-radius: 8px;
+  font-size: 14px;
+  font-family: 'Barlow', sans-serif;
+  outline: none;
+  transition: border-color 0.2s;
+  width: 100%;
+
+  &:focus { border-color: #ff4d00; }
+}
+
+.run-form-check {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  label {
+    font-size: 14px;
+    color: #444;
+    font-family: 'Barlow', sans-serif;
+    text-transform: none;
+    letter-spacing: 0;
+    font-weight: 500;
+  }
+}
+
+.run-submit {
+  width: 100%;
+  padding: 12px;
+  font-size: 15px !important;
+  border-radius: 8px !important;
+  justify-content: center;
+}
