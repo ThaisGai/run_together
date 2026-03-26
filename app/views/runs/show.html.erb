@@ -1,34 +1,57 @@
-<div class="run-show">
-  <p><strong>Data:</strong> <%= @run.date.strftime("%d/%m/%Y") %></p>
-  <p><strong>Horário:</strong> <%= @run.time.strftime("%H:%M") %></p>
-  <p><strong>Local:</strong> <%= @run.location %></p>
-  <p><strong>Criado por:</strong> <%= @run.user.name %></p>
+<div class="run-show-page">
+  <div class="run-show-card">
+    <div class="run-show-header">
+      <div class="run-creator-avatar">
+        <%= @run.user.name&.split&.map { |n| n[0] }&.first(2)&.join&.upcase %>
+      </div>
+      <div class="run-creator-info">
+        <span class="run-creator-name"><%= @run.user.name %></span>
+        <span class="run-date"><%= @run.date.strftime("%d/%m/%Y") %> às <%= @run.time.strftime("%H:%M") %></span>
+      </div>
+    </div>
 
-  <% if user_signed_in? %>
-    <% if @run.user == current_user %>
-      <%= link_to "Editar", edit_run_path(@run), class: "rt-cta" %>
-      <%= link_to "Deletar", run_path(@run), data: { turbo_method: :delete, turbo_confirm: "Tem certeza?" }, class: "btn btn-danger" %>
+    <div class="run-show-body">
+      <p class="run-location">📍 <%= @run.location %></p>
+      <% if @run.pace.present? %>
+        <p class="run-pace">⚡ Pace: <%= @run.pace %></p>
+      <% end %>
+    </div>
 
-      <% if @run.members.any? %>
-        <h3>Participantes</h3>
-        <% @run.members.each do |member| %>
-          <div>
-            <span><%= member.name %></span>
-            <%= link_to "Enviar mensagem", chat_with_user_path(user_id: member.id), class: "rt-cta" %>
-          </div>
+    <div class="run-show-actions">
+      <% if user_signed_in? %>
+        <% if @run.user == current_user %>
+          <%= link_to "Editar", edit_run_path(@run), class: "run-btn-outline" %>
+          <%= link_to "Deletar", run_path(@run), data: { turbo_method: :delete, turbo_confirm: "Tem certeza?" }, class: "run-btn-danger" %>
+        <% else %>
+          <%= link_to "Enviar mensagem ao criador", chat_with_user_path(user_id: @run.user.id), class: "run-btn-outline" %>
+          <% if @run.members.include?(current_user) %>
+            <span class="run-joined">✓ Você está participando!</span>
+          <% else %>
+            <%= button_to "Participar", run_run_members_path(@run), class: "rt-cta" %>
+          <% end %>
         <% end %>
-      <% else %>
-        <p>Nenhum participante ainda.</p>
       <% end %>
+    </div>
+  </div>
 
-    <% else %>
-      <%= link_to "Enviar mensagem ao criador", chat_with_user_path(user_id: @run.user.id), class: "rt-cta" %>
-
-      <% if @run.members.include?(current_user) %>
-        <p>Você já está participando desta corrida!</p>
+  <% if @run.user == current_user %>
+    <div class="run-members-section">
+      <h3>Participantes</h3>
+      <% if @run.members.any? %>
+        <div class="run-members-list">
+          <% @run.members.each do |member| %>
+            <div class="run-member-item">
+              <div class="run-creator-avatar">
+                <%= member.name&.split&.map { |n| n[0] }&.first(2)&.join&.upcase %>
+              </div>
+              <span class="run-creator-name"><%= member.name %></span>
+              <%= link_to "Mensagem", chat_with_user_path(user_id: member.id), class: "run-btn-outline" %>
+            </div>
+          <% end %>
+        </div>
       <% else %>
-        <%= button_to "Participar", run_run_members_path(@run), class: "rt-cta" %>
+        <p class="no-chats">Nenhum participante ainda.</p>
       <% end %>
-    <% end %>
+    </div>
   <% end %>
 </div>
