@@ -2,6 +2,7 @@
 
 <% @runs.each do |run| %>
   <div>
+    <p><strong>Criado por:</strong> <%= run.user.name %></p>
     <p><strong>Date:</strong> <%= run.date %></p>
     <p><strong>Time:</strong> <%= run.time.strftime("%H:%M") %></p>
     <p><strong>Location:</strong> <%= run.location %></p>

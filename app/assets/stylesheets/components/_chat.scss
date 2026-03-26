@@ -156,6 +156,7 @@
 }
 
 .chat-item {
+  color: inherit;
   display: flex;
   align-items: center;
   gap: 14px;
@@ -169,6 +170,7 @@
   &:hover {
     background: #fff8f6;
     border-color: #ff4d00;
+    color: inherit;
   }
 
   .chat-avatar {
@@ -180,7 +182,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    color: #ff4d00;
+    color: #ff4d00 !important;
     font-size: 14px;
     font-weight: 700;
     font-family: 'Barlow Condensed', sans-serif;
