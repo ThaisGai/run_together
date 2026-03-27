@@ -3,7 +3,7 @@ class RunsController < ApplicationController
   skip_after_action :verify_policy_scoped, only: :my_runs
 
   def index
-    @runs = policy_scope(Run)
+    @runs = policy_scope(Run).where.not(user: current_user)
 
     @markers = @runs.map do |run| {
         lat: run.latitude,

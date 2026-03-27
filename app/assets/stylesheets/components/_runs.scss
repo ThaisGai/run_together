@@ -1,0 +1,135 @@
+.runs-index {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 32px 24px;
+
+  h1 {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 32px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #0f0f0f;
+    margin-bottom: 24px;
+  }
+}
+
+.runs-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.run-card {
+  background: #fff;
+  border: 1px solid #f0f0f0;
+  border-radius: 12px;
+  padding: 20px;
+  transition: border-color 0.2s, box-shadow 0.2s;
+
+  &:hover {
+    border-color: #ff4d00;
+    box-shadow: 0 2px 12px rgba(255, 77, 0, 0.08);
+  }
+}
+
+.run-card-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.run-creator-avatar {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: #1e1e1e;
+  border: 1.5px solid #ff4d00;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ff4d00;
+  font-size: 13px;
+  font-weight: 700;
+  font-family: 'Barlow Condensed', sans-serif;
+  flex-shrink: 0;
+}
+
+.run-creator-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.run-creator-name {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: #1a1a1a;
+}
+
+.run-date {
+  font-size: 13px;
+  color: #888;
+  font-family: 'Barlow', sans-serif;
+}
+
+.run-card-body {
+  margin-bottom: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.run-location, .run-pace {
+  margin: 0;
+  font-size: 14px;
+  color: #444;
+  font-family: 'Barlow', sans-serif;
+}
+
+.run-card-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding-top: 16px;
+  border-top: 1px solid #f0f0f0;
+}
+
+.run-btn-outline {
+  color: #ff4d00;
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 600;
+  font-family: 'Barlow', sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  padding: 7px 16px;
+  border: 1.5px solid #ff4d00;
+  border-radius: 4px;
+  transition: all 0.2s;
+
+  &:hover {
+    background: #ff4d00;
+    color: #fff;
+  }
+}
+
+.run-btn-danger {
+  color: #fff;
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 600;
+  font-family: 'Barlow', sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  padding: 7px 16px;
+  border-radius: 4px;
+  background: #cc0000;
+  transition: background 0.2s;
+
+  &:hover { background: #aa0000; }
+}

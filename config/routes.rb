@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
-  resources :runs
+  resources :runs do
+    resources :run_members, only: [:create, :destroy]
+  end
 
   devise_for :users
   root to: "pages#home"
