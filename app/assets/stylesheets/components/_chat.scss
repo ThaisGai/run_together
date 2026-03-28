@@ -200,19 +200,24 @@
 
 // ─── CHAT LIST (index) ───────────────────────────
 .chats-index {
-  max-width: 700px;
-  margin: 0 auto;
   padding: 40px 24px;
   min-height: calc(100vh - 60px);
+  background: #0a0a0a;
 
   h2 {
+    max-width: 700px;
+    margin: 0 auto 24px;
     font-family: 'Barlow Condensed', sans-serif;
     font-size: 28px;
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 1px;
     color: #fff;
-    margin-bottom: 24px;
+  }
+
+  .chat-list {
+    max-width: 700px;
+    margin: 0 auto;
   }
 }
 
@@ -220,6 +225,8 @@
   color: #555;
   font-size: 15px;
   font-family: 'Barlow', sans-serif;
+  max-width: 700px;
+  margin: 0 auto;
 }
 
 .chat-list {
@@ -301,5 +308,9 @@
 
   .chat-header {
     padding: 14px 16px;
+  }
+
+  .chats-index {
+    padding: 24px 16px;
   }
 }
