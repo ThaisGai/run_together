@@ -1,2 +1,88 @@
-<h1>ListRuns#edit</h1>
-<p>Find me in app/views/list_runs/edit.html.erb</p>
+<div class="run-form-page">
+  <div class="run-form-card">
+    <h1>Editar Corrida</h1>
+
+    <%= simple_form_for @run do |f| %>
+      <div class="run-form-fields">
+        <div class="run-form-row">
+          <div class="run-form-group">
+            <%= f.label :date, "Data" %>
+            <%= f.input_field :date, as: :string, input_html: { type: "date", min: Date.today.strftime("%Y-%m-%d") }, class: "run-input" %>
+          </div>
+          <div class="run-form-group">
+            <%= f.label :time, "Horário" %>
+            <%= f.input_field :time, input_html: { type: "time" }, class: "run-input" %>
+          </div>
+        </div>
+
+        <div class="run-form-group">
+          <label>Local de encontro</label>
+          <input type="text"
+            id="location-search"
+            class="run-input"
+            placeholder="Buscar endereço..."
+            value="<%= @run.location %>"
+            autocomplete="address-line1">
+          <%= f.input :location, as: :hidden %>
+          <%= f.input :latitude, as: :hidden %>
+          <%= f.input :longitude, as: :hidden %>
+        </div>
+
+        <div id="map" style="height: 320px; width: 100%; border-radius: 12px; overflow: hidden; margin-bottom: 8px;">
+          <mapbox-address-minimap satellite-toggle="true" can-adjust-marker="true"></mapbox-address-minimap>
+        </div>
+
+        <div class="run-form-group">
+          <%= f.label :pace, "Pace (min/km)" %>
+          <%= f.input_field :pace, collection: (["Sem pace definido", "3:00", "3:30", "4:00", "4:30", "5:00", "5:30", "6:00", "6:30", "7:00", "7:30"].map { |p| ["#{p} min/km", p] }), prompt: "Selecione o ritmo (pace) desejado", class: "run-input" %>
+        </div>
+
+        <div class="run-form-check">
+          <%= f.input_field :private, as: :boolean %>
+          <%= f.label :private, "Corrida privada?" %>
+        </div>
+
+        <%= f.button :submit, "Salvar Alterações", class: "rt-cta run-submit" %>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+<script>
+  document.addEventListener('turbo:load', () => {
+    const ACCESS_TOKEN = '<%= ENV["MAPBOX_ACCESS_TOKEN"] %>';
+    const collection = mapboxsearch.autofill({ accessToken: ACCESS_TOKEN });
+    const minimap = document.querySelector('mapbox-address-minimap');
+    minimap.accessToken = ACCESS_TOKEN;
+    minimap.defaultMapStyle = ['mapbox', 'streets-v12'];
+    minimap.theme = {
+      variables: { border: '3px solid #ff4d00', borderRadius: '18px', boxShadow: '0 2px 8px #000' }
+    }
+    minimap.onSaveMarkerLocation = (coordinate) => {
+      document.getElementById('run_latitude').value = coordinate[1];
+      document.getElementById('run_longitude').value = coordinate[0];
+    };
+
+    <% if @run.latitude.present? && @run.longitude.present? %>
+      minimap.feature = {
+        type: 'Feature',
+        geometry: { type: 'Point', coordinates: [<%= @run.longitude %>, <%= @run.latitude %>] },
+        properties: {}
+      };
+    <% else %>
+      minimap.feature = {
+        type: 'Feature',
+        geometry: { type: 'Point', coordinates: [-46.6560, -23.5615] },
+        properties: {}
+      };
+    <% end %>
+
+    collection.addEventListener('retrieve', (e) => {
+      const feature = e.detail.features[0];
+      minimap.feature = feature;
+      document.getElementById('run_location').value = feature.properties.full_address || feature.place_name;
+      document.getElementById('run_latitude').value = feature.geometry.coordinates[1];
+      document.getElementById('run_longitude').value = feature.geometry.coordinates[0];
+    })
+  });
+</script>
