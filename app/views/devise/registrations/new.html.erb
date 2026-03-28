@@ -12,7 +12,10 @@
         </div>
         <div class="rt-field">
           <%= f.label :birth_date, "Data de nascimento" %>
-          <%= f.input_field :birth_date, required: true %>
+          <%= f.date_select :birth_date,
+          start_year: 1920,
+          end_year: Date.today.year,
+          order: [:day, :month, :year] %>
         </div>
         <div class="rt-field">
           <%= f.label :phone, "Telefone" %>
