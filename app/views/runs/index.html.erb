@@ -1,5 +1,78 @@
+<div>
+  <%= form_with url: runs_path, method: :get, class: "d-flex" do %>
+    <%= label_tag :query, "Search runs", class: "visually-hidden" %>
+    <%= text_field_tag :query,
+        params[:query],
+          class: "form-control",
+          placeholder: "Type a keyword"
+      %>
+    <%= submit_tag "Search", name: "", class: "btn btn-primary" %>
+  <% end %>
+</div>
+
 <div class="runs-index">
   <h1>Explorar Corridas</h1>
+<div>
+  <div
+    id="map"
+    data-markers="<%= @markers.to_json %>"
+    data-mapbox-api-key="<%= ENV['MAPBOX_ACCESS_TOKEN'] %>"
+    style="width: 100%; height: 500px;">
+  </div>
+
+  <script>
+    const mapElement = document.getElementById("map")
+
+    const markers = JSON.parse(mapElement.dataset.markers)
+    const apiKey = mapElement.dataset.mapboxApiKey
+
+    mapboxgl.accessToken = apiKey
+
+    const map = new mapboxgl.Map({
+      container: "map",
+      style: "mapbox://styles/mapbox/streets-v12",
+      zoom: 10
+    })
+
+map.on('load', () => {
+    const bounds = new mapboxgl.LngLatBounds()
+
+    markers.forEach((marker) => {
+      const popup = new mapboxgl.Popup({ offset: 25 })
+        .setHTML(`
+          <div>
+            <strong>${marker.name}</strong><br>
+            📅 ${marker.date}<br>
+            ⏰ ${marker.time}<br>
+            🏃 ${marker.pace}<br>
+            <a href="/runs/${marker.id}">Ver detalhes</a>
+          </div>
+        `)
+
+    const el = document.createElement('div')
+    el.innerHTML = `
+      <div class="rt-avatar" style="cursor: pointer; background: white; border-radius: 50%; width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 4px rgba(0,0,0,0.3);">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="12" cy="8" r="4" fill="#ff4d00"/>
+          <path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" stroke="#ff4d00" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+      </div>
+    `
+
+      new mapboxgl.Marker(el)
+        .setLngLat([marker.lng, marker.lat])
+        .setPopup(popup)
+        .addTo(map)
+
+      bounds.extend([marker.lng, marker.lat])
+    })
+
+    if (markers.length > 0) {
+      map.fitBounds(bounds, { padding: 70, maxZoom: 15 })
+    }
+  })
+  </script>
+
 
   <% if @runs.empty? %>
     <p class="no-chats">Nenhuma corrida disponível no momento.</p>
