@@ -426,6 +426,27 @@
     color: #fff;
     margin-bottom: 24px;
   }
+
+  input[type="date"],
+  input[type="time"],
+  input[type="text"],
+  select {
+    color: #fff !important;
+    background: #1e1e1e !important;
+    border: 1px solid #444 !important;
+    -webkit-text-fill-color: #fff !important;
+
+    &:focus { border-color: #ff4d00 !important; }
+  }
+
+  label, .form-label {
+    color: #bbb !important;
+  }
+
+  input[type="date"]::-webkit-calendar-picker-indicator,
+  input[type="time"]::-webkit-calendar-picker-indicator {
+    filter: invert(1);
+  }
 }
 
 .run-form-fields {
@@ -450,15 +471,15 @@
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 2px;
-    color: #555;
+    color: #999;
     font-family: 'Barlow Condensed', sans-serif;
   }
 }
 
 .run-input {
   padding: 10px 14px;
-  background: #0a0a0a;
-  border: 1px solid #2a2a2a;
+  background: #1e1e1e;
+  border: 1px solid #444;
   border-radius: 6px;
   font-size: 14px;
   font-family: 'Barlow', sans-serif;
@@ -467,8 +488,13 @@
   transition: border-color 0.2s;
   width: 100%;
 
-  &::placeholder { color: #444; }
+  &::placeholder { color: #666; }
   &:focus { border-color: #ff4d00; }
+
+  option {
+    background: #1e1e1e;
+    color: #fff;
+  }
 }
 
 .run-form-check {
@@ -478,7 +504,7 @@
 
   label {
     font-size: 14px;
-    color: #888;
+    color: #ccc;
     font-family: 'Barlow', sans-serif;
     text-transform: none;
     letter-spacing: 0;
