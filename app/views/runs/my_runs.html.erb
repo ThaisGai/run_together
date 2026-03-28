@@ -1,33 +1,48 @@
 <div class="runs-index">
-  <h1>Minhas Corridas</h1>
+  <div class="runs-header">
+    <h1>Minhas Corridas</h1>
+    <%= link_to "+ Criar Corrida", new_run_path, class: "rt-cta" %>
+  </div>
 
   <% if @runs.empty? %>
-    <p class="no-chats">Você ainda não criou nenhuma corrida.</p>
-    <%= link_to "+ Criar Corrida", new_run_path, class: "rt-cta" %>
+    <p class="runs-empty">Você ainda não criou nenhuma corrida.</p>
   <% else %>
     <div class="runs-list">
       <% @runs.each do |run| %>
         <div class="run-card">
-          <div class="run-card-header">
-            <div class="run-creator-avatar">
-              <%= current_user.name&.split&.map { |n| n[0] }&.first(2)&.join&.upcase %>
+          <div class="run-accent"></div>
+          <div class="run-card-content">
+            <div class="run-card-left">
+              <div class="run-creator-avatar">
+                <%= current_user.name&.split&.map { |n| n[0] }&.first(2)&.join&.upcase %>
+              </div>
+              <div class="run-card-info">
+                <span class="run-creator-name"><%= current_user.name %></span>
+                <div class="run-meta">
+                  <span class="run-meta-item">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#ff4d00" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+                    <%= run.date.strftime("%d/%m") %> · <%= run.time.strftime("%H:%M") %>
+                  </span>
+                  <span class="run-meta-item">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#ff4d00" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                    <%= run.location.truncate(40) %>
+                  </span>
+                  <span class="run-meta-item">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#ff4d00" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+                    <%= run.pace %>
+                  </span>
+                  <span class="run-meta-item">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#ff4d00" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
+                    <%= run.members.count %>
+                  </span>
+                </div>
+              </div>
             </div>
-            <div class="run-creator-info">
-              <span class="run-creator-name"><%= current_user.name %></span>
-              <span class="run-date"><%= run.date.strftime("%d/%m/%Y") %> às <%= run.time.strftime("%H:%M") %></span>
+            <div class="run-card-actions">
+              <%= link_to "Detalhes", run_path(run), class: "run-btn-outline" %>
+              <%= link_to "Editar", edit_run_path(run), class: "run-btn-secondary" %>
+              <%= button_to "Excluir", run, method: :delete, data: { turbo_confirm: "Tem certeza?" }, class: "run-btn-danger" %>
             </div>
-          </div>
-
-          <div class="run-card-body">
-            <p class="run-location">📍 <%= run.location %></p>
-            <p class="run-pace">⚡ Pace: <%= run.pace %></p>
-            <p class="run-participants">👥 <%= run.members.count %> participante<%= run.members.count != 1 ? "s" : "" %></p>
-          </div>
-
-          <div class="run-card-actions">
-            <%= link_to "Ver detalhes", run_path(run), class: "run-btn-outline" %>
-            <%= link_to "Editar", edit_run_path(run), class: "run-btn-outline" %>
-            <%= button_to "Excluir", run, method: :delete, data: { turbo_confirm: "Tem certeza?" }, class: "run-btn-danger" %>
           </div>
         </div>
       <% end %>
