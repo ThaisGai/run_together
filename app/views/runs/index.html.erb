@@ -1,103 +1,119 @@
-<div>
-  <%= form_with url: runs_path, method: :get, class: "d-flex" do %>
-    <%= label_tag :query, "Search runs", class: "visually-hidden" %>
-    <%= text_field_tag :query,
-        params[:query],
-          class: "form-control",
-          placeholder: "Type a keyword"
-      %>
-    <%= submit_tag "Search", name: "", class: "btn btn-primary" %>
-  <% end %>
-</div>
-
 <div class="runs-index">
-  <h1>Explorar Corridas</h1>
-<div>
-  <div
-    id="map"
-    data-markers="<%= @markers.to_json %>"
-    data-mapbox-api-key="<%= ENV['MAPBOX_ACCESS_TOKEN'] %>"
-    style="width: 100%; height: 500px;">
+  <div class="runs-header">
+    <h1>Explorar Corridas</h1>
+    <%= link_to "+ Criar Corrida", new_run_path, class: "rt-cta" if user_signed_in? %>
+  </div>
+
+  <div class="runs-search">
+    <%= form_with url: runs_path, method: :get, class: "runs-search-form" do %>
+      <svg class="runs-search-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#555" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      <%= text_field_tag :query, params[:query], class: "runs-search-input", placeholder: "Buscar por local, ritmo..." %>
+      <%= submit_tag "Buscar", name: "", class: "runs-search-btn" %>
+    <% end %>
+  </div>
+
+  <div class="runs-map-container">
+    <div
+      id="map"
+      data-markers="<%= @markers.to_json %>"
+      data-mapbox-api-key="<%= ENV['MAPBOX_ACCESS_TOKEN'] %>"
+      style="width: 100%; height: 100%;">
+    </div>
   </div>
 
   <script>
-    const mapElement = document.getElementById("map")
+    document.addEventListener("DOMContentLoaded", function() {
+      const mapElement = document.getElementById("map")
+      if (!mapElement) return
 
-    const markers = JSON.parse(mapElement.dataset.markers)
-    const apiKey = mapElement.dataset.mapboxApiKey
+      const markers = JSON.parse(mapElement.dataset.markers)
+      const apiKey = mapElement.dataset.mapboxApiKey
 
-    mapboxgl.accessToken = apiKey
+      mapboxgl.accessToken = apiKey
 
-    const map = new mapboxgl.Map({
-      container: "map",
-      style: "mapbox://styles/mapbox/streets-v12",
-      zoom: 10
+      const map = new mapboxgl.Map({
+        container: "map",
+        style: "mapbox://styles/mapbox/dark-v11",
+        zoom: 10
+      })
+
+      map.on('load', () => {
+        const bounds = new mapboxgl.LngLatBounds()
+
+        markers.forEach((marker) => {
+          const popup = new mapboxgl.Popup({ offset: 25, className: 'rt-popup' })
+            .setHTML(`
+              <div>
+                <strong>${marker.name}</strong><br>
+                <span style="color:#888; font-size:12px;">${marker.date} · ${marker.time}</span><br>
+                <span style="color:#ff4d00; font-size:13px;">Pace: ${marker.pace}</span><br>
+                <a href="/runs/${marker.id}" style="color:#ff4d00; font-size:12px; text-transform:uppercase; letter-spacing:0.5px; text-decoration:none; font-weight:600;">Ver detalhes →</a>
+              </div>
+            `)
+
+          const el = document.createElement('div')
+          el.innerHTML = `
+            <div style="cursor:pointer; background:#ff4d00; border-radius:50%; width:32px; height:32px; display:flex; align-items:center; justify-content:center; box-shadow:0 2px 8px rgba(255,77,0,0.4); border:2px solid #0a0a0a;">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="12" cy="8" r="4" fill="#fff"/>
+                <path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" stroke="#fff" stroke-width="2" stroke-linecap="round"/>
+              </svg>
+            </div>
+          `
+
+          new mapboxgl.Marker(el)
+            .setLngLat([marker.lng, marker.lat])
+            .setPopup(popup)
+            .addTo(map)
+
+          bounds.extend([marker.lng, marker.lat])
+        })
+
+        if (markers.length > 0) {
+          map.fitBounds(bounds, { padding: 70, maxZoom: 15 })
+        }
+      })
     })
-
-map.on('load', () => {
-    const bounds = new mapboxgl.LngLatBounds()
-
-    markers.forEach((marker) => {
-      const popup = new mapboxgl.Popup({ offset: 25 })
-        .setHTML(`
-          <div>
-            <strong>${marker.name}</strong><br>
-            📅 ${marker.date}<br>
-            ⏰ ${marker.time}<br>
-            🏃 ${marker.pace}<br>
-            <a href="/runs/${marker.id}">Ver detalhes</a>
-          </div>
-        `)
-
-    const el = document.createElement('div')
-    el.innerHTML = `
-      <div class="rt-avatar" style="cursor: pointer; background: white; border-radius: 50%; width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 4px rgba(0,0,0,0.3);">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <circle cx="12" cy="8" r="4" fill="#ff4d00"/>
-          <path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" stroke="#ff4d00" stroke-width="2" stroke-linecap="round"/>
-        </svg>
-      </div>
-    `
-
-      new mapboxgl.Marker(el)
-        .setLngLat([marker.lng, marker.lat])
-        .setPopup(popup)
-        .addTo(map)
-
-      bounds.extend([marker.lng, marker.lat])
-    })
-
-    if (markers.length > 0) {
-      map.fitBounds(bounds, { padding: 70, maxZoom: 15 })
-    }
-  })
   </script>
 
-
   <% if @runs.empty? %>
-    <p class="no-chats">Nenhuma corrida disponível no momento.</p>
+    <p class="runs-empty">Nenhuma corrida disponível no momento.</p>
   <% else %>
     <div class="runs-list">
       <% @runs.each do |run| %>
         <div class="run-card">
-          <div class="run-card-header">
-            <div class="run-creator-avatar">
-              <%= run.user.name&.split&.map { |n| n[0] }&.first(2)&.join&.upcase %>
+          <div class="run-accent"></div>
+          <div class="run-card-content">
+            <div class="run-card-left">
+              <div class="run-creator-avatar">
+                <%= run.user.name&.split&.map { |n| n[0] }&.first(2)&.join&.upcase %>
+              </div>
+              <div class="run-card-info">
+                <span class="run-creator-name"><%= run.user.name %></span>
+                <div class="run-meta">
+                  <span class="run-meta-item">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#ff4d00" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+                    <%= run.date.strftime("%d/%m") %> · <%= run.time.strftime("%H:%M") %>
+                  </span>
+                  <span class="run-meta-item">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#ff4d00" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                    <%= run.location.truncate(40) %>
+                  </span>
+                  <span class="run-meta-item">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#ff4d00" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+                    <%= run.pace %>
+                  </span>
+                  <span class="run-meta-item">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#ff4d00" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
+                    <%= run.members.count %>
+                  </span>
+                </div>
+              </div>
             </div>
-            <div class="run-creator-info">
-              <span class="run-creator-name"><%= run.user.name %></span>
-              <span class="run-date"><%= run.date.strftime("%d/%m/%Y") %> às <%= run.time.strftime("%H:%M") %></span>
+            <div class="run-card-actions">
+              <%= link_to "Detalhes", run_path(run), class: "run-btn-outline" %>
+              <%= link_to "Mensagem", chat_with_user_path(user_id: run.user.id), class: "run-btn-primary" %>
             </div>
-          </div>
-
-          <div class="run-card-body">
-            <p class="run-location">📍 <%= run.location %></p>
-            <p class="run-pace">⚡ Pace: <%= run.pace %></p>
-          </div>
-
-          <div class="run-card-actions">
-            <%= link_to "Ver detalhes", run_path(run), class: "run-btn-outline" %>
-            <%= link_to "Mensagem", chat_with_user_path(user_id: run.user.id), class: "rt-cta" %>
           </div>
         </div>
       <% end %>
