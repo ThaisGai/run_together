@@ -1,20 +1,17 @@
-<<<<<<< HEAD
 <div>
   <%= form_with url: runs_path, method: :get, class: "d-flex" do %>
-    <%= label_tag :query, "Search runs", class: "visually-hidden" %>
-    <%= text_field_tag :query,
-          params[:query],
-          class: "form-control",
-          placeholder: "Type a keyword"
-      %>
-    <%= submit_tag "Search", name: "", class: "btn btn-primary" %>
+  <%= label_tag :query, "Search runs", class: "visually-hidden" %>
+  <%= text_field_tag :query,
+    params[:query],
+    class: "form-control",
+    placeholder: "Type a keyword"
+  %>
+  <%= submit_tag "Search", name: "", class: "btn btn-primary" %>
   <% end %>
 </div>
-<div>
 
 <div class="runs-index">
   <h1>Explorar Corridas</h1>
-
   <% if @runs.empty? %>
     <p class="no-chats">Você ainda não criou nenhuma corrida.</p>
     <%= link_to "+ Criar Corrida", new_run_path, class: "rt-cta" %>
@@ -33,8 +30,7 @@
           </div>
 
           <div class="run-card-body">
-            <p class="run-location">📍
-
+            <p class="run-location">📍 Location: <%= run.location %></p>
               <div
               id="map"
               data-markers="<%= @markers.to_json %>"
@@ -44,7 +40,6 @@
 
               <script>
                 const mapElement = document.getElementById("map")
-
                 const markers = JSON.parse(mapElement.dataset.markers)
                 const apiKey = mapElement.dataset.mapboxApiKey
 
@@ -69,19 +64,16 @@
                 map.fitBounds(bounds, { padding: 70, maxZoom: 15 })
               </script>
 
-
-            </p>
             <p class="run-pace">⚡ Pace: <%= run.pace %></p>
-          </div>
+            </div>
 
-          <div class="run-card-actions">
-            <%= link_to "Ver detalhes", run_path(run), class: "run-btn-outline" %>
-            <%= link_to "Editar", edit_run_path(run), class: "run-btn-outline" %>
-            <%= button_to "Excluir", run, method: :delete, data: { turbo_confirm: "Tem certeza?" }, class: "run-btn-danger" %>
-          </div>
+            <div class="run-card-actions">
+              <%= link_to "Ver detalhes", run_path(run), class: "run-btn-outline" %>
+              <%= link_to "Editar", edit_run_path(run), class: "run-btn-outline" %>
+              <%= button_to "Excluir", run, method: :delete, data: { turbo_confirm: "Tem certeza?" }, class: "run-btn-danger" %>
+            </div>
         </div>
       <% end %>
-    </div>
+      </div>
   <% end %>
 </div>
->>>>>>> e512a641854cea29b7c9359560abca7f9d8fa3a6
