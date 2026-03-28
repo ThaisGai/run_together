@@ -48,7 +48,7 @@
 </div>
 
 <script>
-  window.addEventListener('load', () => {
+  document.addEventListener('turbo:load', () => {
     const ACCESS_TOKEN = '<%= ENV["MAPBOX_ACCESS_TOKEN"] %>';
     const collection = mapboxsearch.autofill({ accessToken: ACCESS_TOKEN });
     const minimap = document.querySelector('mapbox-address-minimap');
