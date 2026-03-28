@@ -5,3 +5,20 @@
 @import "form_legend_clear";
 @import "chat";
 @import "runs";
+
+.rt-avatar {
+  width: 44px;
+  height: 36px;
+  border-radius: 20px;
+  background: #1e1e1e;
+  border: 1.5px solid #ff4d00;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  cursor: pointer;
+  padding: 0 8px;
+  transition: border-color 0.2s;
+
+  &:hover { border-color: #fff; }
+}

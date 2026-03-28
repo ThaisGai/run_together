@@ -1,17 +1,55 @@
 .rt-home {
-  background: #0f0f0f;
+  background: #0a0a0a;
   min-height: 100vh;
   font-family: 'Barlow', sans-serif;
   color: #fff;
 }
 
+// ─── HERO ────────────────────────────────────────
 .rt-hero {
+  position: relative;
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
+  min-height: calc(100vh - 60px);
+  overflow: hidden;
+}
+
+.rt-hero-bg {
+  position: absolute;
+  inset: 0;
+  background:
+    url('https://images.unsplash.com/photo-1552674605-db6ffd4facb5?w=1400&q=80')
+    center center / cover no-repeat;
+  filter: grayscale(100%) contrast(1.1);
+  opacity: 0.15;
+}
+
+.rt-hero-overlay {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at 50% 0%, rgba(255, 77, 0, 0.08) 0%, transparent 60%),
+    linear-gradient(180deg, transparent 60%, #0a0a0a 100%);
+}
+
+.rt-hero-content {
+  position: relative;
+  z-index: 2;
   text-align: center;
-  padding: 4rem 2rem 0;
+  padding: 2rem;
+  animation: heroFadeIn 0.8s ease-out;
+}
+
+@keyframes heroFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .rt-tag {
@@ -19,42 +57,55 @@
   font-size: 13px;
   letter-spacing: 4px;
   text-transform: uppercase;
-  color: #ff4d00;
-  margin-bottom: 0.8rem;
+  color: #888;
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+
+.rt-tag-line {
+  display: inline-block;
+  width: 32px;
+  height: 1px;
+  background: #ff4d00;
 }
 
 .rt-slogan {
   font-family: 'Barlow Condensed', sans-serif;
   font-weight: 800;
-  font-size: clamp(2rem, 6vw, 5rem);
+  font-size: clamp(2.5rem, 7vw, 5.5rem);
   letter-spacing: 2px;
   text-transform: uppercase;
   color: #fff;
   margin-bottom: 1.5rem;
   line-height: 1;
+
+  span {
+    color: #ff4d00;
+    font-style: italic;
+  }
 }
 
-.rt-slogan span {
-  color: #ff4d00;
-}
-
-.rt-hero p {
-  font-size: 15px;
-  color: #777;
-  max-width: 400px;
+.rt-hero-desc {
+  font-size: 16px;
+  color: #666;
+  max-width: 440px;
   line-height: 1.7;
-  margin-bottom: 2.5rem;
+  margin: 0 auto 2.5rem;
 }
 
 .rt-actions {
   display: flex;
   gap: 1rem;
+  justify-content: center;
 }
 
 .rt-btn-primary {
   background: #ff4d00;
   color: #fff;
-  padding: 14px 32px;
+  padding: 14px 36px;
   border-radius: 4px;
   text-decoration: none;
   font-family: 'Barlow Condensed', sans-serif;
@@ -64,17 +115,22 @@
   text-transform: uppercase;
   border: none;
   cursor: pointer;
-}
+  transition: all 0.25s;
+  position: relative;
+  overflow: hidden;
 
-.rt-btn-primary:hover {
-  background: #e04300;
-  color: #fff;
+  &:hover {
+    background: #e04300;
+    color: #fff;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(255, 77, 0, 0.3);
+  }
 }
 
 .rt-btn-secondary {
   background: transparent;
   color: #aaa;
-  padding: 14px 32px;
+  padding: 14px 36px;
   border-radius: 4px;
   text-decoration: none;
   font-family: 'Barlow Condensed', sans-serif;
@@ -84,50 +140,146 @@
   text-transform: uppercase;
   border: 1px solid #333;
   cursor: pointer;
+  transition: all 0.25s;
+
+  &:hover {
+    color: #fff;
+    border-color: #ff4d00;
+    transform: translateY(-2px);
+  }
 }
 
-.rt-btn-secondary:hover {
-  color: #fff;
-  border-color: #555;
+// scroll indicator
+.rt-hero-scroll {
+  position: absolute;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2;
+
+  span {
+    display: block;
+    width: 2px;
+    height: 32px;
+    background: linear-gradient(180deg, #ff4d00, transparent);
+    animation: scrollPulse 1.8s ease-in-out infinite;
+  }
 }
 
-.rt-watermark {
-  font-family: 'Barlow Condensed', sans-serif;
-  font-weight: 800;
-  font-size: clamp(4rem, 13vw, 11rem);
-  color: transparent;
-  -webkit-text-stroke: 1px #ffffff22;
-  text-transform: uppercase;
-  letter-spacing: 8px;
-  line-height: 1.1;
-  text-align: center;
-  margin-top: 3rem;
-  user-select: none;
+@keyframes scrollPulse {
+  0%, 100% { opacity: 0.3; transform: scaleY(0.6); }
+  50% { opacity: 1; transform: scaleY(1); }
 }
 
+// ─── STATS ───────────────────────────────────────
 .rt-stats {
   display: flex;
   justify-content: center;
-  gap: 4rem;
-  padding: 2.5rem 2rem;
-  border-top: 1px solid #1e1e1e;
+  align-items: center;
+  gap: 3rem;
+  padding: 3.5rem 2rem;
+  background: #0f0f0f;
+  border-top: 1px solid #1a1a1a;
+  border-bottom: 1px solid #1a1a1a;
 }
 
 .rt-stat {
   text-align: center;
 }
 
+.rt-stat-divider {
+  width: 1px;
+  height: 48px;
+  background: linear-gradient(180deg, transparent, #333, transparent);
+}
+
 .rt-stat-number {
   font-family: 'Barlow Condensed', sans-serif;
   font-weight: 700;
-  font-size: 2.5rem;
+  font-size: 2.8rem;
   color: #ff4d00;
   display: block;
+  line-height: 1;
+  margin-bottom: 0.4rem;
 }
 
 .rt-stat-label {
-  font-size: 12px;
+  font-size: 11px;
   color: #555;
   text-transform: uppercase;
-  letter-spacing: 2px;
-}// Specific CSS for your home-page
+  letter-spacing: 3px;
+}
+
+// ─── FEATURES ────────────────────────────────────
+.rt-features {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+  padding: 5rem 4rem;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.rt-feature {
+  padding: 2rem;
+  border: 1px solid #1a1a1a;
+  border-radius: 8px;
+  transition: all 0.3s;
+  background: #0f0f0f;
+
+  &:hover {
+    border-color: #ff4d00;
+    transform: translateY(-4px);
+    box-shadow: 0 12px 32px rgba(255, 77, 0, 0.08);
+  }
+
+  h3 {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 20px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 0.6rem;
+    color: #fff;
+  }
+
+  p {
+    font-size: 14px;
+    color: #666;
+    line-height: 1.7;
+    margin: 0;
+  }
+}
+
+.rt-feature-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 10px;
+  background: rgba(255, 77, 0, 0.08);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1.2rem;
+}
+
+// ─── RESPONSIVE ──────────────────────────────────
+@media (max-width: 768px) {
+  .rt-features {
+    grid-template-columns: 1fr;
+    padding: 3rem 1.5rem;
+  }
+
+  .rt-stats {
+    gap: 1.5rem;
+    flex-wrap: wrap;
+  }
+
+  .rt-stat-divider {
+    display: none;
+  }
+
+  .rt-actions {
+    flex-direction: column;
+    align-items: center;
+  }
+}
