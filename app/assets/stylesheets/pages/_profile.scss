@@ -1,0 +1,237 @@
+.rt-profile {
+  background: #0a0a0a;
+  min-height: calc(100vh - 60px);
+  padding: 3rem 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+  font-family: 'Barlow', sans-serif;
+}
+
+.rt-profile-card {
+  width: 100%;
+  max-width: 560px;
+  background: #111;
+  border: 1px solid #1e1e1e;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.rt-profile-header {
+  text-align: center;
+  padding: 2.5rem 2rem 1.5rem;
+  border-bottom: 1px solid #1a1a1a;
+  background: linear-gradient(180deg, rgba(255, 77, 0, 0.04) 0%, transparent 100%);
+
+  h2 {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 28px;
+    color: #fff;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin: 0.8rem 0 0.3rem;
+  }
+
+  p {
+    color: #555;
+    font-size: 14px;
+    margin: 0;
+  }
+}
+
+.rt-profile-avatar {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: rgba(255, 77, 0, 0.08);
+  border: 2px solid #ff4d00;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+}
+
+.rt-profile-form {
+  padding: 0;
+}
+
+.rt-form-section {
+  padding: 1.5rem 2rem;
+  border-bottom: 1px solid #1a1a1a;
+
+  h3 {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 600;
+    font-size: 14px;
+    color: #888;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 1.2rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+}
+
+.rt-section-icon {
+  display: flex;
+  align-items: center;
+}
+
+.rt-form-section-confirm {
+  background: rgba(255, 77, 0, 0.03);
+}
+
+.rt-field {
+  margin-bottom: 1rem;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+
+  label {
+    display: block;
+    font-size: 13px;
+    font-weight: 500;
+    color: #aaa;
+    margin-bottom: 0.4rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .rt-input {
+    width: 100%;
+    padding: 12px 16px;
+    background: #0a0a0a;
+    border: 1px solid #2a2a2a;
+    border-radius: 6px;
+    color: #fff;
+    font-family: 'Barlow', sans-serif;
+    font-size: 15px;
+    transition: all 0.2s;
+    outline: none;
+    box-sizing: border-box;
+
+    &::placeholder {
+      color: #444;
+    }
+
+    &:focus {
+      border-color: #ff4d00;
+      box-shadow: 0 0 0 3px rgba(255, 77, 0, 0.1);
+    }
+  }
+
+  // Override simple_form wrappers
+  .input {
+    margin-bottom: 0;
+  }
+
+  .hint, .error {
+    font-size: 12px;
+    margin-top: 0.3rem;
+  }
+
+  .hint {
+    color: #555;
+  }
+
+  .error {
+    color: #ff4d00;
+  }
+}
+
+.rt-pending-confirm {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: #ff4d00;
+  background: rgba(255, 77, 0, 0.06);
+  padding: 10px 14px;
+  border-radius: 6px;
+  margin-top: 0.5rem;
+}
+
+.rt-form-error {
+  background: rgba(255, 77, 0, 0.08);
+  border: 1px solid rgba(255, 77, 0, 0.2);
+  color: #ff4d00;
+  padding: 12px 16px;
+  border-radius: 6px;
+  font-size: 14px;
+  margin: 1.5rem 2rem 0;
+}
+
+.rt-form-actions {
+  display: flex;
+  gap: 1rem;
+  padding: 1.5rem 2rem;
+  justify-content: flex-end;
+}
+
+// ─── DANGER ZONE ─────────────────────────────────
+.rt-danger-zone {
+  width: 100%;
+  max-width: 560px;
+  padding: 1.5rem 2rem;
+  border: 1px solid #2a1a1a;
+  border-radius: 12px;
+  background: #111;
+
+  h3 {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 16px;
+    color: #ff4d00;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 0.4rem;
+  }
+
+  p {
+    font-size: 13px;
+    color: #555;
+    margin-bottom: 1rem;
+    line-height: 1.6;
+  }
+}
+
+.rt-btn-danger {
+  background: transparent;
+  color: #ff4d00;
+  border: 1px solid #ff4d00;
+  padding: 10px 24px;
+  border-radius: 4px;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: all 0.25s;
+
+  &:hover {
+    background: #ff4d00;
+    color: #fff;
+    box-shadow: 0 4px 16px rgba(255, 77, 0, 0.3);
+  }
+}
+
+// ─── RESPONSIVE ──────────────────────────────────
+@media (max-width: 600px) {
+  .rt-profile {
+    padding: 1.5rem 1rem;
+  }
+
+  .rt-form-section {
+    padding: 1.2rem 1.2rem;
+  }
+
+  .rt-form-actions {
+    flex-direction: column;
+    padding: 1.2rem;
+  }
+}
