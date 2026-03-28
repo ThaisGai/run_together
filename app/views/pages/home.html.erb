@@ -1,13 +1,19 @@
 <div class="rt-home">
   <div class="rt-hero">
-    <p class="rt-tag">— Conectando corredores</p>
-    <div class="rt-slogan">Corra <span>junto.</span><br>Vá mais longe.</div>
-    <p>Encontre corridas perto de você, crie seu próprio grupo e conecte-se com quem compartilha o mesmo ritmo.</p>
-    <div class="rt-actions">
-      <%= link_to "Explorar Corridas", runs_path, class: "rt-btn-primary" %>
-      <%= link_to "+ Criar Corrida", new_run_path, class: "rt-btn-secondary" %>
+    <div class="rt-hero-bg"></div>
+    <div class="rt-hero-overlay"></div>
+    <div class="rt-hero-content">
+      <p class="rt-tag"><span class="rt-tag-line"></span> Conectando corredores</p>
+      <div class="rt-slogan">Corra <span>junto.</span><br>Vá mais longe.</div>
+      <p class="rt-hero-desc">Encontre corridas perto de você, crie seu próprio grupo e conecte-se com quem compartilha o mesmo ritmo.</p>
+      <div class="rt-actions">
+        <%= link_to "Explorar Corridas", runs_path, class: "rt-btn-primary" %>
+        <%= link_to "+ Criar Corrida", new_run_path, class: "rt-btn-secondary" %>
+      </div>
     </div>
-    <div class="rt-watermark">RUN<br>TOGETHER</div>
+    <div class="rt-hero-scroll">
+      <span></span>
+    </div>
   </div>
 
   <div class="rt-stats">
@@ -15,15 +21,39 @@
       <span class="rt-stat-number">1.2k</span>
       <span class="rt-stat-label">Corredores</span>
     </div>
+    <div class="rt-stat-divider"></div>
     <div class="rt-stat">
       <span class="rt-stat-number">340</span>
       <span class="rt-stat-label">Corridas criadas</span>
     </div>
+    <div class="rt-stat-divider"></div>
     <div class="rt-stat">
       <span class="rt-stat-number">18</span>
       <span class="rt-stat-label">Cidades</span>
     </div>
   </div>
 
-  <%= button_to "Logout", destroy_user_session_path, method: :delete %>
+  <div class="rt-features">
+    <div class="rt-feature">
+      <div class="rt-feature-icon">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#ff4d00" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+      </div>
+      <h3>Encontre corridas</h3>
+      <p>Descubra grupos e corridas perto de você, filtrando por distância, ritmo e horário.</p>
+    </div>
+    <div class="rt-feature">
+      <div class="rt-feature-icon">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#ff4d00" stroke-width="2" stroke-linecap="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+      </div>
+      <h3>Crie seu grupo</h3>
+      <p>Monte sua própria corrida, defina o percurso e convide corredores da comunidade.</p>
+    </div>
+    <div class="rt-feature">
+      <div class="rt-feature-icon">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#ff4d00" stroke-width="2" stroke-linecap="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+      </div>
+      <h3>Conecte-se</h3>
+      <p>Converse com outros corredores, troque dicas e compartilhe seus treinos.</p>
+    </div>
+  </div>
 </div>
