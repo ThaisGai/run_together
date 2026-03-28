@@ -17,7 +17,7 @@ class RunsController < ApplicationController
   end
 
   def my_runs
-    @runs = policy_scope(Run).where(user: current_user)
+  @runs = policy_scope(Run).where(user: current_user).includes(:members)
   end
 
   def show
