@@ -12,7 +12,6 @@
   <% end %>
 
   <ul class="rt-links">
-    <li><%= link_to "Home", root_path, class: current_page?(root_path) ? "active" : "" %></li>
     <li><%= link_to "Explorar Corridas", runs_path, class: current_page?(runs_path) ? "active" : "" %></li>
 
     <% if user_signed_in? %>
