@@ -69,7 +69,7 @@
   display: inline-block;
   width: 32px;
   height: 1px;
-  background: #ff4d00;
+  background: #c93c00;
 }
 
 .rt-slogan {
@@ -83,7 +83,7 @@
   line-height: 1;
 
   span {
-    color: #ff4d00;
+    color: #c93c00;
     font-style: italic;
   }
 }
@@ -103,7 +103,7 @@
 }
 
 .rt-btn-primary {
-  background: #ff4d00;
+  background: #c93c00;
   color: #fff;
   padding: 14px 36px;
   border-radius: 4px;
@@ -120,7 +120,7 @@
   overflow: hidden;
 
   &:hover {
-    background: #e04300;
+    background: #c23b00;
     color: #fff;
     transform: translateY(-2px);
     box-shadow: 0 8px 24px rgba(255, 77, 0, 0.3);
@@ -144,7 +144,7 @@
 
   &:hover {
     color: #fff;
-    border-color: #ff4d00;
+    border-color: #c93c00;
     transform: translateY(-2px);
   }
 }
@@ -161,7 +161,7 @@
     display: block;
     width: 2px;
     height: 32px;
-    background: linear-gradient(180deg, #ff4d00, transparent);
+    background: linear-gradient(180deg, #c93c00, transparent);
     animation: scrollPulse 1.8s ease-in-out infinite;
   }
 }
@@ -197,7 +197,7 @@
   font-family: 'Barlow Condensed', sans-serif;
   font-weight: 700;
   font-size: 2.8rem;
-  color: #ff4d00;
+  color: #c93c00;
   display: block;
   line-height: 1;
   margin-bottom: 0.4rem;
@@ -228,7 +228,7 @@
   background: #0f0f0f;
 
   &:hover {
-    border-color: #ff4d00;
+    border-color: #c93c00;
     transform: translateY(-4px);
     box-shadow: 0 12px 32px rgba(255, 77, 0, 0.08);
   }

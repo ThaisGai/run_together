@@ -63,12 +63,12 @@
   transition: border-color 0.2s;
 
   &::placeholder { color: #444; }
-  &:focus { border-color: #ff4d00; }
+  &:focus { border-color: #c93c00; }
 }
 
 .runs-search-btn {
   padding: 12px 24px;
-  background: #ff4d00;
+  background: #c93c00;
   border: none;
   border-radius: 8px;
   color: #fff;
@@ -81,7 +81,7 @@
   transition: all 0.2s;
 
   &:hover {
-    background: #e04300;
+    background: #c23b00;
     box-shadow: 0 4px 12px rgba(255, 77, 0, 0.2);
   }
 }
@@ -121,7 +121,7 @@
 
 .run-accent {
   width: 4px;
-  background: #ff4d00;
+  background: #c93c00;
   flex-shrink: 0;
 }
 
@@ -151,11 +151,11 @@
   height: 42px;
   border-radius: 50%;
   background: rgba(255, 77, 0, 0.08);
-  border: 2px solid #ff4d00;
+  border: 2px solid #c93c00;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #ff4d00;
+  color: #c93c00;
   font-size: 13px;
   font-weight: 700;
   font-family: 'Barlow Condensed', sans-serif;
@@ -197,7 +197,7 @@
 
 // ─── BUTTONS ─────────────────────────────────────
 .run-btn-outline {
-  color: #ff4d00;
+  color: #c93c00;
   text-decoration: none;
   font-size: 12px;
   font-weight: 600;
@@ -205,14 +205,14 @@
   text-transform: uppercase;
   letter-spacing: 0.5px;
   padding: 7px 16px;
-  border: 1px solid #ff4d00;
+  border: 1px solid #c93c00;
   border-radius: 4px;
   background: transparent;
   cursor: pointer;
   transition: all 0.2s;
 
   &:hover {
-    background: #ff4d00;
+    background: #c93c00;
     color: #fff;
     box-shadow: 0 4px 12px rgba(255, 77, 0, 0.2);
   }
@@ -229,12 +229,12 @@
   padding: 7px 16px;
   border: none;
   border-radius: 4px;
-  background: #ff4d00;
+  background: #c93c00;
   cursor: pointer;
   transition: all 0.2s;
 
   &:hover {
-    background: #e04300;
+    background: #c23b00;
     box-shadow: 0 4px 12px rgba(255, 77, 0, 0.2);
   }
 }
@@ -436,7 +436,7 @@
     border: 1px solid #444 !important;
     -webkit-text-fill-color: #fff !important;
 
-    &:focus { border-color: #ff4d00 !important; }
+    &:focus { border-color: #c93c00 !important; }
   }
 
   label, .form-label {
@@ -489,7 +489,7 @@
   width: 100%;
 
   &::placeholder { color: #666; }
-  &:focus { border-color: #ff4d00; }
+  &:focus { border-color: #c93c00; }
 
   option {
     background: #1e1e1e;

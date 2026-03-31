@@ -5,7 +5,7 @@
   align-items: center;
   justify-content: space-between;
   height: 60px;
-  border-bottom: 2px solid #ff4d00;
+  border-bottom: 2px solid #c93c00;
   font-family: 'Barlow', sans-serif;
 }
 
@@ -50,10 +50,10 @@
 }
 
 .rt-links a:hover { color: #fff; }
-.rt-links a.active { color: #ff4d00; }
+.rt-links a.active { color: #c93c00; }
 
 .rt-cta {
-  background: #ff4d00;
+  background: #c93c00;
   color: #fff !important;
   padding: 7px 18px;
   border-radius: 4px;
@@ -61,7 +61,7 @@
   font-weight: 600 !important;
   text-decoration: none;
 
-  &:hover { background: #e04300; }
+  &:hover { background: #c23b00; }
 }
 
 .rt-user {
@@ -92,7 +92,7 @@
   height: 36px;
   border-radius: 20px;
   background: #1e1e1e;
-  border: 1.5px solid #ff4d00;
+  border: 1.5px solid #c93c00;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -105,7 +105,7 @@
 }
 
 .rt-avatar-initials {
-  color: #ff4d00;
+  color: #c93c00;
   font-size: 12px;
   font-weight: 700;
   font-family: 'Barlow Condensed', sans-serif;
@@ -145,10 +145,10 @@
 
 .rt-dropdown-logout {
   border-top: 1px solid #2a2a2a;
-  color: #ff4d00;
+  color: #c93c00;
 
   &:hover {
-    color: #ff4d00;
+    color: #c93c00;
     background: #2a1a1a;
   }
 }
