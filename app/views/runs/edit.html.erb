@@ -42,10 +42,12 @@
             <%= f.label :max_participants, "Máx. participantes" %>
             <%= f.input_field :max_participants, as: :select, collection: [["Até 5 pessoas", 5], ["Até 10 pessoas", 10], ["Até 15 pessoas", 15], ["Até 20 pessoas", 20]], prompt: "Selecione", class: "run-input" %>
           </div>
-          <div class="run-form-check" style="align-self: end; padding-bottom: 4px;">
-            <%= f.input_field :women_only, as: :boolean %>
-            <%= f.label :women_only, "Corrida só para mulheres" %>
-          </div>
+          <% if current_user.female? %>
+            <div class="run-form-check" style="align-self: end; padding-bottom: 4px;">
+              <%= f.input_field :women_only, as: :boolean %>
+              <%= f.label :women_only, "Corrida só para mulheres" %>
+            </div>
+          <% end %>
         </div>
 
         <div class="run-form-check">
