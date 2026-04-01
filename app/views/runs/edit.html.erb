@@ -37,6 +37,17 @@
           <%= f.input_field :pace, collection: (["Sem pace definido", "3:00", "3:30", "4:00", "4:30", "5:00", "5:30", "6:00", "6:30", "7:00", "7:30"].map { |p| ["#{p} min/km", p] }), prompt: "Selecione o ritmo (pace) desejado", class: "run-input" %>
         </div>
 
+        <div class="run-form-row">
+          <div class="run-form-group">
+            <%= f.label :max_participants, "Máx. participantes" %>
+            <%= f.input_field :max_participants, as: :select, collection: [["Até 5 pessoas", 5], ["Até 10 pessoas", 10], ["Até 15 pessoas", 15], ["Até 20 pessoas", 20]], prompt: "Selecione", class: "run-input" %>
+          </div>
+          <div class="run-form-check" style="align-self: end; padding-bottom: 4px;">
+            <%= f.input_field :women_only, as: :boolean %>
+            <%= f.label :women_only, "Corrida só para mulheres" %>
+          </div>
+        </div>
+
         <div class="run-form-check">
           <%= f.input_field :private, as: :boolean %>
           <%= f.label :private, "Corrida privada?" %>
