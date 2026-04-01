@@ -3,7 +3,11 @@ class RunsController < ApplicationController
   skip_after_action :verify_policy_scoped, only: :my_runs
 
   def index
-    @runs = policy_scope(Run).where.not(user: current_user).upcoming
+    @runs = policy_scope(Run).where.not(user: current_user).upcoming.visible_to(current_user)
+    # .not(user: current_user) não lista as corridas do próprio usuário
+    # upcoming somente corridas futuras
+    # visible_to remove corridas privadas se o user não for do gênero feminino
+
     @markers = @runs.map do |run| {
       id: run.id,
       lat: run.latitude,
@@ -11,7 +15,8 @@ class RunsController < ApplicationController
       name: run.location,
       date: run.date.strftime("%d/%m/%Y"),
       time: run.time.strftime("%H:%M"),
-      pace: run.pace
+      pace: run.pace,
+      private: run.private
     }
     end
   end
