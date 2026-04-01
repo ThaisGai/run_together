@@ -37,10 +37,12 @@
           <%= f.input_field :pace, collection: (["Sem pace definido", "3:00", "3:30", "4:00", "4:30", "5:00", "5:30", "6:00", "6:30", "7:00", "7:30"].map { |p| ["#{p} min/km", p] }), prompt: "Selecione o ritmo (pace) desejado", class: "run-input" %>
         </div>
 
-        <div class="run-form-check">
-          <%= f.input_field :private, as: :boolean %>
-          <%= f.label :private, "Corrida privada?" %>
-        </div>
+        <% if current_user.female? %>
+          <div class="run-form-check">
+            <%= f.input_field :private, as: :boolean %>
+            <%= f.label :private, "Listar apenas para mulheres?" %>
+          </div>
+        <% end %>
 
         <%= f.button :submit, "Salvar Alterações", class: "rt-cta run-submit" %>
       </div>

@@ -36,10 +36,22 @@
           <%= f.input_field :pace, collection: (["Sem pace definido", "3:00", "3:30", "4:00", "4:30", "5:00", "5:30", "6:00", "6:30", "7:00", "7:30"].map { |p| ["#{p} min/km", p] }), prompt: "Selecione o ritmo (pace) desejado", class: "run-input" %>
         </div>
 
-        <div class="run-form-check">
-          <%= f.input_field :private, as: :boolean %>
-          <%= f.label :private, "Corrida privada?" %>
-        </div>
+        <% if current_user.female? %>
+          <div class="run-form-check">
+            <%= f.input_field :private, as: :boolean %>
+            <%= f.label :private do %>
+              <div style="display:flex; align-items:center; gap:8px;">
+                <div style="cursor:pointer; background:#e91e8c; border-radius:50%; width:32px; height:32px; display:flex; align-items:center; justify-content:center; box-shadow:0 2px 8px rgba(233,30,140,0.4); border:2px solid #0a0a0a;">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="12" cy="8" r="4" fill="#fff"/>
+                    <path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" stroke="#fff" stroke-width="2" stroke-linecap="round"/>
+                  </svg>
+                </div>
+                <span>Listar apenas para mulheres?</span>
+              </div>
+            <% end %>
+          </div>
+        <% end %>
 
         <%= f.button :submit, "Criar Corrida", class: "rt-cta run-submit" %>
       </div>

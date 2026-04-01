@@ -46,20 +46,33 @@
               <div>
                 <strong>${marker.name}</strong><br>
                 <span style="color:#888; font-size:12px;">${marker.date} · ${marker.time}</span><br>
-                <span style="color:#ff4d00; font-size:13px;">Pace: ${marker.pace}</span><br>
-                <a href="/runs/${marker.id}" style="color:#ff4d00; font-size:12px; text-transform:uppercase; letter-spacing:0.5px; text-decoration:none; font-weight:600;">Ver detalhes →</a>
+                <span style="color:${marker.private ? '#e91e8c' : '#ff4d00'}; font-size:13px;">Pace: ${marker.pace}</span><br>
+                <a href="/runs/${marker.id}" style="color:${marker.private ? '#e91e8c' : '#ff4d00'}; font-size:12px; text-transform:uppercase; letter-spacing:0.5px; text-decoration:none; font-weight:600;">Ver detalhes →</a>
               </div>
             `)
 
           const el = document.createElement('div')
-          el.innerHTML = `
-            <div style="cursor:pointer; background:#ff4d00; border-radius:50%; width:32px; height:32px; display:flex; align-items:center; justify-content:center; box-shadow:0 2px 8px rgba(255,77,0,0.4); border:2px solid #0a0a0a;">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <circle cx="12" cy="8" r="4" fill="#fff"/>
-                <path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" stroke="#fff" stroke-width="2" stroke-linecap="round"/>
-              </svg>
-            </div>
-          `
+          if (marker.private) {
+            // Marker para corridas privadas (feminina) - rosa
+            el.innerHTML = `
+              <div style="cursor:pointer; background:#e91e8c; border-radius:50%; width:32px; height:32px; display:flex; align-items:center; justify-content:center; box-shadow:0 2px 8px rgba(233,30,140,0.4); border:2px solid #0a0a0a;">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <circle cx="12" cy="8" r="4" fill="#fff"/>
+                  <path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" stroke="#fff" stroke-width="2" stroke-linecap="round"/>
+                </svg>
+              </div>
+            `
+          } else {
+            // Marker normal - laranja
+            el.innerHTML = `
+              <div style="cursor:pointer; background:#ff4d00; border-radius:50%; width:32px; height:32px; display:flex; align-items:center; justify-content:center; box-shadow:0 2px 8px rgba(255,77,0,0.4); border:2px solid #0a0a0a;">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <circle cx="12" cy="8" r="4" fill="#fff"/>
+                  <path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" stroke="#fff" stroke-width="2" stroke-linecap="round"/>
+                </svg>
+              </div>
+            `
+          }
 
           new mapboxgl.Marker(el)
             .setLngLat([marker.lng, marker.lat])
@@ -81,7 +94,7 @@
   <% else %>
     <div class="runs-list">
       <% @runs.each do |run| %>
-        <div class="run-card">
+        <div class="run-card <%= 'run-card-private' if run.private %>">
           <div class="run-accent"></div>
           <div class="run-card-content">
             <div class="run-card-left">
