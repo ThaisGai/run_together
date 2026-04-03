@@ -35,7 +35,7 @@ class RunsController < ApplicationController
   end
 
   def participating
-  @runs = Run.joins(:run_members).where(run_members: { user_id: current_user.id }).includes(:members, :user)
+    @runs = Run.joins(:run_members).where(run_members: { user_id: current_user.id }).includes(:members, :user)
   end
 
   def show
