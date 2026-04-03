@@ -3,7 +3,7 @@ class RunsController < ApplicationController
   skip_after_action :verify_policy_scoped, only: [:my_runs, :participating]
 
   def index
-    @runs = policy_scope(Run).where.not(user: current_user).upcoming
+    @runs = policy_scope(Run).where.not(user: current_user).upcoming.visible_to(current_user)
 
     # Filtros
     @runs = @runs.where(women_only: true) if params[:filter] == "women"
