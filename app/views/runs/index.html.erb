@@ -48,7 +48,8 @@
 
       const map = new mapboxgl.Map({
         container: "map",
-        style: "mapbox://styles/mapbox/navigation-night-v1",
+        style: "mapbox://styles/mapbox/streets-v12",
+        // style: "mapbox://styles/mapbox/navigation-night-v1",
         zoom: 10
       })
 
@@ -121,7 +122,7 @@
                   </span>
                   <span class="run-meta-item">
                     <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
-                    <%= run.location.truncate(35) %>
+                    <%= link_to run.location.truncate(35), "https://www.google.com/maps?q=#{run.latitude},#{run.longitude}", target: "_blank", class: "run-location-link" %>
                   </span>
                   <span class="run-meta-item">
                     <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
