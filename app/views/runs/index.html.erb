@@ -4,8 +4,23 @@
     <%= link_to "+ Criar Corrida", new_run_path, class: "rt-cta" if user_signed_in? %>
   </div>
 
+  <div class="runs-filters">
+    <div class="runs-filter-group">
+      <%= link_to "Todas", runs_path(size: params[:size]), class: "runs-filter-pill #{params[:filter].blank? ? 'active' : ''}" %>
+      <%= link_to "Só Mulheres", runs_path(filter: "women", size: params[:size]), class: "runs-filter-pill pill-women #{params[:filter] == 'women' ? 'active' : ''}" %>
+      <%= link_to "Mistas", runs_path(filter: "mixed", size: params[:size]), class: "runs-filter-pill #{params[:filter] == 'mixed' ? 'active' : ''}" %>
+    </div>
+    <div class="runs-filter-group">
+      <%= link_to "Todos os tamanhos", runs_path(filter: params[:filter]), class: "runs-filter-pill #{params[:size].blank? ? 'active' : ''}" %>
+      <%= link_to "Até 5 pessoas", runs_path(filter: params[:filter], size: "small"), class: "runs-filter-pill #{params[:size] == 'small' ? 'active' : ''}" %>
+      <%= link_to "5+ pessoas", runs_path(filter: params[:filter], size: "big"), class: "runs-filter-pill #{params[:size] == 'big' ? 'active' : ''}" %>
+    </div>
+  </div>
+
   <div class="runs-search">
     <%= form_with url: runs_path, method: :get, class: "runs-search-form" do %>
+      <%= hidden_field_tag :filter, params[:filter] %>
+      <%= hidden_field_tag :size, params[:size] %>
       <svg class="runs-search-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#555" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
       <%= text_field_tag :query, params[:query], class: "runs-search-input", placeholder: "Buscar por local, ritmo..." %>
       <%= submit_tag "Buscar", name: "", class: "runs-search-btn" %>
@@ -42,38 +57,29 @@
         const bounds = new mapboxgl.LngLatBounds()
 
         markers.forEach((marker) => {
-          const popup = new mapboxgl.Popup({ offset: 25, className: 'rt-popup' })
+          const color = marker.women_only ? '#d946ef' : '#ff4d00'
+
+          const popup = new mapboxgl.Popup({ offset: 25 })
             .setHTML(`
               <div>
-                <strong>${marker.name}</strong><br>
+                <strong>${marker.name}</strong>
+                ${marker.women_only ? '<span style="background:#d946ef; color:#fff; font-size:10px; padding:2px 6px; border-radius:4px; margin-left:6px;">Só Mulheres</span>' : ''}
+                <br>
                 <span style="color:#888; font-size:12px;">${marker.date} · ${marker.time}</span><br>
-                <span style="color:${marker.private ? '#e91e8c' : '#ff4d00'}; font-size:13px;">Pace: ${marker.pace}</span><br>
-                <a href="/runs/${marker.id}" style="color:${marker.private ? '#e91e8c' : '#ff4d00'}; font-size:12px; text-transform:uppercase; letter-spacing:0.5px; text-decoration:none; font-weight:600;">Ver detalhes →</a>
+                <span style="color:${color}; font-size:13px;">Pace: ${marker.pace}</span><br>
+                <a href="/runs/${marker.id}" style="color:${color}; font-size:12px; text-transform:uppercase; letter-spacing:0.5px; text-decoration:none; font-weight:600;">Ver detalhes →</a>
               </div>
             `)
 
           const el = document.createElement('div')
-          if (marker.private) {
-            // Marker para corridas privadas (feminina) - rosa
-            el.innerHTML = `
-              <div style="cursor:pointer; background:#e91e8c; border-radius:50%; width:32px; height:32px; display:flex; align-items:center; justify-content:center; box-shadow:0 2px 8px rgba(233,30,140,0.4); border:2px solid #0a0a0a;">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <circle cx="12" cy="8" r="4" fill="#fff"/>
-                  <path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" stroke="#fff" stroke-width="2" stroke-linecap="round"/>
-                </svg>
-              </div>
-            `
-          } else {
-            // Marker normal - laranja
-            el.innerHTML = `
-              <div style="cursor:pointer; background:#ff4d00; border-radius:50%; width:32px; height:32px; display:flex; align-items:center; justify-content:center; box-shadow:0 2px 8px rgba(255,77,0,0.4); border:2px solid #0a0a0a;">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <circle cx="12" cy="8" r="4" fill="#fff"/>
-                  <path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" stroke="#fff" stroke-width="2" stroke-linecap="round"/>
-                </svg>
-              </div>
-            `
-          }
+          el.innerHTML = `
+            <div style="cursor:pointer; background:${color}; border-radius:50%; width:32px; height:32px; display:flex; align-items:center; justify-content:center; box-shadow:0 2px 8px ${color}66; border:2px solid #0a0a0a;">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="12" cy="8" r="4" fill="#fff"/>
+                <path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" stroke="#fff" stroke-width="2" stroke-linecap="round"/>
+              </svg>
+            </div>
+          `
 
           new mapboxgl.Marker(el)
             .setLngLat([marker.lng, marker.lat])
@@ -91,42 +97,51 @@
   </script>
 
   <% if @runs.empty? %>
-    <p class="runs-empty">Nenhuma corrida disponível no momento.</p>
+    <p class="runs-empty">Nenhuma corrida disponível com esses filtros.</p>
   <% else %>
     <div class="runs-list">
       <% @runs.each do |run| %>
-        <div class="run-card <%= 'run-card-private' if run.private %>">
-          <div class="run-accent"></div>
+        <div class="run-card <%= run.women_only? ? 'run-card-women' : '' %>">
+          <div class="run-accent <%= run.women_only? ? 'accent-women' : '' %>"></div>
           <div class="run-card-content">
             <div class="run-card-left">
-              <div class="run-creator-avatar">
+              <div class="run-creator-avatar <%= run.women_only? ? 'avatar-women' : '' %>">
                 <%= run.user.name&.split&.map { |n| n[0] }&.first(2)&.join&.upcase %>
               </div>
               <div class="run-card-info">
-                <span class="run-creator-name"><%= run.user.name %></span>
+                <div class="run-card-name-row">
+                  <span class="run-creator-name"><%= run.user.name %></span>
+                  <% if run.women_only? %>
+                    <span class="run-badge-women">Só Mulheres</span>
+                  <% end %>
+                </div>
                 <div class="run-meta">
                   <span class="run-meta-item">
-                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#ff4d00" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
                     <%= run.date.strftime("%d/%m") %> · <%= run.time.strftime("%H:%M") %>
                   </span>
                   <span class="run-meta-item">
-                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#ff4d00" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
-                    <%= link_to run.location.truncate(40), "https://www.google.com/maps?q=#{run.latitude},#{run.longitude}", target: "_blank", class: "run-location-link" %>
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                    <%= link_to run.location.truncate(35), "https://www.google.com/maps?q=#{run.latitude},#{run.longitude}", target: "_blank", class: "run-location-link" %>
                   </span>
                   <span class="run-meta-item">
-                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#ff4d00" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
                     <%= run.pace %>
                   </span>
                   <span class="run-meta-item">
-                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#ff4d00" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
-                    <%= run.members.count %>
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
+                    <%= run.members.count %><% if run.max_participants %>/<%= run.max_participants %><% end %>
                   </span>
                 </div>
               </div>
             </div>
             <div class="run-card-actions">
-              <%= link_to "Detalhes", run_path(run), class: "run-btn-outline" %>
-              <%= link_to "Mensagem", chat_with_user_path(user_id: run.user.id), class: "run-btn-primary" %>
+              <% if run.full? %>
+                <span class="run-badge-full">Lotada</span>
+              <% else %>
+                <%= link_to "Detalhes", run_path(run), class: "run-btn-outline #{run.women_only? ? 'btn-women' : ''}" %>
+                <%= link_to "Mensagem", chat_with_user_path(user_id: run.user.id), class: "run-btn-primary #{run.women_only? ? 'btn-women-fill' : ''}" %>
+              <% end %>
             </div>
           </div>
         </div>
