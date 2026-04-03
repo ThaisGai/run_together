@@ -41,6 +41,7 @@
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#4caf50" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
                 Participando
               </span>
+              <%= button_to "Desistir", run_run_member_path(@run, @run.run_members.find_by(user: current_user)), method: :delete, data: { turbo_confirm: "Tem certeza que deseja sair desta corrida?" }, class: "run-btn-danger" %>
             <% else %>
               <%= button_to "Participar", run_run_members_path(@run), class: "run-btn-primary" %>
             <% end %>
