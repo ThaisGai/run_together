@@ -8,7 +8,9 @@ class MessagesController < ApplicationController
     @message = @chat.messages.build(content: params[:message][:content], user: current_user)
 
     if @message.save
-      ChatChannel.broadcast_to(@chat, @message)
+      ChatChannel.broadcast_to(
+      @chat, {content: @message.content, user: @message.user.name, created_at: @message.created_at.strftime("%H:%M")}
+      )
       redirect_to chat_path(@chat)
     else
       redirect_to chat_path(@chat), alert: "Mensagem não pode ser vazia."

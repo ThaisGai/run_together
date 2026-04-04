@@ -13,7 +13,7 @@ document.addEventListener("turbo:load", () => {
           messagesDiv.insertAdjacentHTML("beforeend", `
             <div class="chat-bubble theirs">
               <p>${data.content}</p>
-              <span class="chat-time">${data.time}</span>
+              <span class="chat-time">${data.created_at}</span>
             </div>
           `)
         }

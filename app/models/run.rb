@@ -11,7 +11,7 @@ class Run < ApplicationRecord
   validates :location, presence: true
   validates :pace,     presence: true
   validates :max_participants, numericality: { greater_than: 0 }, allow_nil: true
-
+  
   scope :visible_to, ->(user) { user.female? ? all : where(private: false) }
   scope :public_runs, -> { where(private: false) }
   scope :upcoming,    -> { where("date >= ?", Date.today).order(:date, :time) }
@@ -39,7 +39,7 @@ class Run < ApplicationRecord
   end
 
   private
-  
+
   def create_run_chat
     Chat.create!(run: self)
   end
