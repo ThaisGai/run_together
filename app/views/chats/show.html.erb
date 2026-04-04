@@ -24,19 +24,9 @@
   </div>
   <div class="chat-messages" id="chat-messages" data-chat-id="<%= @chat.id %>">
     <% @messages.each do |message| %>
-      <div class="chat-row <%= message.user == current_user ? 'mine' : 'theirs' %>">
-        <% if message.user != current_user %>
-          <div class="chat-msg-avatar">
-            <%= message.user.name&.split&.map { |n| n[0] }&.first(2)&.join&.upcase %>
-          </div>
-        <% end %>
-        <div class="chat-bubble">
-          <% if message.user != current_user %>
-            <span class="chat-sender-name"><%= message.user.name&.split&.first %></span>
-          <% end %>
-          <p><%= message.content %></p>
-          <span class="chat-time"><%= message.created_at.strftime("%H:%M") %></span>
-        </div>
+      <div class="chat-bubble <%= message.user == current_user ? 'mine' : 'theirs' %>">
+        <p><%= message.content %></p>
+        <span class="chat-time"><%= message.created_at.strftime("%H:%M") %></span>
       </div>
     <% end %>
   </div>

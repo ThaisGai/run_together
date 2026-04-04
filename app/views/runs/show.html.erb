@@ -15,7 +15,7 @@
       <div class="run-show-body">
         <div class="run-detail-item">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#ff4d00" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
-          <%= link_to @run.location, "https://www.google.com/maps?q=#{@run.latitude},#{@run.longitude}", target: "_blank", class: "run-location-link" %>
+          <span><%= @run.location %></span>
         </div>
         <% if @run.pace.present? %>
           <div class="run-detail-item">
@@ -42,7 +42,7 @@
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#4caf50" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
                 Participando
               </span>
-              <%= button_to "Desistir", run_run_member_path(@run, @run.run_members.find_by(user: current_user)), method: :delete, data: { turbo_confirm: "Tem certeza que deseja sair desta corrida?" }, class: "run-btn-danger" %>
+              <%= link_to "Chat da corrida", chat_path(@run.chat), class: "run-btn-primary" %>
             <% else %>
               <%= button_to "Participar", run_run_members_path(@run), class: "run-btn-primary" %>
             <% end %>
