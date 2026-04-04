@@ -1,11 +1,10 @@
 class Chat < ApplicationRecord
-  belongs_to :run, optional: true
-  belongs_to :sender, class_name: "User", optional: true
-  belongs_to :receiver, class_name: "User", optional: true
+  belongs_to :sender, class_name: "User"
+  belongs_to :receiver, class_name: "User"
 
   has_many :messages, dependent: :destroy
 
-  validates :sender_id, uniqueness: { scope: :receiver_id }, if: -> { run_id.nil? }
+  validates :sender_id, uniqueness: { scope: :receiver_id }
 
   def self.between(user_a, user_b)
     where(sender: user_a, receiver: user_b)

@@ -143,27 +143,9 @@
   }
 }
 
-.rt-dropdown-menu .button_to {
-  margin: 0;
-  padding: 0;
-  background: none;
-  border-top: 1px solid #2a2a2a;
-}
-
 .rt-dropdown-logout {
-  display: block;
-  width: 100%;
-  background: none;
-  border: none;
-  cursor: pointer;
+  border-top: 1px solid #2a2a2a;
   color: #c93c00;
-  font-size: 13px;
-  font-weight: 500;
-  padding: 10px 16px;
-  text-align: left;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  transition: all 0.15s;
 
   &:hover {
     color: #c93c00;

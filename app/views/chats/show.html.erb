@@ -5,24 +5,16 @@
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
       <% end %>
       <div class="chat-avatar">
-        <% if @chat.run.present? %>
-          🏃
-        <% else %>
-          <%= @chat.other_user(current_user).name&.split&.map { |n| n[0] }&.first(2)&.join&.upcase %>
-        <% end %>
+        <%= @chat.other_user(current_user).name&.split&.map { |n| n[0] }&.first(2)&.join&.upcase %>
       </div>
       <div class="chat-header-info">
-        <% if @chat.run.present? %>
-          <span class="chat-header-name"><%= @chat.run.location %></span>
-          <span class="chat-header-status"><%= @chat.run.date.strftime("%d/%m/%Y") %> · <%= @chat.run.members.count %> participantes</span>
-        <% else %>
-          <span class="chat-header-name"><%= @chat.other_user(current_user).name %></span>
-          <span class="chat-header-status">Online</span>
-        <% end %>
+        <span class="chat-header-name"><%= @chat.other_user(current_user).name %></span>
+        <span class="chat-header-status">Online</span>
       </div>
     </div>
   </div>
-  <div class="chat-messages" id="chat-messages" data-chat-id="<%= @chat.id %>">
+
+  <div class="chat-messages" id="chat-messages">
     <% @messages.each do |message| %>
       <div class="chat-row <%= message.user == current_user ? 'mine' : 'theirs' %>">
         <% if message.user != current_user %>
@@ -40,6 +32,7 @@
       </div>
     <% end %>
   </div>
+
   <%= form_with model: [@chat, @message], class: "chat-form" do |f| %>
     <%= f.text_field :content, placeholder: "Escreva uma mensagem...", class: "chat-input", autocomplete: "off" %>
     <button type="submit" class="chat-send">
