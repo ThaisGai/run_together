@@ -4,7 +4,7 @@ class Run < ApplicationRecord
   has_many :members, through: :run_members, source: :user
   has_one :chat, dependent: :destroy
 
-  # after_create :create_chat
+  after_create :create_run_chat
 
   validates :date,     presence: true
   validates :time,     presence: true
@@ -36,5 +36,11 @@ class Run < ApplicationRecord
 
   def full?
     max_participants && members.count >= max_participants
+  end
+
+  private
+  
+  def create_run_chat
+    Chat.create!(run: self)
   end
 end
