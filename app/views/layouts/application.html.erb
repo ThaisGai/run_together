@@ -36,7 +36,8 @@
     </footer>
 
     <script>
-      const MAPBOX_ACCESS_TOKEN = "<%= ENV['MAPBOX_ACCESS_TOKEN'] %>"
+      if (typeof MAPBOX_ACCESS_TOKEN === 'undefined') {
+        const MAPBOX_ACCESS_TOKEN = "<%= ENV['MAPBOX_ACCESS_TOKEN'] %>" }
     </script>
   </body>
 </html>
