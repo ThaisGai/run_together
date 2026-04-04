@@ -2,3 +2,13 @@
 @import "home";
 @import "auth";
 @import "profile";
+
+.run-location-link {
+  color: #ff4d00;
+  text-decoration: underline;
+  font-size: 12px;
+}
+
+.run-location-link:hover {
+  color: #cc3d00;
+}
