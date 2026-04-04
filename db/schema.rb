@@ -48,14 +48,13 @@ ActiveRecord::Schema[7.1].define(version: 2026_04_01_214409) do
     t.date "date"
     t.time "time"
     t.string "location"
-    t.string "place"
+    t.string "pace"
     t.boolean "private"
     t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.float "latitude"
     t.float "longitude"
-    t.string "pace"
     t.boolean "women_only", default: false
     t.integer "max_participants", default: 5
     t.index ["user_id"], name: "index_runs_on_user_id"

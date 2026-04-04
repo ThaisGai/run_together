@@ -7,7 +7,7 @@
         <div class="run-form-row">
           <div class="run-form-group">
             <%= f.label :date, "Data" %>
-            <%= f.input_field :date, as: :string, input_html: { type: "date", min: Date.today.strftime("%Y-%m-%d") }, class: "run-input" %>
+            <%= f.input_field :date, as: :string, type: "date", min: Date.today.strftime("%Y-%m-%d"), class: "run-input" %>
           </div>
           <div class="run-form-group">
             <%= f.label :time, "Horário" %>
@@ -49,11 +49,6 @@
           <% end %>
         </div>
 
-        <div class="run-form-check">
-          <%= f.input_field :private, as: :boolean %>
-          <%= f.label :private, "Corrida privada?" %>
-        </div>
-
         <%= f.button :submit, "Criar Corrida", class: "rt-cta run-submit" %>
       </div>
     <% end %>
@@ -74,6 +69,7 @@
       document.getElementById('run_latitude').value = coordinate[1];
       document.getElementById('run_longitude').value = coordinate[0];
     };
+
     minimap.feature = {
       type: 'Feature',
       geometry: { type: 'Point', coordinates: [-46.6560, -23.5615] },
