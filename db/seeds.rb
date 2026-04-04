@@ -7,12 +7,12 @@
 #   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
+#
 puts "Cleaning database..."
 Run.destroy_all
 User.destroy_all
 
 puts "Creating users..."
-
 demo = User.create!(
   email: "demo@email.com",
   password: "123123"
@@ -64,3 +64,91 @@ pedro = User.create!(
 )
 
 puts "Creating runs..."
+
+# Runs mistas (women_only: false) — qualquer usuário pode participar
+Run.create!(
+  date: Date.today + 3,
+  time: "07:00",
+  location: "Parque Ibirapuera, São Paulo - SP",
+  latitude: -23.5874,
+  longitude: -46.6576,
+  pace: "5:00",
+  max_participants: 10,
+  women_only: false,
+  user: carlos
+)
+
+Run.create!(
+  date: Date.today + 5,
+  time: "06:30",
+  location: "Parque Villa-Lobos, São Paulo - SP",
+  latitude: -23.5489,
+  longitude: -46.7172,
+  pace: "6:00",
+  max_participants: 15,
+  women_only: false,
+  user: joao
+)
+
+Run.create!(
+  date: Date.today + 7,
+  time: "08:00",
+  location: "Parque Estadual da Cantareira, São Paulo - SP",
+  latitude: -23.4031,
+  longitude: -46.6242,
+  pace: "5:30",
+  max_participants: 20,
+  women_only: false,
+  user: pedro
+)
+
+Run.create!(
+  date: Date.today + 10,
+  time: "07:30",
+  location: "Parque Trianon, São Paulo - SP",
+  latitude: -23.5615,
+  longitude: -46.6560,
+  pace: "4:30",
+  max_participants: 5,
+  women_only: false,
+  user: carlos
+)
+
+# Runs women only (women_only: true) — criadas apenas por usuárias female
+Run.create!(
+  date: Date.today + 2,
+  time: "06:00",
+  location: "Parque Ibirapuera, São Paulo - SP",
+  latitude: -23.5874,
+  longitude: -46.6576,
+  pace: "6:30",
+  max_participants: 10,
+  women_only: true,
+  user: ana
+)
+
+Run.create!(
+  date: Date.today + 4,
+  time: "07:00",
+  location: "Parque Aclimação, São Paulo - SP",
+  latitude: -23.5694,
+  longitude: -46.6289,
+  pace: "5:00",
+  max_participants: 15,
+  women_only: true,
+  user: maria
+)
+
+Run.create!(
+  date: Date.today + 9,
+  time: "08:30",
+  location: "Parque da Independência, São Paulo - SP",
+  latitude: -23.5867,
+  longitude: -46.6228,
+  pace: "7:00",
+  max_participants: 20,
+  women_only: true,
+  user: ana
+)
+
+puts "Done! #{User.count} users and #{Run.count} runs created."
