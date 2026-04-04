@@ -34,6 +34,7 @@
           <% if @run.user == current_user %>
             <%= link_to "Editar", edit_run_path(@run), class: "run-btn-outline" %>
             <%= link_to "Deletar", run_path(@run), data: { turbo_method: :delete, turbo_confirm: "Tem certeza?" }, class: "run-btn-danger" %>
+            <%= link_to "Chat da corrida", chat_path(@run.chat), class: "run-btn-primary" %>
           <% else %>
             <%= link_to "Enviar mensagem", chat_with_user_path(user_id: @run.user.id), class: "run-btn-outline" %>
             <% if @run.members.include?(current_user) %>
@@ -41,6 +42,7 @@
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#4caf50" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
                 Participando
               </span>
+              <%= link_to "Chat da corrida", chat_path(@run.chat), class: "run-btn-primary" %>
             <% else %>
               <%= button_to "Participar", run_run_members_path(@run), class: "run-btn-primary" %>
             <% end %>
