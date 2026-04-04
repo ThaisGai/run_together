@@ -11,8 +11,8 @@ class Run < ApplicationRecord
   validates :location, presence: true
   validates :pace,     presence: true
   validates :max_participants, numericality: { greater_than: 0 }, allow_nil: true
-  
-  scope :visible_to, ->(user) { user.female? ? all : where(private: false) }
+
+  scope :visible_to, ->(user) { user.female? ? all : where(women_only: false) }
   scope :public_runs, -> { where(private: false) }
   scope :upcoming,    -> { where("date >= ?", Date.today).order(:date, :time) }
   scope :women_only,  -> { where(women_only: true) }
