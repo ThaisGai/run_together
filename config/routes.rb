@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   root to: "pages#home"
 
   get "my_runs", to: "runs#my_runs", as: :my_runs
+  get "participating", to: "runs#participating", as: :participating_runs
 
   resources :chats, only: [:index, :show] do
     resources :messages, only: [:create]

@@ -1,9 +1,9 @@
 class RunsController < ApplicationController
-  skip_after_action :verify_authorized, only: :my_runs
-  skip_after_action :verify_policy_scoped, only: :my_runs
+  skip_after_action :verify_authorized, only: [:my_runs, :participating]
+  skip_after_action :verify_policy_scoped, only: [:my_runs, :participating]
 
   def index
-    @runs = policy_scope(Run).where.not(user: current_user).upcoming
+    @runs = policy_scope(Run).where.not(user: current_user).upcoming.visible_to(current_user)
 
     # Filtros
     @runs = @runs.where(women_only: true) if params[:filter] == "women"
@@ -32,6 +32,10 @@ class RunsController < ApplicationController
 
   def my_runs
     @runs = policy_scope(Run).where(user: current_user).includes(:members)
+  end
+
+  def participating
+    @runs = Run.joins(:run_members).where(run_members: { user_id: current_user.id }).includes(:members, :user)
   end
 
   def show
