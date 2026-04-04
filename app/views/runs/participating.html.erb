@@ -1,0 +1,54 @@
+<div class="runs-index">
+  <div class="runs-header">
+    <h1>Corridas que Participo</h1>
+  </div>
+
+  <% if @runs.empty? %>
+    <p class="runs-empty">Você ainda não está participando de nenhuma corrida.</p>
+  <% else %>
+    <div class="runs-list">
+      <% @runs.each do |run| %>
+        <div class="run-card <%= run.women_only? ? 'run-card-women' : '' %>">
+          <div class="run-accent <%= run.women_only? ? 'accent-women' : '' %>"></div>
+          <div class="run-card-content">
+            <div class="run-card-left">
+              <div class="run-creator-avatar <%= run.women_only? ? 'avatar-women' : '' %>">
+                <%= run.user.name&.split&.map { |n| n[0] }&.first(2)&.join&.upcase %>
+              </div>
+              <div class="run-card-info">
+                <div class="run-card-name-row">
+                  <span class="run-creator-name"><%= run.user.name %></span>
+                  <% if run.women_only? %>
+                    <span class="run-badge-women">Só Mulheres</span>
+                  <% end %>
+                </div>
+                <div class="run-meta">
+                  <span class="run-meta-item">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+                    <%= run.date.strftime("%d/%m") %> · <%= run.time.strftime("%H:%M") %>
+                  </span>
+                  <span class="run-meta-item">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                    <%= run.location.truncate(35) %>
+                  </span>
+                  <span class="run-meta-item">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+                    <%= run.pace %>
+                  </span>
+                  <span class="run-meta-item">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
+                    <%= run.members.count %><% if run.max_participants %>/<%= run.max_participants %><% end %>
+                  </span>
+                </div>
+              </div>
+            </div>
+            <div class="run-card-actions">
+              <%= link_to "Detalhes", run_path(run), class: "run-btn-outline" %>
+              <%= button_to "Desistir", run_run_member_path(run, run.run_members.find_by(user: current_user)), method: :delete, data: { turbo_confirm: "Tem certeza que deseja sair desta corrida?" }, class: "run-btn-danger" %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
+</div>

@@ -12,11 +12,11 @@
   <% end %>
 
   <ul class="rt-links">
-    <li><%= link_to "Explorar Corridas", runs_path, class: current_page?(runs_path) ? "active" : "" %></li>
-
     <% if user_signed_in? %>
-      <li><%= link_to "Mensagens", chats_path, class: current_page?(chats_path) ? "active" : "" %></li>
+      <li><%= link_to "Explorar Corridas", runs_path, class: current_page?(runs_path) ? "active" : "" %></li>
       <li><%= link_to "Minhas Corridas", my_runs_path, class: current_page?(my_runs_path) ? "active" : "" %></li>
+      <li><%= link_to "Participando", participating_runs_path, class: current_page?(participating_runs_path) ? "active" : "" %></li>
+      <li><%= link_to "Mensagens", chats_path, class: current_page?(chats_path) ? "active" : "" %></li>
       <li><%= link_to "+ Criar Corrida", new_run_path, class: "rt-cta" %></li>
     <% end %>
   </ul>
