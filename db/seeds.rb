@@ -147,7 +147,7 @@ Run.create!(
   longitude: -46.6228,
   pace: "7:00",
   max_participants: 20,
-  women_only: true,
+  women_only: false,
   user: ana
 )
 

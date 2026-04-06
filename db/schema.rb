@@ -29,7 +29,7 @@ ActiveRecord::Schema[7.1].define(version: 2026_04_04_175833) do
   create_table "messages", force: :cascade do |t|
     t.bigint "chat_id", null: false
     t.bigint "user_id", null: false
-    t.text "content", null: false
+    t.text "content"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["chat_id"], name: "index_messages_on_chat_id"
@@ -42,7 +42,6 @@ ActiveRecord::Schema[7.1].define(version: 2026_04_04_175833) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["run_id"], name: "index_run_members_on_run_id"
-    t.index ["user_id", "run_id"], name: "index_run_members_on_user_id_and_run_id", unique: true
     t.index ["user_id"], name: "index_run_members_on_user_id"
   end
 
