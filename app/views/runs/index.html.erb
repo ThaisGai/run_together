@@ -121,33 +121,41 @@
                 <div class="run-meta">
                   <span class="run-meta-item">
                     <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
-                    <%= run.date.strftime("%d/%m") %> · <%= run.time.strftime("%H:%M") %>
-                  </span>
-                  <span class="run-meta-item">
-                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
-                    <%= link_to run.location.truncate(35), "https://www.google.com/maps?q=#{run.latitude},#{run.longitude}", target: "_blank", class: "run-location-link" %>
-                  </span>
-                  <span class="run-meta-item">
-                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
-                    <%= run.pace %>
-                  </span>
-                  <span class="run-meta-item">
-                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
-                    <%= run.members.count + 1 %><% if run.max_participants %>/<%= run.max_participants %><% end %>
-                    <% if run.members.include?(current_user) %>
-                    <span class="run-badge-full">Participando</span>
-                    <% end %>
-                  </span>
+                      <% if (run.members.count + 1) < run.max_participants %>
+                        <%= run.date.strftime("%d/%m") %> · <%= run.time.strftime("%H:%M") %>
+                      </span>
+                      <span class="run-meta-item">
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                        <%= link_to run.location.truncate(35), "https://www.google.com/maps?q=#{run.latitude},#{run.longitude}", target: "_blank", class: "run-location-link" %>
+                      </span>
+                      <span class="run-meta-item">
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+                        <%= run.pace %>
+                      </span>
+                      <span class="run-meta-item">
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
+                        <%= run.members.count + 1 %>
+                          <% if (run.members.count + 1) < run.max_participants %>/<%= run.max_participants %>
+                          <% else %>
+                          <span class="run-badge-full">Lotada</span>
+                          <% end %>
+                        <% if run.members.include?(current_user) %>
+                        <span class="run-badge-full">Participando</span>
+                        <% end %>
+                      <% else %>
+                      <span class="run-badge-full">Lotada</span>
+                      <% end %>
+                      </span>
+                    </div>
+                  </div>
                 </div>
-              </div>
-            </div>
-            <div class="run-card-actions">
-              <% if run.full? %>
-                <span class="run-badge-full">Lotada</span>
-              <% else %>
-                <%= link_to "Detalhes", run_path(run), class: "run-btn-outline #{run.women_only? ? 'btn-women' : ''}" %>
-                <%= link_to "Mensagem", chat_with_user_path(user_id: run.user.id), class: "run-btn-primary #{run.women_only? ? 'btn-women-fill' : ''}" %>
-              <% end %>
+                <div class="run-card-actions">
+                  <% if (run.members.count + 1) >= (run.max_participants) %>
+                    <span class="run-badge-full">Lotada</span>
+                  <% else %>
+                    <%= link_to "Detalhes", run_path(run), class: "run-btn-outline #{run.women_only? ? 'btn-women' : ''}" %>
+                    <%= link_to "Mensagem", chat_with_user_path(user_id: run.user.id), class: "run-btn-primary #{run.women_only? ? 'btn-women-fill' : ''}" %>
+                  <% end %>
             </div>
           </div>
         </div>
