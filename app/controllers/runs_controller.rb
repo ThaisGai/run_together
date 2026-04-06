@@ -28,6 +28,8 @@ class RunsController < ApplicationController
         women_only: run.women_only
       }
     end
+
+    @runs = @runs.select { |run| run.members.count + 1 <= run.max_participants }
   end
 
   def my_runs
