@@ -13,6 +13,10 @@ class Chat < ApplicationRecord
       .first || create!(sender: user_a, receiver: user_b)
   end
 
+  def group?
+    run_id.present?
+  end
+
   def other_user(current_user)
     current_user == sender ? receiver : sender
   end
