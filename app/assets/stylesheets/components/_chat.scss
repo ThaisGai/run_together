@@ -377,3 +377,40 @@
     padding: 24px 16px;
   }
 }
+
+// ─── TABS ────────────────────────────────────────
+.chats-tabs {
+  max-width: 700px;
+  margin: 0 auto 16px;
+  display: flex;
+  gap: 4px;
+  background: #111;
+  border-radius: 8px;
+  padding: 4px;
+  border: 1px solid #1e1e1e;
+}
+
+.chats-tab {
+  flex: 1;
+  padding: 10px 16px;
+  background: transparent;
+  border: none;
+  border-radius: 6px;
+  color: #666;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 600;
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  transition: all 0.2s;
+
+  &:hover {
+    color: #fff;
+  }
+
+  &.active {
+    background: #ff4d00;
+    color: #fff;
+  }
+}
