@@ -20,6 +20,9 @@ class RunsController < ApplicationController
     @runs = @runs.where(id: joined_run_ids)
   end
 
+    # Data
+    @runs = @runs.where(date: params[:date]) if params[:date].present?
+
     @runs = @runs.includes(:members, :user)
 
     @markers = @runs.map do |run|

@@ -82,6 +82,61 @@
   }
 }
 
+// ─── DATE FILTER ─────────────────────────────────
+.runs-date-filter {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  position: relative;
+}
+
+.runs-date-icon {
+  position: absolute;
+  left: 12px;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.runs-date-input {
+  padding: 8px 14px 8px 34px;
+  background: #111;
+  border: 1px solid #2a2a2a;
+  border-radius: 24px;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 600;
+  font-size: 13px;
+  color: #fff;
+  outline: none;
+  transition: all 0.2s;
+  -webkit-text-fill-color: #fff;
+  cursor: pointer;
+
+  &::-webkit-calendar-picker-indicator {
+    filter: invert(1);
+    cursor: pointer;
+  }
+
+  &:focus, &:not([value=""]) {
+    border-color: #c93c00;
+  }
+}
+
+.runs-date-clear {
+  padding: 6px 12px;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 600;
+  font-size: 12px;
+  color: #ff4444;
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  transition: color 0.2s;
+
+  &:hover {
+    color: #ff6666;
+  }
+}
+
 // ─── SEARCH ──────────────────────────────────────
 .runs-search {
   max-width: 900px;

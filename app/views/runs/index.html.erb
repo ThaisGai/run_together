@@ -19,6 +19,19 @@
       <%= link_to "Participando", runs_path(filter: params[:filter], participating: "true"), class: "runs-filter-pill pill-participating #{params[:participating] == 'true' ? 'active' : ''}" %>
 
     </div>
+      <div class="runs-filter-group">
+      <%= form_with url: runs_path, method: :get, class: "runs-date-filter" do %>
+        <%= hidden_field_tag :filter, params[:filter] %>
+        <%= hidden_field_tag :size, params[:size] %>
+        <%= hidden_field_tag :participating, params[:participating] %>
+        <svg class="runs-date-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#888" stroke-width="2" stroke-linecap="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+        <%= date_field_tag :date, params[:date], class: "runs-date-input", min: Date.today.strftime("%Y-%m-%d"), onchange: "this.form.requestSubmit()" %>
+        <% if params[:date].present? %>
+          <%= link_to "Limpar data", runs_path(filter: params[:filter], size: params[:size], participating: params[:participating]), class: "runs-date-clear" %>
+        <% end %>
+      <% end %>
+    </div>
+
   </div>
 
   <div class="runs-search">
