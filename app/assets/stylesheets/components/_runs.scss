@@ -76,6 +76,10 @@
     background: #d946ef;
     border-color: #d946ef;
   }
+   &.pill-participating.active {
+    background: #4caf50;
+    border-color: #4caf50;
+  }
 }
 
 // ─── SEARCH ──────────────────────────────────────
@@ -146,23 +150,23 @@
 .runs-list {
   max-width: 900px;
   margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
 }
 
 // ─── RUN CARD (estilo C - accent bar) ────────────
 .run-card {
   display: flex;
   background: #111;
-  border-radius: 8px;
+  border-radius: 10px;
   overflow: hidden;
   border: 1px solid #1a1a1a;
   transition: all 0.2s;
 
   &:hover {
     border-color: #2a2a2a;
-    transform: translateX(4px);
+    transform: translateY(-2px);
   }
 }
 
@@ -179,10 +183,10 @@
 
 .run-card-content {
   flex: 1;
-  padding: 16px 20px;
+  padding: 18px;
   display: flex;
-  align-items: center;
-  gap: 16px;
+  flex-direction: column;
+  gap: 14px;
 }
 
 .run-card-left {
@@ -249,8 +253,13 @@
 .run-card-actions {
   display: flex;
   gap: 6px;
-  flex-shrink: 0;
   align-items: center;
+
+  .run-btn-outline,
+  .run-btn-primary {
+    flex: 1;
+    text-align: center;
+  }
 }
 
 // ─── WOMEN-ONLY VARIANTS ─────────────────────────
@@ -649,12 +658,52 @@
   justify-content: center;
 }
 
+// ─── LOAD MORE ───────────────────────────────────
+.runs-counter {
+  max-width: 900px;
+  margin: 16px auto 0;
+  text-align: center;
+  color: #555;
+  font-size: 12px;
+  font-family: 'Barlow', sans-serif;
+  letter-spacing: 0.5px;
+}
+
+.runs-load-more {
+  max-width: 900px;
+  margin: 16px auto 0;
+  text-align: center;
+}
+
+.runs-load-more-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 32px;
+  background: transparent;
+  border: 1px solid #2a2a2a;
+  border-radius: 8px;
+  color: #888;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 600;
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  text-decoration: none;
+  transition: all 0.2s;
+  cursor: pointer;
+
+  &:hover {
+    color: #fff;
+    border-color: #c93c00;
+    background: rgba(201, 60, 0, 0.08);
+  }
+}
+
 // ─── RESPONSIVE ──────────────────────────────────
 @media (max-width: 768px) {
-  .run-card-content {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 12px;
+  .runs-list {
+    grid-template-columns: 1fr;
   }
 
   .run-card-actions {

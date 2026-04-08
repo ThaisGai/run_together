@@ -6,7 +6,6 @@
 
   <div class="runs-filters">
     <div class="runs-filter-group">
-      <!-- filtro especifico para mulheres-->
       <% if current_user.female? %>
         <%= link_to "Todas", runs_path(size: params[:size]), class: "runs-filter-pill #{params[:filter].blank? ? 'active' : ''}" %>
         <%= link_to "Só Mulheres", runs_path(filter: "women", size: params[:size]), class: "runs-filter-pill pill-women #{params[:filter] == 'women' ? 'active' : ''}" %>
@@ -17,6 +16,8 @@
       <%= link_to "Todos os tamanhos", runs_path(filter: params[:filter]), class: "runs-filter-pill #{params[:size].blank? ? 'active' : ''}" %>
       <%= link_to "Até 5 pessoas", runs_path(filter: params[:filter], size: "small"), class: "runs-filter-pill #{params[:size] == 'small' ? 'active' : ''}" %>
       <%= link_to "5+ pessoas", runs_path(filter: params[:filter], size: "big"), class: "runs-filter-pill #{params[:size] == 'big' ? 'active' : ''}" %>
+      <%= link_to "Participando", runs_path(filter: params[:filter], participating: "true"), class: "runs-filter-pill pill-participating #{params[:participating] == 'true' ? 'active' : ''}" %>
+
     </div>
   </div>
 
@@ -52,7 +53,6 @@
       const map = new mapboxgl.Map({
         container: "map",
         style: "mapbox://styles/mapbox/streets-v12",
-        // style: "mapbox://styles/mapbox/navigation-night-v1",
         zoom: 10
       })
 
@@ -161,5 +161,18 @@
         </div>
       <% end %>
     </div>
+
+    <div class="runs-counter">
+      Mostrando <%= @runs.count %> de <%= @total %> corridas
+    </div>
+
+    <% if @has_more %>
+      <div class="runs-load-more" id="load-more">
+        <%= link_to runs_path(filter: params[:filter], size: params[:size], query: params[:query], page: params[:page].to_i + 1, anchor: "load-more"), class: "runs-load-more-btn", data: { turbo: false } do %>
+        Ver mais corridas (<%= @total - @runs.count %> restantes)
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
+        <% end %>
+      </div>
+    <% end %>
   <% end %>
 </div>
