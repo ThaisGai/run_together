@@ -18,10 +18,23 @@
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ff4d00" stroke-width="2" stroke-linecap="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
             </div>
             <div class="chat-info">
-              <span class="chat-name"><%= chat.run.location.truncate(30) %></span>
+              <span class="chat-name"><%= chat.run.date %> <%= chat.run.location.truncate(90) %></span>
               <span class="chat-preview">
                 <span class="chat-group-badge">Grupo</span>
-                <%= chat.messages.last&.content&.truncate(30) || "Nenhuma mensagem ainda" %>
+                <% last_message = chat.messages.last %>
+                <% if last_message.present? %>
+                  <span class="run-meta-item">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#ff4d00" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+                  <% if last_message.created_at < 24.hours.ago %>
+                    <%= last_message.created_at.strftime("%d/%m/%Y %H:%M") %>
+                  <% else %>
+                    <%= last_message.created_at.strftime("%H:%M") %>
+                  <% end %>
+                  </span>
+                  <%= last_message.content.truncate(40) %>
+                <% else %>
+                  Nenhuma mensagem ainda
+                <% end %>
               </span>
             </div>
           <% end %>
@@ -33,7 +46,21 @@
             </div>
             <div class="chat-info">
               <span class="chat-name"><%= other.name %></span>
-              <span class="chat-preview"><%= chat.messages.last&.content&.truncate(40) %></span>
+              <span class="chat-preview">                <% last_message = chat.messages.last %>
+                <% if last_message.present? %>
+                  <span class="run-meta-item">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#ff4d00" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+                  <% if last_message.created_at < 24.hours.ago %>
+                    <%= last_message.created_at.strftime("%d/%m/%Y %H:%M") %>
+                  <% else %>
+                    <%= last_message.created_at.strftime("%H:%M") %>
+                  <% end %>
+                  </span>
+                  <%= last_message.content.truncate(40) %>
+                <% else %>
+                  Nenhuma mensagem ainda
+                <% end %>
+                </span>
             </div>
           <% end %>
         <% end %>
