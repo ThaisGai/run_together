@@ -4,6 +4,11 @@
 
     <%= simple_form_for @run do |f| %>
       <div class="run-form-fields">
+        <div class="run-form-group">
+          <%= f.label :title, "Nome da corrida" %>
+          <%= f.input_field :title, class: "run-input", placeholder: "Ex: Treino Ibirapuera 5K" %>
+        </div>
+
         <div class="run-form-row">
           <div class="run-form-group">
             <%= f.label :date, "Data" %>
