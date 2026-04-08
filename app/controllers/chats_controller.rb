@@ -5,7 +5,8 @@ class ChatsController < ApplicationController
 
  def index
   @chats = current_user.chats
-    .left_joins(:messages)
+    # .left_joins(:messages) (para mostrar mensagens sem mensagens)
+    .joins(:messages)
     .select("chats.*, MAX(messages.created_at) AS last_message_time")
     .group("chats.id")
     .order("last_message_time DESC NULLS LAST")
