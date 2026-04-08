@@ -68,6 +68,11 @@
   letter-spacing: 0.5px;
 }
 
+.chat-run-link {
+  color:  #fff;      /* título do chat leva as informações da corrida */
+  text-decoration: none;
+}
+
 // ─── MESSAGES ────────────────────────────────────
 .chat-messages {
   flex: 1;

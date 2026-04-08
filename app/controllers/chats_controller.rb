@@ -3,9 +3,13 @@ class ChatsController < ApplicationController
   skip_after_action :verify_authorized
   skip_after_action :verify_policy_scoped
 
-  def index
-    @chats = current_user.chats.includes(:sender, :receiver, :messages)
-  end
+ def index
+  @chats = current_user.chats
+    .left_joins(:messages)
+    .select("chats.*, MAX(messages.created_at) AS last_message_time")
+    .group("chats.id")
+    .order("last_message_time DESC NULLS LAST")
+ end
 
   def show
     @chat = Chat.find(params[:id])
