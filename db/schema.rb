@@ -29,7 +29,7 @@ ActiveRecord::Schema[7.1].define(version: 2026_04_09_182341) do
   create_table "messages", force: :cascade do |t|
     t.bigint "chat_id", null: false
     t.bigint "user_id", null: false
-    t.text "content", null: false
+    t.text "content"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.datetime "read_at"
@@ -43,7 +43,6 @@ ActiveRecord::Schema[7.1].define(version: 2026_04_09_182341) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["run_id"], name: "index_run_members_on_run_id"
-    t.index ["user_id", "run_id"], name: "index_run_members_on_user_id_and_run_id", unique: true
     t.index ["user_id"], name: "index_run_members_on_user_id"
   end
 
@@ -51,14 +50,13 @@ ActiveRecord::Schema[7.1].define(version: 2026_04_09_182341) do
     t.date "date"
     t.time "time"
     t.string "location"
-    t.string "place"
+    t.string "pace"
     t.boolean "private"
     t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.float "latitude"
     t.float "longitude"
-    t.string "pace"
     t.boolean "women_only", default: false
     t.integer "max_participants", default: 5
     t.string "title"
@@ -77,6 +75,10 @@ ActiveRecord::Schema[7.1].define(version: 2026_04_09_182341) do
     t.date "birth_date"
     t.string "phone"
     t.integer "gender"
+    t.text "bio"
+    t.string "instagram_url"
+    t.text "username"
+    t.integer "runs_completed"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
