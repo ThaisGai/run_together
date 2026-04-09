@@ -11,10 +11,19 @@ class User < ApplicationRecord
 
   enum gender: { male: 0, female: 1, other: 2 }
 
-def chats
+  def chats
   run_ids = runs.pluck(:id) + runs_joined.pluck(:id)
   Chat.where(sender: self)
       .or(Chat.where(receiver: self))
       .or(Chat.where(run_id: run_ids))
+  end
+
+    validates :username,
+    presence: true,
+    uniqueness: true,
+    format: { with: /\A[a-zA-Z0-9_]+\z/ }
+
+  def to_param
+    username
   end
 end

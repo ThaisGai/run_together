@@ -34,7 +34,8 @@
           </span>
         </div>
         <div class="rt-dropdown-menu" id="dropdownMenu">
-          <%= link_to "Meu Perfil", edit_user_registration_path, class: "rt-dropdown-item" %>
+          <%= link_to "Meu Perfil", user_path(current_user), class: "rt-dropdown-item" %>
+          <%= link_to "Ajustes", edit_user_registration_path, class: "rt-dropdown-item" %>
           <%= button_to "Sair", destroy_user_session_path,
               method: :delete,
               class: "rt-dropdown-item rt-dropdown-logout",

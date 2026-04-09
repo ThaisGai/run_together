@@ -49,6 +49,7 @@ gem "sassc-rails"
 gem "pundit" #authorization gem
 gem "pg_search"
 gem "geocoder"
+gem 'faker'
 
 group :development, :test do
   gem "dotenv-rails"

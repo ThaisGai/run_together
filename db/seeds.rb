@@ -14,110 +14,190 @@ Run.destroy_all
 User.destroy_all
 
 puts "Creating users..."
+
+puts "Cleaning database..."
+User.destroy_all
+
+puts "Creating users..."
+
+# Usuário demo fixo
 demo = User.create!(
   email: "demo@email.com",
-  password: "123123"
+  password: "123123",
+  username: "demo",
+  name: "Demo User",
+  bio: "Adoro correr e conhecer pessoas novas.",
+  birth_date: Date.new(1990, 1, 1),
+  phone: "11999999999",
+  gender: "other",
+  runs_completed: rand(5..30),
+  created_at: 6.months.ago
 )
 
 ana = User.create!(
-  email: "ana@email.com",
-  password: "123123",
-  name: "Ana Silva",
-  birth_date: Date.new(1992, 5, 12),
-  phone: "11987654321",
-  gender: "female"
+email: "ana@email.com",
+password: "123123",
+username: "ana_silva",
+name: "Ana Silva",
+bio: "Corro para relaxar depois do trabalho.",
+birth_date: Date.new(1992, 5, 12),
+phone: "11987654321",
+gender: "female",
+runs_completed: 12,
+created_at: 5.months.ago
 )
 
 carlos = User.create!(
-  email: "carlos@email.com",
-  password: "123123",
-  name: "Carlos Souza",
-  birth_date: Date.new(1988, 9, 3),
-  phone: "11981234567",
-  gender: "male"
+email: "carlos@email.com",
+password: "123123",
+username: "carlos_souza",
+name: "Carlos Souza",
+bio: "Treinando para minha próxima meia maratona.",
+birth_date: Date.new(1988, 9, 3),
+phone: "11981234567",
+gender: "male",
+runs_completed: 28,
+created_at: 8.months.ago
 )
 
 maria = User.create!(
-  email: "maria@email.com",
-  password: "123123",
-  name: "Maria Oliveira",
-  birth_date: Date.new(1995, 2, 20),
-  phone: "11993456789",
-  gender: "female"
+email: "maria@email.com",
+password: "123123",
+username: "maria_oliveira",
+name: "Maria Oliveira",
+bio: "Corrida é minha terapia.",
+birth_date: Date.new(1995, 2, 20),
+phone: "11993456789",
+gender: "female",
+runs_completed: 9,
+created_at: 3.months.ago
 )
 
 joao = User.create!(
-  email: "joao@email.com",
-  password: "123123",
-  name: "João Santos",
-  birth_date: Date.new(1990, 11, 8),
-  phone: "11992345678",
-  gender: "male"
+email: "joao@email.com",
+password: "123123",
+username: "joao_santos",
+name: "João Santos",
+bio: "Sempre em busca de novos desafios.",
+birth_date: Date.new(1990, 11, 8),
+phone: "11992345678",
+gender: "male",
+runs_completed: 21,
+created_at: 7.months.ago
 )
 
 pedro = User.create!(
-  email: "pedro@email.com",
-  password: "123123",
-  name: "Pedro Lima",
-  birth_date: Date.new(1993, 7, 17),
-  phone: "11995678901",
-  gender: "male"
+email: "pedro@email.com",
+password: "123123",
+username: "pedro_lima",
+name: "Pedro Lima",
+bio: "Corrida + café = felicidade.",
+birth_date: Date.new(1993, 7, 17),
+phone: "11995678901",
+gender: "male",
+runs_completed: 17,
+created_at: 4.months.ago
 )
 
-# Novos usuários
 julia = User.create!(
-  email: "julia@email.com",
-  password: "123123",
-  name: "Julia Ferreira",
-  birth_date: Date.new(1997, 3, 25),
-  phone: "11994321098",
-  gender: "female"
+email: "julia@email.com",
+password: "123123",
+username: "julia_ferreira",
+name: "Julia Ferreira",
+bio: "Adoro correr no Ibirapuera.",
+birth_date: Date.new(1997, 3, 25),
+phone: "11994321098",
+gender: "female",
+runs_completed: 11,
+created_at: 2.months.ago
 )
 
 lucas = User.create!(
-  email: "lucas@email.com",
-  password: "123123",
-  name: "Lucas Mendes",
-  birth_date: Date.new(1991, 6, 14),
-  phone: "11996543210",
-  gender: "male"
+email: "lucas@email.com",
+password: "123123",
+username: "lucas_mendes",
+name: "Lucas Mendes",
+bio: "Treinos noturnos são os melhores.",
+birth_date: Date.new(1991, 6, 14),
+phone: "11996543210",
+gender: "male",
+runs_completed: 19,
+created_at: 6.months.ago
 )
 
 beatriz = User.create!(
-  email: "beatriz@email.com",
-  password: "123123",
-  name: "Beatriz Costa",
-  birth_date: Date.new(1994, 10, 30),
-  phone: "11997654321",
-  gender: "female"
+email: "beatriz@email.com",
+password: "123123",
+username: "beatriz_costa",
+name: "Beatriz Costa",
+bio: "Cada km é uma conquista.",
+birth_date: Date.new(1994, 10, 30),
+phone: "11997654321",
+gender: "female",
+runs_completed: 14,
+created_at: 3.months.ago
 )
 
 rafael = User.create!(
-  email: "rafael@email.com",
-  password: "123123",
-  name: "Rafael Nunes",
-  birth_date: Date.new(1989, 1, 19),
-  phone: "11998765432",
-  gender: "male"
+email: "rafael@email.com",
+password: "123123",
+username: "rafael_nunes",
+name: "Rafael Nunes",
+bio: "Treinando para melhorar meu pace.",
+birth_date: Date.new(1989, 1, 19),
+phone: "11998765432",
+gender: "male",
+runs_completed: 26,
+created_at: 9.months.ago
 )
 
 fernanda = User.create!(
-  email: "fernanda@email.com",
-  password: "123123",
-  name: "Fernanda Alves",
-  birth_date: Date.new(1996, 8, 7),
-  phone: "11999876543",
-  gender: "female"
+email: "fernanda@email.com",
+password: "123123",
+username: "fernanda_alves",
+name: "Fernanda Alves",
+bio: "Correr me dá energia.",
+birth_date: Date.new(1996, 8, 7),
+phone: "11999876543",
+gender: "female",
+runs_completed: 13,
+created_at: 4.months.ago
 )
 
 rafaela = User.create!(
-  email: "rafaela@email.com",
-  password: "123123",
-  name: "Rafaela Bezerra",
-  birth_date: Date.new(1990, 10, 3),
-  phone: "11999876663",
-  gender: "female"
+email: "rafaela@email.com",
+password: "123123",
+username: "rafaela_bezerra",
+name: "Rafaela Bezerra",
+bio: "Correndo para uma vida mais saudável.",
+birth_date: Date.new(1990, 10, 3),
+phone: "11999876663",
+gender: "female",
+runs_completed: 16,
+created_at: 5.months.ago
+)
+
+
+# Criar usuários aleatórios
+10.times do
+  name = Faker::Name.name
+  username = Faker::Internet.username(specifier: 5..10, separators: ['_'])
+
+  User.create!(
+    email: Faker::Internet.unique.email,
+    password: "123123",
+    username: username,
+    name: name,
+    bio: Faker::Quote.most_interesting_man_in_the_world,
+    birth_date: Faker::Date.birthday(min_age: 20, max_age: 45),
+    phone: Faker::PhoneNumber.cell_phone_in_e164,
+    gender: ["male", "female"].sample,
+    runs_completed: rand(0..50),
+    created_at: rand(1..12).months.ago
   )
+end
+
+puts "Created #{User.count} users"
 
 puts "Creating runs..."
 

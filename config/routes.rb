@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   end
 
   devise_for :users
+
   root to: "pages#home"
 
   get "my_runs", to: "runs#my_runs", as: :my_runs
@@ -12,7 +13,13 @@ Rails.application.routes.draw do
   resources :chats, only: [:index, :show] do
     resources :messages, only: [:create]
   end
+
   get "chats/with/:user_id", to: "chats#with_user", as: "chat_with_user"
+
+  get "/profile/edit", to: "users#edit", as: :edit_profile
+  patch "/profile", to: "users#update", as: :update_profile
+
+  get "/@:username", to: "users#show", as: :user
 
   get "up" => "rails/health#show", as: :rails_health_check
 end
