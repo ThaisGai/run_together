@@ -52,6 +52,29 @@
 .rt-links a:hover { color: #fff; }
 .rt-links a.active { color: #c93c00; }
 
+.rt-nav-messages {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.rt-badge {
+  background: #ff4444;
+  color: #fff;
+  font-size: 10px;
+  font-weight: 700;
+  font-family: 'Barlow Condensed', sans-serif;
+  min-width: 18px;
+  height: 18px;
+  border-radius: 9px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 5px;
+  line-height: 1;
+}
+
 .rt-cta {
   background: #c93c00;
   color: #fff !important;

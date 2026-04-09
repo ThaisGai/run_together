@@ -17,4 +17,9 @@ def chats
       .or(Chat.where(receiver: self))
       .or(Chat.where(run_id: run_ids))
   end
+
+def unread_messages_count
+  chat_ids = chats.pluck(:id)
+  Message.where(chat_id: chat_ids).unread_for(self).count
+  end
 end
