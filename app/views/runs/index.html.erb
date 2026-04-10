@@ -122,7 +122,9 @@
           <div class="run-card-content">
             <div class="run-card-left">
               <div class="run-creator-avatar <%= run.women_only? ? 'avatar-women' : '' %>">
+                <%= link_to user_path(run.user.username), style: "color: inherit; text-decoration: none;" do %>
                 <%= run.user.name&.split&.map { |n| n[0] }&.first(2)&.join&.upcase %>
+                <% end %>
               </div>
               <div class="run-card-info">
                 <div class="run-card-name-row">

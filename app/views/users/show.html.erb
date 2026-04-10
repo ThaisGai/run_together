@@ -1,2 +1,59 @@
-<h1>Users#show</h1>
-<p>Find me in app/views/users/show.html.erb</p>
+<div class="rt-profile">
+  <div class="rt-profile-card">
+
+    <div class="rt-profile-header">
+      <div class="rt-profile-avatar">
+        <span style="font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 20px; color: #c93c00;">
+          <%= @user.name&.split&.map { |n| n[0] }&.first(2)&.join&.upcase %>
+        </span>
+      </div>
+      <h2><%= @user.name %></h2>
+      <p>Nível <%= @user.level %> · <%= @user.level_name %></p>
+    </div>
+
+    <div class="rt-form-section">
+      <h3>Sobre</h3>
+
+      <div class="rt-field">
+        <label>Bio</label>
+        <p style="color: #ccc; font-size: 15px; margin: 0;">
+          <%= @user.bio.present? ? @user.bio : "Nenhuma bio cadastrada." %>
+        </p>
+      </div>
+
+      <div class="rt-field">
+        <label>Instagram</label>
+        <p style="color: #ccc; font-size: 15px; margin: 0;">
+          <% if @user.instagram_url.present? %>
+            <a href="https://instagram.com/<%= @user.instagram_url %>" target="_blank" style="color: #c93c00;">
+              @<%= @user.instagram_url %>
+            </a>
+          <% else %>
+            Não cadastrado.
+          <% end %>
+        </p>
+      </div>
+
+      <div class="rt-field">
+        <label>Membro desde</label>
+        <p style="color: #ccc; font-size: 15px; margin: 0;">
+          <%= l(@user.created_at.to_date, format: :long) %>
+        </p>
+      </div>
+
+      <div class="rt-field">
+        <label>Pontos</label>
+        <p style="color: #c93c00; font-size: 20px; font-weight: 700; font-family: 'Barlow Condensed', sans-serif; margin: 0;">
+          <%= @user.points %>
+        </p>
+      </div>
+    </div>
+
+    <div class="rt-form-actions">
+      <% if @user == current_user %>
+        <%= link_to "Editar perfil", edit_user_registration_path, class: "rt-btn-primary" %>
+      <% end %>
+    </div>
+
+  </div>
+</div>

@@ -1,27 +1,54 @@
 <div class="rt-profile">
   <div class="rt-profile-card">
+
     <div class="rt-profile-header">
       <div class="rt-profile-avatar">
-        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <circle cx="12" cy="8" r="4" fill="#ff4d00"/>
-          <path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" stroke="#ff4d00" stroke-width="2" stroke-linecap="round"/>
-        </svg>
+        <span style="font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 20px; color: #c93c00;">
+          <%= current_user.name&.split&.map { |n| n[0] }&.first(2)&.join&.upcase %>
+        </span>
       </div>
-      <h2>Meu Perfil</h2>
+      <h2>Editar Perfil</h2>
       <p>Gerencie suas informações e segurança</p>
     </div>
 
+    <%# Seção: bio e instagram (rota própria) %>
+    <%= form_with model: current_user, url: update_profile_path, method: :patch, class: "rt-profile-form" do |f| %>
+      <div class="rt-form-section">
+        <h3>Perfil</h3>
+
+        <div class="rt-field">
+          <%= f.label :bio, "Bio" %>
+          <%= f.text_area :bio, placeholder: "Conte um pouco sobre você...", rows: 3, class: "rt-input" %>
+        </div>
+
+        <div class="rt-field">
+          <%= f.label :instagram_url, "Instagram" %>
+          <div style="display: flex; align-items: center; background: #0a0a0a; border: 1px solid #333; border-radius: 6px; overflow: hidden;">
+            <span style="padding: 0 12px; font-size: 15px; color: #666; border-right: 1px solid #333; height: 46px; display: flex; align-items: center;">@</span>
+            <%= f.text_field :instagram_url, placeholder: "seu.perfil", class: "rt-input", style: "border: none; border-radius: 0;" %>
+          </div>
+        </div>
+      </div>
+
+      <div class="rt-form-actions" style="border-bottom: 1px solid #1a1a1a;">
+        <%= f.submit "Salvar perfil", class: "rt-btn-primary" %>
+      </div>
+    <% end %>
+
+    <%# Seção: email e senha (Devise) %>
     <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, class: "rt-profile-form" }) do |f| %>
       <%= f.error_notification message: "Não foi possível salvar:", error_class: "rt-form-error" %>
 
       <div class="rt-form-section">
-        <h3><span class="rt-section-icon">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#ff4d00" stroke-width="2" stroke-linecap="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 7l-10 7L2 7"/></svg>
-        </span> Informações</h3>
+        <h3>
+          <span class="rt-section-icon">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#ff4d00" stroke-width="2" stroke-linecap="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 7l-10 7L2 7"/></svg>
+          </span>
+          E-mail
+        </h3>
 
         <div class="rt-field">
-          <%= f.input :email, required: true, autofocus: true,
-              label: "E-mail",
+          <%= f.input :email, required: true, label: "E-mail",
               input_html: { class: "rt-input", placeholder: "seu@email.com" } %>
         </div>
 
@@ -34,41 +61,37 @@
       </div>
 
       <div class="rt-form-section">
-        <h3><span class="rt-section-icon">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#ff4d00" stroke-width="2" stroke-linecap="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
-        </span> Alterar Senha</h3>
+        <h3>
+          <span class="rt-section-icon">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#ff4d00" stroke-width="2" stroke-linecap="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+          </span>
+          Alterar Senha
+        </h3>
 
         <div class="rt-field">
-          <%= f.input :password,
-              label: "Nova senha",
-              hint: false,
-              required: false,
+          <%= f.input :password, label: "Nova senha", hint: false, required: false,
               input_html: { class: "rt-input", autocomplete: "new-password", placeholder: "Deixe em branco para manter a atual" } %>
         </div>
 
         <div class="rt-field">
-          <%= f.input :password_confirmation,
-              label: "Confirmar nova senha",
-              required: false,
+          <%= f.input :password_confirmation, label: "Confirmar nova senha", required: false,
               input_html: { class: "rt-input", autocomplete: "new-password", placeholder: "Repita a nova senha" } %>
         </div>
       </div>
 
       <div class="rt-form-section rt-form-section-confirm">
         <div class="rt-field">
-          <%= f.input :current_password,
-              label: "Senha atual",
-              hint: false,
-              required: true,
+          <%= f.input :current_password, label: "Senha atual", hint: false, required: true,
               input_html: { class: "rt-input", autocomplete: "current-password", placeholder: "Confirme sua senha atual para salvar" } %>
         </div>
       </div>
 
       <div class="rt-form-actions">
-        <%= f.button :submit, "Salvar Alterações", class: "rt-btn-primary" %>
-        <%= link_to "Voltar", root_path, class: "rt-btn-secondary" %>
+        <%= f.button :submit, "Salvar alterações", class: "rt-btn-primary" %>
+        <%= link_to "Voltar", user_path(current_user.username), class: "rt-btn-secondary" %>
       </div>
     <% end %>
+
   </div>
 
   <div class="rt-danger-zone">

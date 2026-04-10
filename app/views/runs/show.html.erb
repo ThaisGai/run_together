@@ -65,7 +65,9 @@
           <% @run.members.each do |member| %>
             <div class="run-member-item">
               <div class="run-creator-avatar">
+                <%= link_to user_path(run.user.username), style: "color: inherit; text-decoration: none;" do %>
                 <%= member.name&.split&.map { |n| n[0] }&.first(2)&.join&.upcase %>
+                <% end %>
               </div>
               <span class="run-creator-name"><%= member.name %></span>
               <%= link_to "Mensagem", chat_with_user_path(user_id: member.id), class: "run-btn-outline" %>
