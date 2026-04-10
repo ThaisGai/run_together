@@ -13,28 +13,45 @@
     <div class="chat-list">
       <% @chats.each do |chat| %>
         <% if chat.group? %>
-          <%= link_to chat_path(chat), class: "chat-item chat-item-group", data: { chat_type: "group" } do %>
-            <div class="chat-avatar chat-avatar-group">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ff4d00" stroke-width="2" stroke-linecap="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
+          <% unread = chat.messages.unread_for(current_user).count %>
+          <%= link_to chat_path(chat), class: "chat-item chat-item-group #{chat.run&.women_only? ? 'chat-item-women' : ''}", data: { chat_type: "group" } do %>
+            <div class="chat-avatar chat-avatar-group <%= chat.run&.women_only? ? 'chat-avatar-women' : '' %>">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="<%= chat.run&.women_only? ? '#d946ef' : '#c93c00' %>" stroke-width="2" stroke-linecap="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
             </div>
             <div class="chat-info">
-              <span class="chat-name"><%= chat.run.location.truncate(30) %></span>
+              <span class="chat-name"><%= chat.run.title.presence || chat.run.location.truncate(30) %></span>
               <span class="chat-preview">
                 <span class="chat-group-badge">Grupo</span>
+                <% if chat.run&.women_only? %>
+                  <span class="chat-women-badge">Só mulheres</span>
+                <% end %>
                 <%= chat.messages.last&.content&.truncate(30) || "Nenhuma mensagem ainda" %>
               </span>
             </div>
+            <% if unread > 0 %>
+              <span class="chat-unread-badge"><%= unread %></span>
+            <% end %>
           <% end %>
         <% else %>
           <% other = chat.other_user(current_user) %>
+          <% shared = chat.shared_runs(current_user) %>
+          <% unread = chat.messages.unread_for(current_user).count %>
           <%= link_to chat_path(chat), class: "chat-item", data: { chat_type: "direct" } do %>
             <div class="chat-avatar">
               <%= other.name&.split&.map { |n| n[0] }&.first(2)&.join&.upcase %>
             </div>
             <div class="chat-info">
               <span class="chat-name"><%= other.name %></span>
-              <span class="chat-preview"><%= chat.messages.last&.content&.truncate(40) %></span>
+              <span class="chat-preview">
+                <% if shared.any? %>
+                  <span class="chat-shared-run-badge"><%= shared.first.title.presence || shared.first.location.truncate(20) %></span>
+                <% end %>
+                <%= chat.messages.last&.content&.truncate(40) %>
+              </span>
             </div>
+            <% if unread > 0 %>
+              <span class="chat-unread-badge"><%= unread %></span>
+            <% end %>
           <% end %>
         <% end %>
       <% end %>

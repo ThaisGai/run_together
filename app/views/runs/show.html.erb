@@ -2,6 +2,10 @@
   <div class="run-show-card">
     <div class="run-accent"></div>
     <div class="run-show-content">
+      <% if @run.title.present? %>
+        <h2 class="run-show-title"><%= @run.title %></h2>
+      <% end %>
+
       <div class="run-show-header">
         <div class="run-creator-avatar">
           <%= @run.user.name&.split&.map { |n| n[0] }&.first(2)&.join&.upcase %>
@@ -25,7 +29,7 @@
         <% end %>
         <div class="run-detail-item">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#ff4d00" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
-          <span><%= @run.members.count %> participante<%= @run.members.count != 1 ? "s" : "" %></span>
+          <span><%= @run.members.count + 1 %> participante<%= (@run.members.count + 1) != 1 ? "s" : "" %></span>
         </div>
       </div>
 
@@ -43,6 +47,7 @@
                 Participando
               </span>
               <%= link_to "Chat da corrida", chat_path(@run.chat), class: "run-btn-primary" %>
+              <%= button_to "Desistir", run_run_member_path(@run, @run.run_members.find_by(user: current_user)), method: :delete, data: { turbo_confirm: "Tem certeza que deseja sair desta corrida?" }, class: "run-btn-danger" %>
             <% else %>
               <%= button_to "Participar", run_run_members_path(@run), class: "run-btn-primary" %>
             <% end %>

@@ -14,6 +14,15 @@ class RunsController < ApplicationController
     # Search
     @runs = @runs.where("location ILIKE ?", "%#{params[:query]}%") if params[:query].present?
 
+    # Participando
+  if params[:participating] == "true"
+    joined_run_ids = current_user.run_members.pluck(:run_id)
+    @runs = @runs.where(id: joined_run_ids)
+  end
+
+    # Data
+    @runs = @runs.where(date: params[:date]) if params[:date].present?
+
     @runs = @runs.includes(:members, :user)
 
     @markers = @runs.map do |run|
@@ -29,7 +38,14 @@ class RunsController < ApplicationController
       }
     end
 
+    # Filtra corridas lotadas e pagina
     @runs = @runs.select { |run| run.members.count + 1 <= run.max_participants }
+    @per_page = 6
+    @page = params[:page].to_i
+    @total = @runs.count
+    @showing = @per_page * (@page + 1)
+    @has_more = @total > @showing
+    @runs = @runs.first(@showing)
   end
 
   def my_runs
@@ -86,6 +102,6 @@ class RunsController < ApplicationController
   private
 
   def run_params
-    params.require(:run).permit(:user_id, :date, :time, :location, :pace, :private, :latitude, :longitude, :women_only, :max_participants)
+    params.require(:run).permit(:user_id, :date, :time, :location, :pace, :private, :latitude, :longitude, :women_only, :max_participants, :title)
   end
 end

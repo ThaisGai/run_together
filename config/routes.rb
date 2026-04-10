@@ -9,6 +9,7 @@ Rails.application.routes.draw do
 
   get "my_runs", to: "runs#my_runs", as: :my_runs
   get "participating", to: "runs#participating", as: :participating_runs
+  get "ranking", to: "leaderboard#index", as: :ranking
 
   resources :chats, only: [:index, :show] do
     resources :messages, only: [:create]
