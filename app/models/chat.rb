@@ -26,6 +26,6 @@ class Chat < ApplicationRecord
     other = other_user(current_user)
     my_run_ids = RunMember.where(user_id: current_user.id).pluck(:run_id) + Run.where(user_id: current_user.id).pluck(:id)
     other_run_ids = RunMember.where(user_id: other.id).pluck(:run_id) + Run.where(user_id: other.id).pluck(:id)
-    Run.where(id: my_run_ids & other_run_ids)
+          Run.where(id: my_run_ids & other_run_ids)
   end
 end
