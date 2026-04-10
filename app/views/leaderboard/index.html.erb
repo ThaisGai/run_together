@@ -1,0 +1,209 @@
+<div class="lb-page">
+  <div class="lb-header">
+    <h1>Ranking de Corredores</h1>
+  </div>
+
+  <div class="lb-tabs">
+    <button class="lb-tab active" data-tab="meu-perfil" onclick="switchLbTab('meu-perfil')">Meu Perfil</button>
+    <button class="lb-tab" data-tab="ranking" onclick="switchLbTab('ranking')">Ranking</button>
+    <button class="lb-tab" data-tab="como-funciona" onclick="switchLbTab('como-funciona')">Como Funciona</button>
+  </div>
+
+  <!-- MEU PERFIL -->
+  <div class="lb-section" data-section="meu-perfil">
+    <div class="lb-profile">
+      <div class="lb-profile-left">
+        <div class="lb-profile-avatar">
+          <%= current_user.name&.split&.map { |n| n[0] }&.first(2)&.join&.upcase %>
+        </div>
+        <div class="lb-profile-info">
+          <span class="lb-profile-name"><%= current_user.name %></span>
+          <div class="lb-profile-level">
+            <span class="lb-level-badge">Nível <%= current_user.level %></span>
+            <span class="lb-level-name"><%= current_user.level_name %></span>
+          </div>
+        </div>
+      </div>
+      <div class="lb-profile-points">
+        <span class="lb-points-number"><%= current_user.points %></span>
+        <span class="lb-points-label">Pontos</span>
+      </div>
+    </div>
+
+    <div class="lb-progress-wrap">
+      <div class="lb-progress-info">
+        <span>Nível <%= current_user.level %></span>
+        <span><%= current_user.points %>/<%= current_user.level_max_points %> pts</span>
+      </div>
+      <div class="lb-progress-bar">
+        <div class="lb-progress-fill" style="width: <%= current_user.level_progress %>%;"></div>
+      </div>
+    </div>
+
+    <div class="lb-stats">
+      <div class="lb-stat">
+        <span class="lb-stat-number"><%= current_user.runs.count %></span>
+        <span class="lb-stat-label">Criadas</span>
+      </div>
+      <div class="lb-stat">
+        <span class="lb-stat-number"><%= current_user.run_members.count %></span>
+        <span class="lb-stat-label">Participou</span>
+      </div>
+      <div class="lb-stat">
+        <span class="lb-stat-number"><%= current_user.messages.count %></span>
+        <span class="lb-stat-label">Mensagens</span>
+      </div>
+    </div>
+
+    <div class="lb-badges-section">
+      <h3>Conquistas</h3>
+      <div class="lb-badges">
+        <% current_user.badges.each do |badge| %>
+          <div class="lb-badge">
+            <div class="lb-badge-icon" style="background: <%= badge[:color] %>1a;">
+              <%= render_badge_icon(badge[:icon], badge[:color]) %>
+            </div>
+            <div class="lb-badge-info">
+              <span class="lb-badge-name"><%= badge[:name] %></span>
+              <span class="lb-badge-desc"><%= badge[:description] %></span>
+            </div>
+          </div>
+        <% end %>
+        <% current_user.locked_badges.each do |badge| %>
+          <div class="lb-badge lb-badge-locked">
+            <div class="lb-badge-icon">
+              <%= render_badge_icon(badge[:icon], badge[:color]) %>
+            </div>
+            <div class="lb-badge-info">
+              <span class="lb-badge-name"><%= badge[:name] %></span>
+              <span class="lb-badge-desc"><%= badge[:remaining] %></span>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+  <!-- RANKING -->
+  <div class="lb-section" data-section="ranking" style="display: none;">
+    <% if @users.length >= 3 %>
+      <div class="lb-podium">
+        <div class="lb-podium-item lb-silver">
+          <div class="lb-podium-avatar silver">
+            <%= @users[1].name&.split&.map { |n| n[0] }&.first(2)&.join&.upcase %>
+          </div>
+          <span class="lb-podium-name"><%= @users[1].name&.split&.first %></span>
+          <span class="lb-podium-pts"><%= @users[1].points %> pts</span>
+          <div class="lb-podium-bar silver">2</div>
+        </div>
+        <div class="lb-podium-item lb-gold">
+          <div class="lb-podium-avatar gold">
+            <%= @users[0].name&.split&.map { |n| n[0] }&.first(2)&.join&.upcase %>
+          </div>
+          <span class="lb-podium-name"><%= @users[0].name&.split&.first %></span>
+          <span class="lb-podium-pts"><%= @users[0].points %> pts</span>
+          <div class="lb-podium-bar gold">1</div>
+        </div>
+        <div class="lb-podium-item lb-bronze">
+          <div class="lb-podium-avatar bronze">
+            <%= @users[2].name&.split&.map { |n| n[0] }&.first(2)&.join&.upcase %>
+          </div>
+          <span class="lb-podium-name"><%= @users[2].name&.split&.first %></span>
+          <span class="lb-podium-pts"><%= @users[2].points %> pts</span>
+          <div class="lb-podium-bar bronze">3</div>
+        </div>
+      </div>
+    <% end %>
+
+    <div class="lb-list">
+      <% @users.each_with_index do |user, i| %>
+        <% next if i < 3 %>
+        <div class="lb-list-item <%= user == current_user ? 'lb-list-me' : '' %>">
+          <span class="lb-list-pos"><%= i + 1 %></span>
+          <div class="lb-list-avatar">
+            <%= user.name&.split&.map { |n| n[0] }&.first(2)&.join&.upcase %>
+          </div>
+          <span class="lb-list-name"><%= user.name %></span>
+          <span class="lb-list-level">Nv.<%= user.level %></span>
+          <span class="lb-list-pts"><%= user.points %> pts</span>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+  <!-- COMO FUNCIONA -->
+  <div class="lb-section" data-section="como-funciona" style="display: none;">
+    <div class="lb-how-it-works">
+      <h3>Pontuação por ação</h3>
+      <div class="lb-points-list">
+        <div class="lb-points-item">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#c93c00" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg>
+          <span class="lb-points-action">Criar uma corrida</span>
+          <span class="lb-points-value" style="color: #c93c00;">+10 pts</span>
+        </div>
+        <div class="lb-points-item">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#4caf50" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+          <span class="lb-points-action">Participar de corrida</span>
+          <span class="lb-points-value" style="color: #4caf50;">+5 pts</span>
+        </div>
+        <div class="lb-points-item">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#378add" stroke-width="2"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+          <span class="lb-points-action">Enviar mensagem</span>
+          <span class="lb-points-value" style="color: #378add;">+1 pt</span>
+        </div>
+        <div class="lb-points-item">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#d946ef" stroke-width="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 22 12 18.27 5.82 22 7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <span class="lb-points-action">Criar corrida feminina</span>
+          <span class="lb-points-value" style="color: #d946ef;">+15 pts</span>
+        </div>
+        <div class="lb-points-item">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#d946ef" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78L12 21.23l8.84-8.84a5.5 5.5 0 000-7.78z"/></svg>
+          <span class="lb-points-action">Participar de corrida feminina</span>
+          <span class="lb-points-value" style="color: #d946ef;">+10 pts</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="lb-how-it-works" style="margin-top: 12px;">
+      <h3>Níveis</h3>
+      <div class="lb-points-list">
+        <div class="lb-points-item">
+          <span class="lb-level-badge">Nível 1</span>
+          <span class="lb-points-action">Iniciante</span>
+          <span class="lb-points-value" style="color: #888;">0-25 pts</span>
+        </div>
+        <div class="lb-points-item">
+          <span class="lb-level-badge">Nível 2</span>
+          <span class="lb-points-action">Corredor</span>
+          <span class="lb-points-value" style="color: #888;">26-50 pts</span>
+        </div>
+        <div class="lb-points-item">
+          <span class="lb-level-badge">Nível 3</span>
+          <span class="lb-points-action">Corredor ativo</span>
+          <span class="lb-points-value" style="color: #888;">51-100 pts</span>
+        </div>
+        <div class="lb-points-item">
+          <span class="lb-level-badge">Nível 4</span>
+          <span class="lb-points-action">Maratonista</span>
+          <span class="lb-points-value" style="color: #888;">101-200 pts</span>
+        </div>
+        <div class="lb-points-item">
+          <span class="lb-level-badge" style="background: rgba(255,215,0,0.12); color: #ffd700;">Nível 5</span>
+          <span class="lb-points-action" style="color: #ffd700;">Lenda</span>
+          <span class="lb-points-value" style="color: #ffd700;">200+ pts</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  function switchLbTab(tab) {
+    document.querySelectorAll('.lb-tab').forEach(t => t.classList.remove('active'));
+    document.querySelector(`.lb-tab[data-tab="${tab}"]`).classList.add('active');
+
+    document.querySelectorAll('.lb-section').forEach(s => {
+      s.style.display = s.dataset.section === tab ? 'block' : 'none';
+    });
+  }
+</script>

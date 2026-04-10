@@ -1,0 +1,533 @@
+.lb-page {
+  padding: 40px 24px;
+  min-height: calc(100vh - 60px);
+  background: #0a0a0a;
+
+  > * {
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+.lb-header {
+  margin-bottom: 28px;
+
+  h1 {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 28px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #fff;
+  }
+}
+
+// ─── TABS ────────────────────────────────────────
+.lb-tabs {
+  display: flex;
+  gap: 4px;
+  background: #111;
+  border-radius: 8px;
+  padding: 4px;
+  border: 1px solid #1e1e1e;
+  margin-bottom: 24px;
+}
+
+.lb-tab {
+  flex: 1;
+  padding: 10px 16px;
+  background: transparent;
+  border: none;
+  border-radius: 6px;
+  color: #666;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 600;
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  transition: all 0.2s;
+
+  &:hover {
+    color: #fff;
+  }
+
+  &.active {
+    background: #c93c00;
+    color: #fff;
+  }
+}
+
+.lb-section {
+  animation: lbFadeIn 0.3s ease-out;
+}
+
+@keyframes lbFadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+// ─── PERFIL ──────────────────────────────────────
+.lb-profile {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #111;
+  border: 1px solid #1a1a1a;
+  border-radius: 10px;
+  padding: 20px;
+  margin-bottom: 12px;
+}
+
+.lb-profile-left {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.lb-profile-avatar {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: rgba(201, 60, 0, 0.08);
+  border: 2.5px solid #c93c00;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #c93c00;
+  font-size: 16px;
+  font-weight: 700;
+  font-family: 'Barlow Condensed', sans-serif;
+}
+
+.lb-profile-name {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: #fff;
+  display: block;
+  margin-bottom: 4px;
+}
+
+.lb-profile-level {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.lb-level-badge {
+  background: rgba(201, 60, 0, 0.12);
+  color: #c93c00;
+  font-size: 11px;
+  font-weight: 700;
+  font-family: 'Barlow Condensed', sans-serif;
+  padding: 3px 10px;
+  border-radius: 12px;
+  text-transform: uppercase;
+}
+
+.lb-level-name {
+  color: #888;
+  font-size: 12px;
+  font-family: 'Barlow', sans-serif;
+}
+
+.lb-profile-points {
+  text-align: center;
+}
+
+.lb-points-number {
+  display: block;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 32px;
+  font-weight: 700;
+  color: #c93c00;
+  line-height: 1;
+}
+
+.lb-points-label {
+  color: #666;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-family: 'Barlow', sans-serif;
+}
+
+// ─── PROGRESS ────────────────────────────────────
+.lb-progress-wrap {
+  background: #111;
+  border-radius: 8px;
+  padding: 12px 16px;
+  margin-bottom: 12px;
+}
+
+.lb-progress-info {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 6px;
+
+  span {
+    color: #666;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-family: 'Barlow', sans-serif;
+  }
+}
+
+.lb-progress-bar {
+  background: #1a1a1a;
+  border-radius: 6px;
+  height: 6px;
+  overflow: hidden;
+}
+
+.lb-progress-fill {
+  background: #c93c00;
+  height: 100%;
+  border-radius: 6px;
+  transition: width 0.5s ease;
+}
+
+// ─── STATS ───────────────────────────────────────
+.lb-stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 8px;
+  margin-bottom: 24px;
+}
+
+.lb-stat {
+  background: #111;
+  border-radius: 8px;
+  padding: 14px;
+  text-align: center;
+}
+
+.lb-stat-number {
+  display: block;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 22px;
+  font-weight: 700;
+  color: #c93c00;
+}
+
+.lb-stat-label {
+  color: #666;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-family: 'Barlow', sans-serif;
+}
+
+// ─── BADGES ──────────────────────────────────────
+.lb-badges-section {
+  margin-bottom: 32px;
+
+  h3 {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #fff;
+    margin-bottom: 12px;
+  }
+}
+
+.lb-badges {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.lb-badge {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: #111;
+  border: 1px solid #1e1e1e;
+  border-radius: 8px;
+  padding: 10px 14px;
+}
+
+.lb-badge-locked {
+  opacity: 0.35;
+}
+
+.lb-badge-icon {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: #1a1a1a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.lb-badge-name {
+  display: block;
+  color: #fff;
+  font-size: 12px;
+  font-weight: 600;
+  font-family: 'Barlow Condensed', sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.lb-badge-desc {
+  display: block;
+  color: #555;
+  font-size: 10px;
+  font-family: 'Barlow', sans-serif;
+}
+
+// ─── PÓDIO ───────────────────────────────────────
+.lb-section-title {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #fff;
+  margin-bottom: 16px;
+}
+
+.lb-podium {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 24px;
+  padding: 0 20px;
+}
+
+.lb-podium-item {
+  text-align: center;
+  flex: 1;
+}
+
+.lb-podium-avatar {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: 700;
+  font-family: 'Barlow Condensed', sans-serif;
+  margin: 0 auto 6px;
+
+  &.gold {
+    width: 52px;
+    height: 52px;
+    font-size: 16px;
+    background: rgba(255, 215, 0, 0.08);
+    border: 2.5px solid #ffd700;
+    color: #ffd700;
+  }
+
+  &.silver {
+    background: rgba(192, 192, 192, 0.08);
+    border: 2px solid #c0c0c0;
+    color: #c0c0c0;
+  }
+
+  &.bronze {
+    background: rgba(205, 127, 50, 0.08);
+    border: 2px solid #cd7f32;
+    color: #cd7f32;
+  }
+}
+
+.lb-podium-name {
+  display: block;
+  color: #fff;
+  font-size: 13px;
+  font-weight: 600;
+  font-family: 'Barlow Condensed', sans-serif;
+  text-transform: uppercase;
+}
+
+.lb-podium-pts {
+  display: block;
+  font-size: 11px;
+  font-family: 'Barlow', sans-serif;
+  margin-bottom: 8px;
+
+  .lb-gold & { color: #ffd700; }
+  .lb-silver & { color: #c0c0c0; }
+  .lb-bronze & { color: #cd7f32; }
+}
+
+.lb-podium-bar {
+  background: #1a1a1a;
+  border-radius: 0 0 6px 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  font-weight: 700;
+  font-family: 'Barlow Condensed', sans-serif;
+
+  &.gold {
+    height: 70px;
+    border-top: 3px solid #ffd700;
+    color: #ffd700;
+  }
+
+  &.silver {
+    height: 50px;
+    border-top: 3px solid #c0c0c0;
+    color: #c0c0c0;
+  }
+
+  &.bronze {
+    height: 36px;
+    border-top: 3px solid #cd7f32;
+    color: #cd7f32;
+  }
+}
+
+// ─── LISTA ───────────────────────────────────────
+.lb-list {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.lb-list-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 14px;
+  background: #111;
+  border-radius: 8px;
+  border: 1px solid #1a1a1a;
+}
+
+.lb-list-me {
+  border-color: #c93c00;
+  background: rgba(201, 60, 0, 0.04);
+}
+
+.lb-list-pos {
+  color: #555;
+  font-size: 14px;
+  font-weight: 700;
+  font-family: 'Barlow Condensed', sans-serif;
+  min-width: 20px;
+}
+
+.lb-list-avatar {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: rgba(201, 60, 0, 0.08);
+  border: 1.5px solid #c93c00;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #c93c00;
+  font-size: 11px;
+  font-weight: 700;
+  font-family: 'Barlow Condensed', sans-serif;
+}
+
+.lb-list-name {
+  flex: 1;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 600;
+  font-family: 'Barlow Condensed', sans-serif;
+  text-transform: uppercase;
+}
+
+.lb-list-level {
+  color: #888;
+  font-size: 12px;
+  font-family: 'Barlow', sans-serif;
+}
+
+.lb-list-pts {
+  color: #888;
+  font-size: 13px;
+  font-family: 'Barlow', sans-serif;
+}
+
+// ─── COMO FUNCIONA ───────────────────────────────
+.lb-how-it-works {
+  margin-top: 32px;
+  background: #111;
+  border: 1px solid #1a1a1a;
+  border-radius: 10px;
+  padding: 20px;
+
+  h3 {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #fff;
+    margin-bottom: 14px;
+  }
+}
+
+.lb-points-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.lb-points-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  background: #0a0a0a;
+  border-radius: 8px;
+}
+
+.lb-points-action {
+  flex: 1;
+  color: #ccc;
+  font-size: 13px;
+  font-family: 'Barlow', sans-serif;
+}
+
+.lb-points-value {
+  font-size: 14px;
+  font-weight: 700;
+  font-family: 'Barlow Condensed', sans-serif;
+}
+
+// ─── RESPONSIVE ──────────────────────────────────
+@media (max-width: 600px) {
+  .lb-profile {
+    flex-direction: column;
+    text-align: center;
+    gap: 16px;
+  }
+
+  .lb-profile-left {
+    flex-direction: column;
+  }
+
+  .lb-profile-level {
+    justify-content: center;
+  }
+
+  .lb-badges {
+    flex-direction: column;
+  }
+
+  .lb-podium {
+    padding: 0;
+  }
+}
